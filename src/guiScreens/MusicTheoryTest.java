@@ -7,11 +7,10 @@ public class MusicTheoryTest {
 		Frame frame = new Frame();
 		frame.frame.setVisible(true);
 		
-//		Difficulty difficulty = new Difficulty();
-//		difficulty.difficultyPanel.setVisible(true);
+
+		new Initialize();
 		
-		Sidebar sidebar = new Sidebar();//
-		//sidebar.sidePane.setVisible(true);
+
 	}
 
 }

@@ -1,4 +1,4 @@
-package guiScreens;
+package main;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -14,6 +14,7 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseAdapter;
+import javax.swing.UIManager;
 
 public class Diff implements MouseListener {
 
@@ -24,6 +25,8 @@ public class Diff implements MouseListener {
 	private JLabel lblProfile;
 	private JLabel lblChallengeBank;
 	private JLabel lblSettings;
+
+	private JLabel isClicked;
 
 	/**
 	 * Launch the application.
@@ -60,7 +63,7 @@ public class Diff implements MouseListener {
 
 		sidePane = new JPanel();
 		sidePane.setBounds(0, 0, 300, 810);
-		sidePane.setBackground(Color.LIGHT_GRAY);
+		// sidePane.setBackground(Color.LIGHT_GRAY);
 		frame.getContentPane().add(sidePane);
 		sidePane.setLayout(null);
 
@@ -68,40 +71,70 @@ public class Diff implements MouseListener {
 		logo.setBounds(0, 0, 300, 100);
 		sidePane.add(logo);
 
-		lblHome = new JLabel("Home");
+		lblHome = new JLabel("  Home");
+		lblHome.setBackground(Color.red);
+		lblHome.setOpaque(true);
 		lblHome.addMouseListener(this);
 		lblHome.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
-		lblHome.setBounds(15, 110, 285, 50);
+		lblHome.setBounds(0, 110, 300, 50);
 		sidePane.add(lblHome);
 
-		lblProfile = new JLabel("Profile");
+		lblProfile = new JLabel("  Profile");
+		lblProfile.setBackground(Color.red);
+		lblProfile.setOpaque(true);
 		lblProfile.addMouseListener(this);
 		lblProfile.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
-		lblProfile.setBounds(15, 172, 285, 50);
+		lblProfile.setBounds(0, 172, 300, 50);
 		sidePane.add(lblProfile);
 
-		lblChallengeBank = new JLabel("Challenge Bank");
+		lblChallengeBank = new JLabel("  Challenge Bank");
+		lblChallengeBank.setBackground(Color.red);
+		lblChallengeBank.setOpaque(true);
 		lblChallengeBank.addMouseListener(this);
 		lblChallengeBank.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
-		lblChallengeBank.setBounds(15, 234, 285, 50);
+		lblChallengeBank.setBounds(0, 234, 300, 50);
 		sidePane.add(lblChallengeBank);
 
-		lblSettings = new JLabel("Settings");
+		lblSettings = new JLabel("  Settings");
+		lblSettings.setBackground(Color.red);
+		lblSettings.setOpaque(true);
 		lblSettings.addMouseListener(this);
 		lblSettings.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
-		lblSettings.setBounds(15, 296, 285, 50);
+		lblSettings.setBounds(0, 296, 300, 50);
 		sidePane.add(lblSettings);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(300, 0, 1140, 810);
 		frame.getContentPane().add(panel);
 	}
 
+	private void setAll() {
+		lblHome.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
+		lblProfile.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
+		lblChallengeBank.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
+		lblSettings.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
+		
+		lblHome.setBackground(Color.red);
+		lblProfile.setBackground(Color.red);
+		lblChallengeBank.setBackground(Color.red);
+		lblSettings.setBackground(Color.red);
+		
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		System.out.println(((JLabel) e.getSource()).getText());
+		// if(e.getSource()==lblHome)
+
+//		System.out.println(((JLabel) e.getSource()).getText());
+		
+		setAll();
+		
+		((JLabel) e.getSource()).setBackground(Color.white);
+		((JLabel) e.getSource()).setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
+
+		isClicked = (JLabel) e.getSource();
 	}
 
 	@Override
@@ -111,20 +144,29 @@ public class Diff implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 
-		((JLabel) e.getSource()).setFont(new Font("Helvetica Neue", Font.BOLD, 20));
+		if (e.getSource() != isClicked) {
+			((JLabel) e.getSource()).setFont(new Font("Helvetica Neue", Font.BOLD, 20));
+			((JLabel) e.getSource()).setBackground(Color.yellow);
+		}
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-	
-		((JLabel) e.getSource()).setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
+
+		if (e.getSource() != isClicked) {
+			((JLabel) e.getSource()).setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
+			((JLabel) e.getSource()).setBackground(Color.red);
+//			
+//			((JLabel) e.getSource()).setBackground(Color.white);
+//			((JLabel) e.getSource()).setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
+		}
 
 	}
 }

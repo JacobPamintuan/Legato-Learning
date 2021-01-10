@@ -1,4 +1,4 @@
-package guiScreens;
+package main;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package guiScreens;
+package main;
 
 import java.awt.event.ActionEvent;
 
