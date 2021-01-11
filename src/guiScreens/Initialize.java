@@ -7,6 +7,8 @@ public class Initialize {
 	public static ChallengeBankGUI challengeBank;
 	public static ProfileGUI profile;
 	public static SettingsGUI settings;
+	
+	public static LessonTemplate lesson;
 
 	public Initialize() {
 		sidebar = new SidebarGUI();
@@ -22,6 +24,8 @@ public class Initialize {
 
 		settings = new SettingsGUI();
 		settings.settingsPane.setVisible(false);
+		
+		lesson = new LessonTemplate();
 	}
 
 }

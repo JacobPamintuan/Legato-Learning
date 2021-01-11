@@ -29,7 +29,7 @@ public class SidebarGUI implements MouseListener {
 	public SidebarGUI() {
 		sidePane = new JPanel();
 		sidePane.setBounds(0, 0, 300, 810);
-		sidePane.setBackground(Color.decode("#131417"));
+		sidePane.setBackground(Colours.vDarkBlue);
 		sidePane.setLayout(null);
 		Frame.frame.getContentPane().add(sidePane);
 

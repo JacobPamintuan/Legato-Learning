@@ -4,9 +4,11 @@ import java.awt.Font;
 
 public class Fonts {
 
-	public static Font TITLE = new Font("Helvetica Neue", Font.BOLD, 36);
-	public static Font HEADING = new Font("Helvetica Neue", Font.BOLD, 30);
-	public static Font SUBHEADING = new Font("Helvetica Neue", Font.BOLD, 24);
-	public static Font BODY = new Font("Helvetica Neue", Font.PLAIN, 18);
+	public static final  Font TITLE1 = new Font("Helvetica Neue", Font.BOLD, 40);
+	public static final  Font HEADING = new Font("Helvetica Neue", Font.BOLD, 32);
+	public static final  Font SUBHEADING = new Font("Helvetica Neue", Font.BOLD, 24);
+	public static final  Font BODY = new Font("Helvetica Neue", Font.PLAIN, 20);
+	
+	public static final  Font TITLE2 = new Font("Helvetica Neue", Font.BOLD, 48);
 	
 }

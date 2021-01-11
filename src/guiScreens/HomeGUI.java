@@ -30,7 +30,7 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 	private JLabel lblCourse2Title;
 	private JLabel lblCourse2Description;
 
-	private static Color purple = Color.decode("#5551FF");
+	
 	private static ImageIcon purpRect = new ImageIcon("images/Home Rectangle.png");
 
 //	private static Font TITLE = new Font("Helvetica Neue", Font.BOLD, 36);
@@ -49,8 +49,8 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 				+ ", what would <br>you like to learn today?</div><html>");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(295, 30, 550, 100);
-		lblTitle.setFont(Fonts.TITLE);
-		lblTitle.setForeground(purple);
+		lblTitle.setFont(Fonts.TITLE1);
+		lblTitle.setForeground(Colours.purp);
 		homePane.add(lblTitle);
 
 		lblCourses = new JLabel("Courses");
