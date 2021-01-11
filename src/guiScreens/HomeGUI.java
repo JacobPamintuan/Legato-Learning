@@ -40,7 +40,7 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 
 	public HomeGUI() {
 		homePane = new JPanel();
-		homePane.setBounds(300, 0, 1140, 810);
+		homePane.setBounds(300, 0, 1240, 810);
 		homePane.setBackground(Color.white);
 		homePane.setLayout(null);
 		Frame.frame.getContentPane().add(homePane);

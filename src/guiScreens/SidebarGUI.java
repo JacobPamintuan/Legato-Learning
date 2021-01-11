@@ -41,7 +41,8 @@ public class SidebarGUI implements MouseListener {
 		sidePane.add(logo);
 
 		lblHome = new JLabel("Home");
-		//lblHome.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/Home Dark.png"));
+		// lblHome.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music
+		// Theory App/images/Home Dark.png"));
 		lblHome.setIcon(new ImageIcon("images/Home Dark.png"));
 		lblHome.addMouseListener(this);
 //		lblHome.setFont(PLAIN);
@@ -95,47 +96,47 @@ public class SidebarGUI implements MouseListener {
 
 	private void setInvisible() {
 		Initialize.home.homePane.setVisible(false);
+		Initialize.profile.profilePane.setVisible(false);
+		Initialize.challengeBank.challengePane.setVisible(false);
+		Initialize.settings.settingsPane.setVisible(false);
+
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		temp = (JLabel) e.getSource();
-		setDark();
-		if (temp == logo) {
-			Initialize.home.homePane.setVisible(true);
-			lblHome.setIcon(new ImageIcon("images/Home Light.png"));
-			isClicked=lblHome;
-		} else {
-
-			
-			imgName = temp.getText();
-
-			temp.setIcon(new ImageIcon("images/" + imgName + " Light.png"));
-
-			if (isClicked != temp) { // Switch Main screen
-
-				setInvisible();
-				if (temp == lblHome) {
-
-					Initialize.home.homePane.setVisible(true);
-					// home.homePane.setVisible(true);
-
-				} else if (temp == lblProfile) {
-
-				} else if (temp == lblChallengeBank) {
-
-				} else if (temp == lblSettings) {
-
-				}
-				isClicked = temp;
-			}
-		}
-
+	public void mouseClicked(MouseEvent e) { // MouseListener makes JLabel act as a button
+		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		temp = (JLabel) e.getSource(); // Downcasting MouseEvent e to JLabel
 
+		if (temp == logo)
+			temp = lblHome;
+		//if (isClicked != temp) {
+			setDark(); // Sets all sidebar items to dark
+
+			imgName = temp.getText();
+
+			temp.setIcon(new ImageIcon("images/" + imgName + " Light.png"));
+
+			setInvisible();
+			if (temp == lblHome) {
+
+				Initialize.home.homePane.setVisible(true);
+
+			} else if (temp == lblProfile) {
+				Initialize.profile.profilePane.setVisible(true);
+			} else if (temp == lblChallengeBank) {
+
+				Initialize.challengeBank.challengePane.setVisible(true);
+
+			} else if (temp == lblSettings) {
+				Initialize.settings.settingsPane.setVisible(true);
+
+			}
+			isClicked = temp;
+		//}
 	}
 
 	@Override

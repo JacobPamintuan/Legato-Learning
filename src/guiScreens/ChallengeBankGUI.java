@@ -19,7 +19,17 @@ public class ChallengeBankGUI {
 	
 	
 	public ChallengeBankGUI() {
-		// TODO Auto-generated constructor stub
+		challengePane = new JPanel();
+		challengePane.setBounds(300, 0, 1140, 810);
+		challengePane.setBackground(Color.white);
+		challengePane.setLayout(null);
+		Frame.frame.getContentPane().add(challengePane);
+		
+		JLabel lbl = new JLabel("Challenge bank");
+		lbl.setBounds(300, 300, 300, 300);
+		challengePane.add(lbl);
+		
+		challengePane.repaint();
 	}
 
 }
