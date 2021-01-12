@@ -14,30 +14,42 @@ import javax.swing.SwingConstants;
 
 public class LessonTemplate implements ActionListener, MouseListener {
 
-	JPanel LessonTempPane;
+	public JPanel LessonTempPane;
 
-	String difficulty = "Beginner";	
-	String course="INTERVALS";
-
-	String title = "What is an interval?";
-	String lesson = "Lesson 1";
-	int currentPane = 1;
-	int totalPanes = 5;
-
-	JLabel lblTitle;
-	JLabel lblCourse;
-	JLabel lblDifficulty;
-	JLabel lblLesson;
+	private String course="INTERVALS";
 	
-	JLabel chevron = new JLabel();
+	private	String difficulty = "Beginner";
+	private	int lessonNumber = 1;
+	
+	private	int currentPane = 1;
+	private	int totalPanes = 3;
+	
+	private	String title = "What is an interval?";
 	
 	
-	JLabel lblProgress;
 
-	JLabel lessonImage;
+	private	JLabel lblTitle;
+	private	JLabel lblCourse;
+	private	JLabel lblDifficulty;
+	private JLabel lblLesson;
+	
+	private JLabel chevron = new JLabel();
+	
+	
+	private JLabel lblProgress;
 
-	JLabel lblPrevious;
-	JLabel lblNext;
+	private JLabel lessonImage;
+
+	private JLabel lblPrevious;
+	private JLabel lblNext;
+	
+	public void getLesson() {
+		
+	}
+	
+	public void saveLesson() {
+		
+	}
 
 	public LessonTemplate() {
 		LessonTempPane = new JPanel();
@@ -68,7 +80,8 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		chevron.setBounds(215+shiftX(), 69, 32, 32);
 		LessonTempPane.add(chevron);
 		
-		lblLesson = new JLabel(lesson);
+		
+		lblLesson = new JLabel("Lesson" + lessonNumber);
 		lblLesson.setBounds(255+shiftX(), 65,450,40);
 		lblLesson.setFont(Fonts.HEADING);
 		LessonTempPane.add(lblLesson);
@@ -82,8 +95,10 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		
 		
 		lessonImage = new JLabel();
+		lessonImage.setVerticalAlignment(SwingConstants.TOP);
+	
 		lessonImage.setIcon(new ImageIcon("images/" + difficulty+" "+ currentPane+".png"));
-		lessonImage.setBounds(60, 210, 1020, 500);
+		lessonImage.setBounds(65, 200, 1020, 490);
 		LessonTempPane.add(lessonImage);
 		
 		
@@ -124,6 +139,12 @@ public class LessonTemplate implements ActionListener, MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		JLabel press = (JLabel) e.getSource();
+		
+		if(press==lblNext&&currentPane==totalPanes) {
+			System.out.println("Start Quiz");
+//			LessonTempPane.setVisible(false);
+		}
+		
 		if (press == lblPrevious && currentPane != 1)
 			currentPane--;
 		else if (press == lblNext && currentPane != totalPanes)
@@ -133,11 +154,9 @@ public class LessonTemplate implements ActionListener, MouseListener {
 			lblPrevious.setEnabled(false);
 		} else
 			lblPrevious.setEnabled(true);
-		if (currentPane == totalPanes) {
-			lblNext.setEnabled(false);
-		} else
-			lblNext.setEnabled(true);
-		System.out.println(press.getText());
+		if (currentPane == totalPanes) { 
+			lblNext.setIcon(new ImageIcon("images/Start Quiz.png"));
+		} else lblNext.setIcon(new ImageIcon("images/Next.png"));
 		
 		lblProgress.setText((currentPane + " of " + totalPanes));
 		lessonImage.setIcon(new ImageIcon("images/" + difficulty+" "+ currentPane+".png"));

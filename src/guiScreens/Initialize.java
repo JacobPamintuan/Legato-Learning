@@ -9,6 +9,7 @@ public class Initialize {
 	public static SettingsGUI settings;
 	
 	public static LessonTemplate lesson;
+	public static QuizTemplate quiz;
 
 	public Initialize() {
 		sidebar = new SidebarGUI();
@@ -26,6 +27,11 @@ public class Initialize {
 		settings.settingsPane.setVisible(false);
 		
 		lesson = new LessonTemplate();
+		lesson.LessonTempPane.setVisible(false);
+		
+		quiz = new QuizTemplate();
+//		
+		
 	}
 
 }

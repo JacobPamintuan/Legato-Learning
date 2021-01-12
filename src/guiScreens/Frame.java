@@ -7,7 +7,7 @@ public class Frame {
 	public static JFrame frame;
 
 	public static final int FRAME_WIDTH = 1440;
-	public static final int FRAME_HEIGHT = 810;
+	public static final int FRAME_HEIGHT = 820;
 
 	public Frame() {
 
