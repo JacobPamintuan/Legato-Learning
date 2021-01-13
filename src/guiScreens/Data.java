@@ -10,15 +10,21 @@ public class Data {
 
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
-
+	
+	static String[] QUIZZES = new String[2];
+	
 	public Data() throws Exception {
 
 	}
 
-	public  Quiz loadData() throws IOException {
+	public Quiz loadData() throws IOException {
 		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/Data.txt")));
 
-		String line = br.readLine();
+		for(int i=0;i<2;i++) {
+			QUIZZES[i]= br.readLine();
+		}
+		
+		String line = QUIZZES[0];
 		System.out.println(line);
 		String[] str = line.trim().split(";");
 
