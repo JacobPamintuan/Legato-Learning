@@ -15,30 +15,40 @@ import javax.swing.SwingConstants;
 
 public class QuizTemplate implements ActionListener, MouseListener {
 
+	Quiz q = Initialize.testQuiz;
+
+	public QuizTemplate() {
+
+		initialize();
+	}
+
+	private int[] ansKey = q.getAnsKey();
+	public boolean[] answeredCorrect = q.getAnsweredCorrect();
+
 	public JPanel QuizPane;
 
-	private String course = "INTERVALS";
+	private String course = q.getCourse();
 
-	private String difficulty = "Beginner";
-	private int lessonNumber = 1;
+	private String difficulty = q.getDifficulty();
+	private int quizNumber = q.getQuizNumber();
 
-	private int currentPane = 1;
-	private int totalPanes = 6;
+	private int currentPane = q.getCurrentPane();
+	private int totalPanes = q.getTotalPanes();
 
-	private String questionTitle = "Name the following melodic interval:";
+	private String questionTitle = q.getQuestionTitle();
 
 	private JLabel lblTitle;
 	private JLabel lblCourse;
 	private JLabel lblDifficulty;
 	private JLabel lblLesson;
-
 	private JLabel chevron = new JLabel();
-
 	private JLabel lblProgress;
+	private JLabel questionImage;
+	
+	private int[] numTries = q.getNumWrong();
 
-	private JLabel quizImage;
-
-	JButton answers[] = new JButton[4];
+	JButton[] btnAnswers = new JButton[4];
+	JLabel[][] lblAnswers = new JLabel[4][2];
 	JLabel qBoxL;
 
 	private JLabel lblSkip;
@@ -57,7 +67,24 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 	}
 
-	public QuizTemplate() {
+	public void resetQBox() {
+		for (int i = 0; i < 4; i++) {
+			btnAnswers[i].setIcon(ansBox);
+		}
+	}
+
+	public void actionListenerQBox(boolean bool) {
+		if (bool)
+			for (int i = 0; i < 4; i++)
+				btnAnswers[i].addActionListener(this);
+		else
+			for (int i = 0; i < 4; i++)
+
+				btnAnswers[i].removeActionListener(this);
+
+	}
+
+	private void initialize() {
 		QuizPane = new JPanel();
 		QuizPane.setBounds(300, 0, 1140, 810);
 		QuizPane.setBackground(Color.white);
@@ -86,7 +113,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		chevron.setBounds(215 + shiftX(), 69, 32, 32);
 		QuizPane.add(chevron);
 
-		lblLesson = new JLabel("Lesson" + lessonNumber);
+		lblLesson = new JLabel("Quiz " + quizNumber);
 		lblLesson.setBounds(255 + shiftX(), 65, 450, 40);
 		lblLesson.setFont(Fonts.HEADING);
 		QuizPane.add(lblLesson);
@@ -101,22 +128,58 @@ public class QuizTemplate implements ActionListener, MouseListener {
 //				+ "images/Incorrect.png"));
 //		temp2.setBounds(860, 390, 220, 290);
 //		QuizPane.add(temp2);
-		
-		
-		
+
 		for (int i = 0; i < 4; i++) {
-			answers[i] = new JButton();
-			answers[i].setIcon(ansBox);
-			answers[i].setBounds(65+i*265, 390, 220, 290);
-			QuizPane.add(answers[i]);
+			btnAnswers[i] = new JButton(ansBox);
+			// answers[i].setIcon(ansBox);
+			btnAnswers[i].setBounds(65 + i * 265, 390, 220, 290);
+			btnAnswers[i].addActionListener(this);
+
+			lblAnswers[i][0] = new JLabel(); // Image
+//			if(!(q.getAnswersImage()[currentPane-1][i]))
+			
+			lblAnswers[i][0].setIcon((q.getAnswersImage()[currentPane-1][i])); System.out.println("QT " + i +" "+q.getAnswersImage()[currentPane-1][i]);
+			lblAnswers[i][0].setBounds((65 + i * 265), 390, 220, 190);
+			lblAnswers[i][0].setHorizontalAlignment(SwingConstants.CENTER);
+
+			lblAnswers[i][1] = new JLabel(); // Text
+			lblAnswers[i][1].setText(q.getAnswersText()[currentPane - 1][i]);
+
+			if (q.getAnswersImage()[currentPane-1][i]== null && q.getAnswersText()[i] != null) { // if no image and is text
+
+				// Centers and sets text
+				lblAnswers[i][1].setHorizontalAlignment(SwingConstants.CENTER);
+				lblAnswers[i][1].setVerticalAlignment(SwingConstants.CENTER);
+				lblAnswers[i][1].setFont(Fonts.TITLE2);
+				lblAnswers[i][1].setBounds(65 + i * 265, 390, 220, 290);
+
+			} else if (q.getAnswersImage()[currentPane-1][i] != null && q.getAnswersText()[currentPane-1][i] == (null)) { // if is image and no next
+	
+				// Centers image
+				lblAnswers[i][0].setVerticalAlignment(SwingConstants.CENTER);
+				lblAnswers[i][0].setBounds((65 + i * 265), 390, 220, 290);
+				lblAnswers[i][0].setHorizontalAlignment(SwingConstants.CENTER);
+				
+			} else if (q.getAnswersImage()[currentPane-1][i] != null && q.getAnswersText()[i] != null) { // if is image and is text
+				// Formats image on top half
+				lblAnswers[i][0].setBounds((65 + i * 265), 390, 220, 190);
+				lblAnswers[i][0].setHorizontalAlignment(SwingConstants.CENTER);
+				
+				// Formats text on bottom half
+				lblAnswers[i][1].setHorizontalAlignment(SwingConstants.CENTER);
+				lblAnswers[i][1].setFont(Fonts.SUBHEADING);
+				lblAnswers[i][1].setBounds(65 + i * 265, 580, 220, 100);
+			}
+
+			QuizPane.add(lblAnswers[i][0]);
+			QuizPane.add(lblAnswers[i][1]);
+			QuizPane.add(btnAnswers[i]);
 		}
-		
+
 		qBoxL = new JLabel();
 		qBoxL.setIcon(qBox);
-		qBoxL.setBounds(165 +119*(currentPane-1), 187, 100, 148);
+		qBoxL.setBounds(165 + 119 * (currentPane - 1), 187, 100, 148);
 		QuizPane.add(qBoxL);
-		
-		
 
 		lblProgress = new JLabel("Question " + currentPane + " of " + totalPanes);
 		lblProgress.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -125,11 +188,12 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		lblProgress.setForeground(Colours.purp);
 		QuizPane.add(lblProgress);
 
-		quizImage = new JLabel();
-		quizImage.setVerticalAlignment(SwingConstants.TOP);
-		quizImage.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/Melodic.png"));
-		quizImage.setBounds(65, 185, 1020, 193);
-		QuizPane.add(quizImage);
+		questionImage = new JLabel();
+		questionImage.setVerticalAlignment(SwingConstants.TOP);
+		questionImage
+				.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/Melodic.png"));
+		questionImage.setBounds(65, 185, 1020, 193);
+		QuizPane.add(questionImage);
 
 		lblSkip = new JLabel("Skip");
 		lblSkip.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/Skip.png"));
@@ -144,7 +208,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		lblNext.setBounds(691, 712, 195, 55);
 		lblNext.addMouseListener(this);
 		QuizPane.add(lblNext);
-		
+
 		lblNext.setEnabled(false);
 
 		QuizPane.repaint();
@@ -172,7 +236,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		JLabel press = (JLabel) e.getSource();
 
 		if (press == lblSkip && currentPane == totalPanes) {
-			System.out.println("Start Quiz");
+			// System.out.println("Start Quiz");
 //			LessonTempPane.setVisible(false);
 		}
 
@@ -190,9 +254,21 @@ public class QuizTemplate implements ActionListener, MouseListener {
 //		} else
 //			lblNext.setIcon(new ImageIcon("images/Next.png"));
 
-		qBoxL.setBounds(165 +119*(currentPane-1), 187, 100, 148);
+		if (lblNext.isEnabled() && press == lblNext && currentPane != totalPanes) {
+			currentPane++;
+			lblNext.setEnabled(false);
+			lblSkip.setEnabled(true);
+			actionListenerQBox(true);
+		}
+
+		for (int i = 0; i < 4; i++)
+			lblAnswers[i][1].setText(q.getAnswersText()[currentPane - 1][i]);
+
+		qBoxL.setBounds(165 + 119 * (currentPane - 1), 187, 100, 148);
 		lblProgress.setText((currentPane + " of " + totalPanes));
-		
+
+		resetQBox();
+
 	}
 
 	@Override
@@ -215,7 +291,24 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		JButton btn = ((JButton) e.getSource());
+		btnAnswers[ansKey[currentPane - 1]].setIcon(correct);
+		if (btn == btnAnswers[ansKey[currentPane - 1]]) {
+			System.out.println("Correct");
+			answeredCorrect[currentPane - 1] = true;
+		} else {
+			btn.setIcon(incorrect);
+			System.out.println("Incorrect");
+			numTries[currentPane-1]++;
+		}
+
+		for(int i=0;i<6;i++)System.out.print(numTries[i]+", ");
+		System.out.println();
+		
+		actionListenerQBox(false);
+
+		lblNext.setEnabled(true);
+		lblSkip.setEnabled(false);
 
 	}
 

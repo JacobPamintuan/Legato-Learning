@@ -99,6 +99,8 @@ public class SidebarGUI implements MouseListener {
 		Initialize.profile.profilePane.setVisible(false);
 		Initialize.challengeBank.challengePane.setVisible(false);
 		Initialize.settings.settingsPane.setVisible(false);
+		
+		Initialize.quiz.QuizPane.setVisible(false);
 
 	}
 
