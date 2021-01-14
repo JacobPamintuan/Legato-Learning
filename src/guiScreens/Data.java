@@ -17,7 +17,7 @@ public class Data {
 
 	}
 
-	public Quiz loadData() throws IOException {
+	public void loadData() throws IOException {
 		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/Data.txt")));
 
 		for(int i=0;i<2;i++) {
@@ -90,8 +90,8 @@ public class Data {
 			System.out.println();
 				 
 		}
-		br.close();
-		return new Quiz(course, diff, q, lessonNum, currPane, numQ,ansKey, correct, numWrong,  qImage, ansArr, ansText);
+		//br.close();
+		//return new Quiz(course, diff, q, lessonNum, currPane, numQ,ansKey, correct, numWrong,  qImage, ansArr, ansText);
 	}
 
 }

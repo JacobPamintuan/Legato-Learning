@@ -1,5 +1,8 @@
 package guiScreens;
 
+import java.io.BufferedReader;
+import java.io.File;
+
 import javax.swing.ImageIcon;
 
 public class Initialize {
@@ -13,9 +16,9 @@ public class Initialize {
 	public static LessonTemplate lesson;
 	public static QuizTemplate quiz;
 
-	public static LessonPlan intervals;
+	// public static LessonPlan intervals;
 	public static Data info;
-	public static Quiz testQuiz;
+	public static Quiz[] quizArr;
 
 	public Initialize() throws Exception {
 
@@ -26,8 +29,14 @@ public class Initialize {
 			e.printStackTrace();
 		}
 
-		testQuiz = info.loadData();
-
+		quizArr = new Quiz[3];
+		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/Data.txt")));
+		for(int i=0;i<quizArr.length;i++) {
+			String line = br.readLine();
+			quizArr[i] = new Quiz(line);
+			System.out.println("line:" + line);
+		}
+		
 		sidebar = new SidebarGUI();
 
 		home = new HomeGUI();
@@ -57,7 +66,7 @@ public class Initialize {
 
 //		intervals = new Quiz("INTERVALS", "Beginner", "Name the following melodic interval:", 1, 1, 6, ansKey, bool,numWrong,       				new ImageIcon("images/Melodic.png"), image, ans);
 
-		quiz = new QuizTemplate();
+		quiz = new QuizTemplate(2);
 	}
 
 }

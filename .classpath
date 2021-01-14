@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="src" path="FIles"/>
+	<classpathentry kind="src" path="BQ3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

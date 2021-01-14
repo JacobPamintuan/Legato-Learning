@@ -7,37 +7,61 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 public class QuizTemplate implements ActionListener, MouseListener {
-
-	Quiz q = Initialize.testQuiz;
+//	Quiz q;// = Initialize.quizArr[2];
+	Quiz q;
 
 	public QuizTemplate() {
+		initializeGUI();
 
-		initialize();
 	}
 
-	private int[] ansKey = q.getAnsKey();
-	public boolean[] answeredCorrect = q.getAnsweredCorrect();
+	public QuizTemplate(int num) {
+		Quiz quiz = Initialize.quizArr[num];
+		q = quiz;
+		initializeObject();
+		initializeGUI();
+	}
+
+	private void initializeObject() {
+		course = q.getCourse();
+
+		difficulty = q.getDifficulty();
+		quizNumber = q.getQuizNumber();
+
+		currentPane = q.getCurrentPane();
+		totalPanes = q.getTotalPanes();
+
+		questionTitle = q.getQuestionTitle();
+		qImage = q.getQuestionImage();
+
+		numTries = q.getNumWrong();
+		ansKey = q.getAnsKey();
+		answeredCorrect = q.getAnsweredCorrect();
+	}
+
+	private int[] ansKey;// = q.getAnsKey();
+	public boolean[] answeredCorrect;// = q.getAnsweredCorrect();
+
+	private String course;// = q.getCourse();
+
+	private String difficulty;// = q.getDifficulty();
+	private int quizNumber;// = q.getQuizNumber();
+
+	private int currentPane;// = q.getCurrentPane();
+	private int totalPanes;// = q.getTotalPanes();
+
+	private String questionTitle;// = q.getQuestionTitle();
+	private ImageIcon qImage;// = q.getQuestionImage();
+
+	private int[] numTries;// = q.getNumWrong();
 
 	public JPanel QuizPane;
-
-	private String course = q.getCourse();
-
-	private String difficulty = q.getDifficulty();
-	private int quizNumber = q.getQuizNumber();
-
-	private int currentPane = q.getCurrentPane();
-	private int totalPanes = q.getTotalPanes();
-
-	private String questionTitle = q.getQuestionTitle();
-	private ImageIcon qImage = q.getQuestionImage();
-
 	private JLabel lblTitle;
 	private JLabel lblCourse;
 	private JLabel lblDifficulty;
@@ -45,8 +69,6 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	private JLabel chevron = new JLabel();
 	private JLabel lblProgress;
 	private JLabel lblQuestionImage;
-
-	private int[] numTries = q.getNumWrong();
 
 	JButton[] btnAnswers = new JButton[4];
 	JLabel[][] lblAnswers = new JLabel[4][2];
@@ -85,7 +107,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 	}
 
-	private void initialize() {
+	private void initializeGUI() {
 		QuizPane = new JPanel();
 		QuizPane.setBounds(300, 0, 1140, 810);
 		QuizPane.setBackground(Color.white);
@@ -94,7 +116,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 		lblTitle = new JLabel(questionTitle);
 		lblTitle.setBounds(65, 130, 995, 55);
-		lblTitle.setFont(Fonts.TITLE2);
+		lblTitle.setFont(Fonts.TITLE1);
 		lblTitle.setForeground(Colours.purp);
 		QuizPane.add(lblTitle);
 
@@ -298,7 +320,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		// answeredCorrect[totalPanes
 		// - 1]) {
 
-		if (curr == totalPanes && ((nextEn && press == lblNext) || (skipEn && press == lblSkip))||last) {
+		if (curr == totalPanes && ((nextEn && press == lblNext) || (skipEn && press == lblSkip)) || last) {
 //			boolean bool = true;
 
 			System.out.println("\nCALLED\n");
@@ -310,8 +332,8 @@ public class QuizTemplate implements ActionListener, MouseListener {
 					break;
 				}
 			}
-			
-			System.out.println("num: "+num);
+
+			System.out.println("num: " + num);
 			if (num != -1) {
 				currentPane = num + 1;
 				actionListenerQBox(true);
@@ -320,7 +342,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 				System.out.println("Final:");
 				displayTries();
 //fin=true;		
-				
+
 				lblQuestionImage.setIcon(new ImageIcon("images/TEST.png"));
 
 				actionListenerQBox(false);
@@ -382,10 +404,10 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	}
 
 	private void displayTries() {
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < totalPanes; i++)
 			System.out.print(numTries[i] + ", ");
 		System.out.println();
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < totalPanes; i++)
 			System.out.print(answeredCorrect[i] + ", ");
 		System.out.println();
 	}
