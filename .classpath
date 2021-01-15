@@ -5,5 +5,7 @@
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="src" path="FIles"/>
 	<classpathentry kind="src" path="BQ3"/>
+	<classpathentry kind="src" path="IQ1"/>
+	<classpathentry kind="src" path="IQ2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

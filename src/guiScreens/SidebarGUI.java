@@ -13,7 +13,7 @@ public class SidebarGUI implements MouseListener {
 
 	JPanel sidePane;
 	JLabel logo;
-	private JLabel lblHome;
+	public JLabel lblHome;
 	private JLabel lblProfile;
 	private JLabel lblChallengeBank;
 	private JLabel lblSettings;
@@ -43,7 +43,8 @@ public class SidebarGUI implements MouseListener {
 		lblHome = new JLabel("Home");
 		// lblHome.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music
 		// Theory App/images/Home Dark.png"));
-		lblHome.setIcon(new ImageIcon("images/Home Dark.png"));
+		lblHome.setIcon(new ImageIcon("images/Home Light.png")); //asdf asdf
+		isClicked = lblHome;
 		lblHome.addMouseListener(this);
 //		lblHome.setFont(PLAIN);
 		lblHome.setBounds(0, 120, 300, 54);
@@ -85,7 +86,7 @@ public class SidebarGUI implements MouseListener {
 
 	}
 
-	private void setDark() {
+	public void setDark() {
 
 		lblHome.setIcon(new ImageIcon("images/Home Dark.png"));
 		lblProfile.setIcon(new ImageIcon("images/Profile Dark.png"));
@@ -100,7 +101,11 @@ public class SidebarGUI implements MouseListener {
 		Initialize.challengeBank.challengePane.setVisible(false);
 		Initialize.settings.settingsPane.setVisible(false);
 		
-		Initialize.quiz.QuizPane.setVisible(false);
+		Initialize.lesson.LessonTempPane.setVisible(false);
+		
+		
+//		Initialize.quiz.QuizPane.setVisible(false);
+		//System.gc();
 
 	}
 
@@ -126,6 +131,7 @@ public class SidebarGUI implements MouseListener {
 			if (temp == lblHome) {
 
 				Initialize.home.homePane.setVisible(true);
+
 
 			} else if (temp == lblProfile) {
 				Initialize.profile.profilePane.setVisible(true);

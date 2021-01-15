@@ -22,8 +22,9 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	}
 
 	public QuizTemplate(int num) {
-		Quiz quiz = Initialize.quizArr[num];
-		q = quiz;
+//		Quiz quiz = Initialize.quizArr[num];
+//		q = quiz;
+		this.q= Initialize.quizArr[num];
 		initializeObject();
 		initializeGUI();
 	}
@@ -43,6 +44,8 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		numTries = q.getNumWrong();
 		ansKey = q.getAnsKey();
 		answeredCorrect = q.getAnsweredCorrect();
+		
+		completed = q.isCompleted();
 	}
 
 	private int[] ansKey;// = q.getAnsKey();
@@ -60,6 +63,8 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	private ImageIcon qImage;// = q.getQuestionImage();
 
 	private int[] numTries;// = q.getNumWrong();
+	
+	private boolean completed;
 
 	public JPanel QuizPane;
 	private JLabel lblTitle;
@@ -113,6 +118,22 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		QuizPane.setBackground(Color.white);
 		QuizPane.setLayout(null);
 		Frame.frame.getContentPane().add(QuizPane);
+		
+//		JButton test = new JButton("Save");
+//		test.setBounds(400, 400, 100, 100);
+//		
+//		test.addActionListener(new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("Action "+ currentPane);
+//				q.saveQuiz();
+//				
+//			}
+//			
+//		});
+//		
+//		QuizPane.add(test);
 
 		lblTitle = new JLabel(questionTitle);
 		lblTitle.setBounds(65, 130, 995, 55);
@@ -175,7 +196,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 				// Centers and sets text
 				lblAnswers[i][1].setHorizontalAlignment(SwingConstants.CENTER);
 				lblAnswers[i][1].setVerticalAlignment(SwingConstants.CENTER);
-				lblAnswers[i][1].setFont(Fonts.TITLE2);
+				lblAnswers[i][1].setFont(Fonts.TITLE1);
 				lblAnswers[i][1].setBounds(65 + i * 265, 390, 220, 290);
 
 			} else if (q.getAnswersImage()[currentPane - 1][i] != null
@@ -298,6 +319,12 @@ public class QuizTemplate implements ActionListener, MouseListener {
 //			lblSkip.setEnabled(true);
 //			actionListenerQBox(true);
 //		}
+		
+		if (press == lblNext) {
+			lblNext.setEnabled(false);
+			lblSkip.setEnabled(true);
+			actionListenerQBox(true);
+		}
 
 		if (((nextEn && press == lblNext) || (skipEn && press == lblSkip)) && currentPane != totalPanes) {
 			currentPane++;
@@ -308,11 +335,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 					break;
 			}
 
-			if (press == lblNext) {
-				lblNext.setEnabled(false);
-				lblSkip.setEnabled(true);
-				actionListenerQBox(true);
-			}
+			
 		}
 
 //		System.out.println("\nQuestion " + currentPane + "\n");
@@ -342,7 +365,8 @@ public class QuizTemplate implements ActionListener, MouseListener {
 				System.out.println("Final:");
 				displayTries();
 //fin=true;		
-
+				completed = true;
+				q.saveQuiz();
 				lblQuestionImage.setIcon(new ImageIcon("images/TEST.png"));
 
 				actionListenerQBox(false);
@@ -411,5 +435,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 			System.out.print(answeredCorrect[i] + ", ");
 		System.out.println();
 	}
+
+	
 
 }

@@ -30,7 +30,6 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 	private JLabel lblCourse2Title;
 	private JLabel lblCourse2Description;
 
-	
 	private static ImageIcon purpRect = new ImageIcon("images/Home Rectangle.png");
 
 //	private static Font TITLE = new Font("Helvetica Neue", Font.BOLD, 36);
@@ -74,10 +73,16 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 		lblIntervalDescription.setFont(Fonts.BODY);
 		homePane.add(lblIntervalDescription);
 
-		lblIntervalRect = new JButton(purpRect);
+		
+		
+		lblIntervalRect = new JButton();//purpRect);
 		lblIntervalRect.setBounds(75, 210, 992, 252);// (73, 208, 992,252)
 		lblIntervalRect.addActionListener(this);
 		homePane.add(lblIntervalRect);
+		
+		JLabel purp = new JLabel(purpRect);
+		purp.setBounds(75, 210, 992, 252);
+		homePane.add(purp);
 
 		///////////////////////////////////
 
@@ -108,10 +113,20 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Initialize.sidebar.setDark();
 		if (e.getSource() == lblIntervalRect) {
 			System.out.println("Interval Button");
+			Initialize.lesson.LessonTempPane.setVisible(true);
+			System.out.println("currPane: " + Initialize.lesson.currentPane);
+			Initialize.lesson.currentPane = 1;
+			System.out.println("currPane: " + Initialize.lesson.currentPane);
+			Initialize.lesson.LessonTempPane.revalidate();
+			Initialize.home.homePane.setVisible(false);
+			
 		} else if (e.getSource() == lblCourse2Rect) {
 			System.out.println("Course 2 Button");
+			homePane.setVisible(false);
+			Initialize.quiz.QuizPane.setVisible(true);
 		}
 	}
 

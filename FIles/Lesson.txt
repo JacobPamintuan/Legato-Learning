@@ -1,0 +1,2 @@
+INTERVALS;Beginner;What is an Interval?;1;1;3;false
+INTERVALS;Intermediate;Perfect and Major Intervals;1;1;3;false

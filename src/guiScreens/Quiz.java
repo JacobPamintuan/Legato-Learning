@@ -1,21 +1,18 @@
 package guiScreens;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class Quiz  {
+public class Quiz {
 
 	private int[] numWrong;
 	private int[] ansKey;
 	private boolean[] answeredCorrect;
-
-	public JPanel QuizPane;
 
 	private String course;
 
@@ -31,47 +28,42 @@ public class Quiz  {
 	private ImageIcon[][] answersImage;
 	private String[][] answersText;
 
-	JButton[] btnAnswers = new JButton[4];
-	JLabel[][] lblAnswers = new JLabel[4][2];
-	JLabel qBoxL;
+	private boolean completed;
+
+	private String data;
+	private String[] lines = new String[3];
 
 	public Quiz(String line) {
 		/*
-    super(course, difficulty);
-
-		this.course = course;
-		this.difficulty = difficulty;
-		this.questionTitle = questionTitle;
-		this.quizNumber = quizNumber;
-		this.currentPane = currentPane;
-		this.totalPanes = totalPanes;
-		this.ansKey = ansKey;
-		this.answeredCorrect = answeredCorrect;
-		this.numWrong = numWrong;
-		this.questionImage = questionImage;
-		this.answersImage = answersImage;
-		this.answersText = answersText;
-    */
-	System.out.println("Constructor:" +line);
-    loadData(line);
+		 * super(course, difficulty);
+		 * 
+		 * this.course = course; this.difficulty = difficulty; this.questionTitle =
+		 * questionTitle; this.quizNumber = quizNumber; this.currentPane = currentPane;
+		 * this.totalPanes = totalPanes; this.ansKey = ansKey; this.answeredCorrect =
+		 * answeredCorrect; this.numWrong = numWrong; this.questionImage =
+		 * questionImage; this.answersImage = answersImage; this.answersText =
+		 * answersText;
+		 */
+		// System.out.println("Constructor:" +line);
+		this.data = line;
+		loadData(line);
 	}
-	
-	//static Quiz[] QUIZZES = new String[2];
+
+	// static Quiz[] QUIZZES = new String[2];
 
 	private void loadData(String line) {
-		//BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/Data.txt")));
+		// BufferedReader br = new BufferedReader(new java.io.FileReader(new
+		// File("Files/Data.txt")));
 
-/*
-		for (int i = 0; i < 2; i++) {
-			QUIZZES[i] = br.readLine();
-		}
-    */
+		/*
+		 * for (int i = 0; i < 2; i++) { QUIZZES[i] = br.readLine(); }
+		 */
 
-		System.out.println("Load data: "+line);
+		// System.out.println("Load data: "+line);
 		String[] str = line.trim().split(";");
 
-		for (int i = 0; i < str.length; i++)
-			System.out.println(str[i]);
+		// for (int i = 0; i < str.length; i++)
+		// System.out.println(str[i]);
 
 		String course = str[0];
 		String difficulty = str[1];
@@ -102,27 +94,29 @@ public class Quiz  {
 		String[] answers = str[11].trim().split(":");
 		String[][] answersText = new String[totalPanes][4];
 
+		boolean completed = Boolean.parseBoolean(str[12]);
+
 		for (int i = 0; i < totalPanes; i++) {
-			System.out.println(answers[i]);//
+			// System.out.println(answers[i]);//
 		}
 
 		for (int i = 0; i < totalPanes; i++) {
-			String[] temp = answers[i].trim().split(",");
-			String[] Temp = ansImages[i].trim().split(",");
+			String[] tempText = answers[i].trim().split(",");
+			String[] tempImage = ansImages[i].trim().split(",");
 			for (int j = 0; j < 4; j++) {
-				if(temp[j].equalsIgnoreCase("null"))
-					answersText[i][j] =null;
+				if (tempText[j].equalsIgnoreCase("null"))
+					answersText[i][j] = null;
 				else {
-					answersText[i][j] = temp[j];
+					answersText[i][j] = tempText[j];
 				}
-				if (Temp[j].equalsIgnoreCase("null")) {
+				if (tempImage[j].equalsIgnoreCase("null")) {
 					answersImage[i][j] = null;
-					System.out.println("NULL IMAGE");
+					// System.out.println("NULL IMAGE");
 				}
 
 				else {
-					answersImage[i][j] = new ImageIcon(Temp[j]);// Temp[j]);
-					System.out.println("Valiud IMAGE " + Temp[j]);
+					answersImage[i][j] = new ImageIcon(tempImage[j]);// Temp[j]);
+					// System.out.println("Valiud IMAGE " + tempImage[j]);
 				}
 			}
 
@@ -131,13 +125,12 @@ public class Quiz  {
 		for (int i = 0; i < totalPanes; i++) {
 
 			for (int j = 0; j < 4; j++) {
-				System.out.println(answersText[i][j]);
-				System.out.println(answersImage[i][j]);
+				// System.out.println(answersText[i][j]);
 			}
 
-			System.out.println();
+			// System.out.println();
 		}
-		//br.close();
+		// br.close();
 		this.course = course;
 		this.difficulty = difficulty;
 		this.questionTitle = questionTitle;
@@ -150,7 +143,68 @@ public class Quiz  {
 		this.questionImage = questionImage;
 		this.answersImage = answersImage;
 		this.answersText = answersText;
-		//return new Quiz(course, diff, q, lessonNum, currPane, numQ, ansKey, correct, numWrong, qImage, ansArr, ansText);
+		this.completed = completed;
+
+		// System.out.println("COMPLETED??? " + this.completed);
+		// return new Quiz(course, diff, q, lessonNum, currPane, numQ, ansKey, correct,
+		// numWrong, qImage, ansArr, ansText);
+	}
+
+	public String saveData(int curr) {
+
+		// Currentpane - 4, answeredCorrect[] - 7,numWrong[] - 8,
+
+		String[] str = data.trim().split(";");
+		String line = "";
+
+		str[4] = String.valueOf(curr);
+
+		boolean complete = false;
+		String ans = "";
+		for (int i = 0; i < ansKey.length; i++) {
+			if(answeredCorrect[i]) complete=true;
+			ans += (answeredCorrect[i]) + ",";
+		}
+
+		str[7] = ans.substring(0, ans.length() - 1);
+
+		String wrong = "";
+		for (int i = 0; i < ansKey.length; i++)
+			wrong += String.valueOf(numWrong[i]) + ",";
+
+		str[8] = wrong.substring(0, wrong.length() - 1);
+
+		System.out.println("\n" + data);
+		System.out.println(str[4]);
+		System.out.println(str[7]);
+		System.out.println(str[8]);
+
+		str[12] = String.valueOf(complete);
+
+		for (int i = 0; i < str.length; i++)
+			line += str[i] + ";";
+		line = line.substring(0, line.length() - 1);
+		System.out.println(line);
+
+		return line;
+
+	}
+
+	public void saveQuiz() {
+
+		try {
+			BufferedWriter pr = new BufferedWriter(new FileWriter(new File("Files/Test"), false));
+			for (int i = 0; i < Initialize.quizArr.length; i++) {
+				pr.write(Initialize.quizArr[i].saveData(Initialize.quizArr[i].getCurrentPane()));
+				pr.newLine();
+
+			}
+			pr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public boolean[] getAnsweredCorrect() {
@@ -249,9 +303,15 @@ public class Quiz  {
 		this.numWrong = numWrong;
 	}
 
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+
 }
-
-
 
 //package guiScreens;
 //
