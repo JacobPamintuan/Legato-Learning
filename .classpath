@@ -7,5 +7,7 @@
 	<classpathentry kind="src" path="BQ3"/>
 	<classpathentry kind="src" path="IQ1"/>
 	<classpathentry kind="src" path="IQ2"/>
+	<classpathentry kind="src" path="IntCourse"/>
+	<classpathentry kind="src" path="IQ4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

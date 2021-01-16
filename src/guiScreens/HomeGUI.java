@@ -19,18 +19,18 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 	private JLabel lblCourses;
 
 	private JLabel lblIntervalImg;
-//	private JLabel lblIntervalRect;
 	private JButton lblIntervalRect;
 	private JLabel lblIntervalTitle;
 	private JLabel lblIntervalDescription;
 
 	private JLabel lblCourse2Img;
-//	private JLabel lblCourse2Rect;
 	private JButton lblCourse2Rect;
 	private JLabel lblCourse2Title;
 	private JLabel lblCourse2Description;
 
 	private static ImageIcon purpRect = new ImageIcon("images/Home Rectangle.png");
+	
+	private static IntervalCourse intCourse;
 
 //	private static Font TITLE = new Font("Helvetica Neue", Font.BOLD, 36);
 //	private static Font HEADING = new Font("Helvetica Neue", Font.BOLD, 30);
@@ -38,6 +38,10 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 //	private static Font BODY = new Font("Helvetica Neue", Font.PLAIN, 18);
 
 	public HomeGUI() {
+		
+		intCourse = new IntervalCourse();
+		intCourse.iCoursePane.setVisible(false);
+		
 		homePane = new JPanel();
 		homePane.setBounds(300, 0, 1240, 810);
 		homePane.setBackground(Color.white);
@@ -64,7 +68,7 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 
 		lblIntervalTitle = new JLabel("Intervals");
 		lblIntervalTitle.setBounds(462, 235, 216, 40);
-		lblIntervalTitle.setFont(Fonts.SUBHEADING);
+		lblIntervalTitle.setFont(Fonts.SUBHEADING1);
 		homePane.add(lblIntervalTitle);
 
 		lblIntervalDescription = new JLabel("Description");
@@ -93,7 +97,7 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 
 		lblCourse2Title = new JLabel("Course2");
 		lblCourse2Title.setBounds(462, 515, 216, 40);
-		lblCourse2Title.setFont(Fonts.SUBHEADING);
+		lblCourse2Title.setFont(Fonts.SUBHEADING1);
 		homePane.add(lblCourse2Title);
 
 		lblCourse2Description = new JLabel("Description");
@@ -116,17 +120,20 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 		Initialize.sidebar.setDark();
 		if (e.getSource() == lblIntervalRect) {
 			System.out.println("Interval Button");
-			Initialize.lesson.LessonTempPane.setVisible(true);
-			System.out.println("currPane: " + Initialize.lesson.currentPane);
-			Initialize.lesson.currentPane = 1;
-			System.out.println("currPane: " + Initialize.lesson.currentPane);
-			Initialize.lesson.LessonTempPane.revalidate();
+//			Initialize.lesson.LessonTempPane.setVisible(true);
+//			System.out.println("currPane: " + Initialize.lesson.currentPane);
+//			Initialize.lesson.currentPane = 1;
+//			System.out.println("currPane: " + Initialize.lesson.currentPane);
+//			Initialize.lesson.LessonTempPane.revalidate();
+			
+			Initialize.iCourse.iCoursePane.setVisible(true);
+			
 			Initialize.home.homePane.setVisible(false);
 			
 		} else if (e.getSource() == lblCourse2Rect) {
 			System.out.println("Course 2 Button");
 			homePane.setVisible(false);
-			Initialize.quiz.QuizPane.setVisible(true);
+//			Initialize.quizGUI.QuizPane.setVisible(true);
 		}
 	}
 

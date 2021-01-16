@@ -1,5 +1,10 @@
 package guiScreens;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Lesson {
 
 	private String course;
@@ -13,7 +18,10 @@ public class Lesson {
 
 	private boolean completed;
 
+	private String data;
+
 	public Lesson(String line) {
+		this.data = line;
 		loadData(line);
 	}
 
@@ -33,10 +41,37 @@ public class Lesson {
 		this.course = course;
 		this.difficulty = difficulty;
 		this.lessonNumber = lessonNumber;
-		this.title=title;
+		this.title = title;
 		this.currentPane = currentPane;
 		this.totalPanes = totalPanes;
 		this.completed = completed;
+	}
+
+	public String saveData() {
+		String[] str = data.trim().split(";");
+		String line = "";
+		str[6] = String.valueOf(this.completed);
+
+		for (int i = 0; i < str.length; i++)
+			line += str[i] + ";";
+		line = line.substring(0, line.length() - 1);
+
+		return line;
+	}
+	
+	public void saveLesson( ) {
+		try {
+			BufferedWriter pr = new BufferedWriter(new FileWriter(new File("Files/Test2"), false));
+			for (int i = 0; i < Initialize.lessonArr.length; i++) {
+				pr.write(Initialize.lessonArr[i].saveData());
+				pr.newLine();
+
+			}
+			pr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getCourse() {

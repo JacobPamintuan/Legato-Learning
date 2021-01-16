@@ -31,7 +31,7 @@ public class Quiz {
 	private boolean completed;
 
 	private String data;
-	private String[] lines = new String[3];
+
 
 	public Quiz(String line) {
 		/*
@@ -88,10 +88,10 @@ public class Quiz {
 
 		ImageIcon questionImage = new ImageIcon(str[9]);
 
-		String[] ansImages = str[10].trim().split(":");
+		String[] ansImages = str[10].split(":");
 		ImageIcon[][] answersImage = new ImageIcon[totalPanes][4];
 
-		String[] answers = str[11].trim().split(":");
+		String[] answers = str[11].split(":");
 		String[][] answersText = new String[totalPanes][4];
 
 		boolean completed = Boolean.parseBoolean(str[12]);

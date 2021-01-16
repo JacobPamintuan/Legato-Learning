@@ -84,6 +84,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		LessonTempPane.add(lblTitle);
 
 		lblCourse = new JLabel(course);
+		lblCourse.addMouseListener(this);
 		lblCourse.setBounds(65, 25, 190, 30);
 		lblCourse.setFont(Fonts.BODY);
 		LessonTempPane.add(lblCourse);
@@ -157,14 +158,22 @@ public class LessonTemplate implements ActionListener, MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		JLabel press = (JLabel) e.getSource();
+		
+		if (press == lblCourse) {
+			LessonTempPane.setVisible(false);
+			Initialize.iCourse.iCoursePane.setVisible(true);
+			return;
+		}
 
 		if (press == lblNext && currentPane == totalPanes) {
-			System.out.println("Start Quiz");
 			currentPane = 0;
-			completed = true;
+			l.setCompleted(true);
 			LessonTempPane.setVisible(false);
-			Initialize.home.homePane.setVisible(true);
-			Initialize.sidebar.lblHome.setIcon(new ImageIcon("images/Home Light.png"));
+			l.saveLesson();
+			Initialize.iCourse.enableQuizzes();
+			//Initialize.home.homePane.setVisible(true);
+			Initialize.iCourse.iCoursePane.setVisible(true);
+//			Initialize.sidebar.lblHome.setIcon(new ImageIcon("images/Home Light.png"));
 		}
 
 		if (press == lblPrevious && currentPane != 1)
@@ -177,7 +186,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		} else
 			lblPrevious.setEnabled(true);
 		if (currentPane == totalPanes) {
-			lblNext.setIcon(new ImageIcon("images/Start Quiz.png"));
+			lblNext.setIcon(new ImageIcon("images/BackToCourse.png"));
 		} else
 			lblNext.setIcon(new ImageIcon("images/Next.png"));
 
@@ -193,13 +202,20 @@ public class LessonTemplate implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		JLabel lbl = (JLabel) e.getSource();
+
+		lbl.setText("<html><u>" + lbl.getText() + "<u><html>");
+
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		JLabel lbl = (JLabel) e.getSource();
+
+		String noUnderline = lbl.getText().substring(9, lbl.getText().length() - 9);
+
+		lbl.setText(noUnderline);
 
 	}
 

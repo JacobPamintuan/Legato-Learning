@@ -101,7 +101,16 @@ public class SidebarGUI implements MouseListener {
 		Initialize.challengeBank.challengePane.setVisible(false);
 		Initialize.settings.settingsPane.setVisible(false);
 		
-		Initialize.lesson.LessonTempPane.setVisible(false);
+		
+		for (int i = 0; i < Initialize.quizArr.length; i++) {
+			Initialize.quizGUI[i].QuizPane.setVisible(false);
+		}
+		
+		for (int i = 0; i < Initialize.lessonArr.length; i++) {
+			Initialize.	lessonGUI[i].LessonTempPane.setVisible(false);
+		}
+		
+		Initialize.iCourse.iCoursePane.setVisible(false);
 		
 		
 //		Initialize.quiz.QuizPane.setVisible(false);

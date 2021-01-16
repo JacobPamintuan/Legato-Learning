@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.JOptionPane;
 
 public class QuizTemplate implements ActionListener, MouseListener {
 //	Quiz q;// = Initialize.quizArr[2];
@@ -24,7 +25,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	public QuizTemplate(int num) {
 //		Quiz quiz = Initialize.quizArr[num];
 //		q = quiz;
-		this.q= Initialize.quizArr[num];
+		this.q = Initialize.quizArr[num];
 		initializeObject();
 		initializeGUI();
 	}
@@ -44,7 +45,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		numTries = q.getNumWrong();
 		ansKey = q.getAnsKey();
 		answeredCorrect = q.getAnsweredCorrect();
-		
+
 		completed = q.isCompleted();
 	}
 
@@ -63,7 +64,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	private ImageIcon qImage;// = q.getQuestionImage();
 
 	private int[] numTries;// = q.getNumWrong();
-	
+
 	private boolean completed;
 
 	public JPanel QuizPane;
@@ -118,7 +119,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		QuizPane.setBackground(Color.white);
 		QuizPane.setLayout(null);
 		Frame.frame.getContentPane().add(QuizPane);
-		
+
 //		JButton test = new JButton("Save");
 //		test.setBounds(400, 400, 100, 100);
 //		
@@ -141,9 +142,10 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		lblTitle.setForeground(Colours.purp);
 		QuizPane.add(lblTitle);
 
-		lblCourse = new JLabel(course);
+		lblCourse = new JLabel("<html><u>" + course + "<u><html>");
+		lblCourse.addMouseListener(this);
 		lblCourse.setBounds(65, 25, 190, 30);
-		lblCourse.setFont(Fonts.BODY);
+		lblCourse.setFont(Fonts.BREADCRUMBS);
 		QuizPane.add(lblCourse);
 
 		lblDifficulty = new JLabel(difficulty);
@@ -216,7 +218,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 				// Formats text on bottom half
 				lblAnswers[i][1].setHorizontalAlignment(SwingConstants.CENTER);
-				lblAnswers[i][1].setFont(Fonts.SUBHEADING);
+				lblAnswers[i][1].setFont(Fonts.SUBHEADING1);
 				lblAnswers[i][1].setBounds(65 + i * 265, 580, 220, 100);
 			}
 
@@ -283,6 +285,12 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	public void mousePressed(MouseEvent e) {
 		JLabel press = (JLabel) e.getSource();
 
+		if (press == lblCourse) {
+			QuizPane.setVisible(false);
+			Initialize.iCourse.iCoursePane.setVisible(true);
+			return;
+		}
+
 		boolean skipEn = lblSkip.isEnabled();
 		boolean nextEn = lblNext.isEnabled();
 
@@ -294,32 +302,6 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 		int curr = currentPane;
 
-//		if (press == lblSkip && currentPane != 1)
-//			currentPane--;
-//		if (lblSkip.isEnabled() && press == lblSkip && currentPane != totalPanes) {
-//			currentPane++;
-//			while (answeredCorrect[currentPane - 1]) {
-//				if (currentPane != totalPanes)
-//					currentPane++;
-//				else
-//					break;
-//			}
-//		}
-//		
-//		if (lblNext.isEnabled() && press == lblNext && currentPane != totalPanes) {
-//			currentPane++;
-//			while (answeredCorrect[currentPane - 1]) {
-//				if (currentPane != totalPanes)
-//					currentPane++;
-//				else
-//					break;
-//			}
-//
-//			lblNext.setEnabled(false);
-//			lblSkip.setEnabled(true);
-//			actionListenerQBox(true);
-//		}
-		
 		if (press == lblNext) {
 			lblNext.setEnabled(false);
 			lblSkip.setEnabled(true);
@@ -335,22 +317,14 @@ public class QuizTemplate implements ActionListener, MouseListener {
 					break;
 			}
 
-			
 		}
 
-//		System.out.println("\nQuestion " + currentPane + "\n");
-//		if (((nextEn && press == lblNext) || (skipEn && press == lblSkip)) && currentPane == totalPanes||curr==totalPanes) {// &&
-		// answeredCorrect[totalPanes
-		// - 1]) {
-
 		if (curr == totalPanes && ((nextEn && press == lblNext) || (skipEn && press == lblSkip)) || last) {
-//			boolean bool = true;
 
 			System.out.println("\nCALLED\n");
 			int num = -1;
 			for (int i = 0; i < totalPanes; i++) {
 				if (answeredCorrect[i] == false) {
-//					bool = false;
 					num = i;
 					break;
 				}
@@ -364,17 +338,23 @@ public class QuizTemplate implements ActionListener, MouseListener {
 			} else if (last || num == -1) {
 				System.out.println("Final:");
 				displayTries();
-//fin=true;		
 				completed = true;
+				currentPane = 0;
 				q.saveQuiz();
-				lblQuestionImage.setIcon(new ImageIcon("images/TEST.png"));
+				// lblQuestionImage.setIcon(new ImageIcon("images/TEST.png"));
+
+				if (popup() == JOptionPane.YES_OPTION)
+					QuizPane.setVisible(false);
+
+				Initialize.iCourse.iCoursePane.setVisible(true);
+				QuizPane.setVisible(false);
 
 				actionListenerQBox(false);
+				return;
 			}
 
 		}
 
-//		System.out.println("\nQuestion " + currentPane + "\n");
 		for (int i = 0; i < 4; i++) {
 			lblAnswers[i][1].setText(q.getAnswersText()[currentPane - 1][i]);
 			lblAnswers[i][0].setIcon(q.getAnswersImage()[currentPane - 1][i]);
@@ -395,13 +375,17 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		JLabel lbl = (JLabel) e.getSource();
+
+		lbl.setForeground(Colours.purp);
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		JLabel lbl = (JLabel) e.getSource();
+
+		lbl.setForeground(Color.BLACK);
 
 	}
 
@@ -427,6 +411,19 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 	}
 
+	private int popup() {
+
+		Object[] ob = { "Back to Course" };
+
+		return JOptionPane.showOptionDialog(QuizPane, 
+				"Congratulations! You have completed "+difficulty+", Quiz "+quizNumber, 
+				"Quiz Complete!", 
+				JOptionPane.YES_OPTION,
+				JOptionPane.INFORMATION_MESSAGE, 
+				new ImageIcon("images/Legato Learning.png"), ob, null);
+
+	}
+
 	private void displayTries() {
 		for (int i = 0; i < totalPanes; i++)
 			System.out.print(numTries[i] + ", ");
@@ -435,7 +432,5 @@ public class QuizTemplate implements ActionListener, MouseListener {
 			System.out.print(answeredCorrect[i] + ", ");
 		System.out.println();
 	}
-
-	
 
 }
