@@ -248,6 +248,8 @@ public class IntervalCourse implements MouseListener, ActionListener {
 		iCoursePane.repaint();
 
 	}
+	
+	
 
 	public void quizCompleted() {
 		for (int i = 0; i < 3; i++) {
@@ -260,13 +262,13 @@ public class IntervalCourse implements MouseListener, ActionListener {
 				iL1QChecks[i-3].setVisible(true);
 		}
 		
-		for(int i=6;i<=8;i++) {
+		for(int i=6;i<=7;i++) {
 			if (Initialize.quizArr[i].isCompleted())
 				iL2QChecks[i-6].setVisible(true);
 		}
-		for(int i=9;i<=10;i++) {
+		for(int i=8;i<=9;i++) {
 			if (Initialize.quizArr[i].isCompleted())
-				aQChecks[i-9].setVisible(true);
+				aQChecks[i-8].setVisible(true);
 		}
 	}
 

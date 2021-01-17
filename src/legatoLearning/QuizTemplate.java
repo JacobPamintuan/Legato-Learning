@@ -35,6 +35,8 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	private int[] numTries;
 
 	private boolean completed;
+	
+	private int sumWrong;
 
 	public JPanel QuizPane;
 	private JLabel lblTitle;
@@ -203,6 +205,14 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		lblNext.setEnabled(false);
 
 		QuizPane.repaint();
+	}
+	
+	public int numWrong() {
+		sumWrong=0;
+		for(int i=0;i<totalPanes;i++) {
+			sumWrong+=numTries[i];
+		}
+		return sumWrong;
 	}
 
 	private int shiftX() {
