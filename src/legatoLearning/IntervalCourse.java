@@ -3,6 +3,7 @@ package legatoLearning;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -244,6 +245,9 @@ public class IntervalCourse implements MouseListener, ActionListener {
 //		iCoursePane.add(iLesson2);
 //		iCoursePane.add(aLesson1);
 //		iCoursePane.add(aLesson2);
+		
+		enableQuizzes();
+		quizCompleted();
 
 		iCoursePane.repaint();
 
@@ -369,7 +373,18 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 		for (int i = 0; i < beginnerQ.length; i++)
 			if (btn == beginnerQ[i]) {
-				Initialize.quizGUI[i].QuizPane.setVisible(true);
+				if (Initialize.quizArr[i].isCompleted()) {
+//					boolean[] arr = new boolean[Initialize.quizArr[i].getAnsKey().length];
+//					Arrays.fill(Initialize.quizArr[i].numWrong, 0);
+//					
+//					Initialize.quizArr[i].setAnsweredCorrect(arr);
+					Initialize.quizArr[i] = Initialize.quizOG[i];
+//					System.out.println(Initialize.quizArr[i].toString());
+//					System.out.println(Initialize.quizOG[i].toString());
+					new QuizTemplate(Initialize.quizArr[i]);
+				} else
+					Initialize.quizGUI[i].QuizPane.setVisible(true);
+
 				iCoursePane.setVisible(false);
 				return;
 			}

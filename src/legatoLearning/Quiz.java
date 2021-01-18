@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 public class Quiz {
 
-	private int[] numWrong;
+	public int[] numWrong;
 	private int[] ansKey;
 	private boolean[] answeredCorrect;
 
@@ -215,7 +215,8 @@ public class Quiz {
 	public void saveQuiz() {
 
 		try {
-			BufferedWriter pr = new BufferedWriter(new FileWriter(new File("Files/Test"), false));
+//			BufferedWriter pr = new BufferedWriter(new FileWriter(new File("Files/Test"), false));
+			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.quizSaveData, false));
 			for (int i = 0; i < Initialize.quizArr.length; i++) {
 				pr.write(Initialize.quizArr[i].saveData(Initialize.quizArr[i].getCurrentPane()));
 				pr.newLine();
@@ -390,3 +391,4 @@ public class Quiz {
 	}
 
 }
+

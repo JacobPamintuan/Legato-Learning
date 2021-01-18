@@ -65,7 +65,8 @@ public class Lesson {
 
 	public void saveLesson() {
 		try {
-			BufferedWriter pr = new BufferedWriter(new FileWriter(new File("Files/Test2"), false));
+//			BufferedWriter pr = new BufferedWriter(new FileWriter(new File("Files/Test2"), false));
+			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.lessonSaveData, false));
 			for (int i = 0; i < Initialize.lessonArr.length; i++) {
 				pr.write(Initialize.lessonArr[i].saveData());
 				pr.newLine();

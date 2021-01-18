@@ -2,6 +2,7 @@ package legatoLearning;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.util.Arrays;
 
 public class Initialize {
 
@@ -15,14 +16,29 @@ public class Initialize {
 	public static QuizTemplate[] quizGUI;
 
 	public static Quiz[] quizArr;
+	public static Quiz[] quizOG;
+	public static String[] QuizData;
 	public static Lesson[] lessonArr;
 
 	public static IntervalCourse iCourse;
+	
+	public static File quizDataOG = new File("Files/Quiz.txt");
+	public static File quizSaveData = new File("Files/Test");
 
+	public static File lessonDataOG = new File("Files/Lesson.txt");
+	public static File lessonSaveData = new File("Files/Test2");
+	
 	public Initialize() throws Exception {
 
 		quizArr = new Quiz[10]; // UPDATE
-		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/Quiz.txt")));
+
+		
+		BufferedReader br;
+		if (quizSaveData.length() == 0)
+			br = new BufferedReader(new java.io.FileReader(quizDataOG));
+		else
+			br = new BufferedReader(new java.io.FileReader(quizSaveData));
+
 		for (int i = 0; i < quizArr.length; i++) {
 			String line = br.readLine();
 			quizArr[i] = new Quiz(line);
@@ -31,8 +47,23 @@ public class Initialize {
 		}
 		br.close();
 
+		quizOG = new Quiz[10];
+		BufferedReader br2 = new BufferedReader(new java.io.FileReader(new File("Files/Quiz.txt")));
+		for (int i = 0; i < quizOG.length; i++) {
+			String line = br2.readLine();
+			quizOG[i] = new Quiz(line);
+//			System.out.printf("Quiz %d: %s\n", i, line);
+
+		}
+		br2.close();
+
 		lessonArr = new Lesson[4]; // UPDATE
-		br = new BufferedReader(new java.io.FileReader(new File("Files/Lesson.txt")));
+		
+		
+		
+		if(lessonSaveData.length()==0)
+			br = new BufferedReader(new java.io.FileReader(lessonDataOG));
+		else br = new BufferedReader(new java.io.FileReader(lessonSaveData));
 		for (int i = 0; i < lessonArr.length; i++) {
 			String line = br.readLine();
 			lessonArr[i] = new Lesson(line);
