@@ -1,4 +1,4 @@
-INTERVALS;Beginner;What is an Interval?;1;1;3;false
-INTERVALS;Intermediate;Perfect and Major Intervals;1;1;3;false
-INTERVALS;Intermediate;Minor Intervals;2;1;3;false
-INTERVALS;Advanced;Augmented and Diminished;1;1;3;true
+INTERVALS;Beginner;What is an Interval?;1;1;3;true;Intro to Intervals
+INTERVALS;Intermediate;Perfect and Major Intervals;1;1;3;false;Perfect & Major Intervals
+INTERVALS;Intermediate;Minor Intervals;2;1;3;true;Minor Intervals
+INTERVALS;Advanced;Augmented and Diminished;1;1;3;true;Augmented & Diminished

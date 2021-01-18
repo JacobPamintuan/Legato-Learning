@@ -17,6 +17,7 @@ public class Lesson {
 	private int totalPanes;
 
 	private boolean completed;
+	private String lessonName;
 
 	private String data;
 
@@ -38,6 +39,8 @@ public class Lesson {
 
 		boolean completed = Boolean.parseBoolean(str[6]);
 
+		String lessonName = str[7];
+
 		this.course = course;
 		this.difficulty = difficulty;
 		this.lessonNumber = lessonNumber;
@@ -45,6 +48,7 @@ public class Lesson {
 		this.currentPane = currentPane;
 		this.totalPanes = totalPanes;
 		this.completed = completed;
+		this.setLessonName(lessonName);
 	}
 
 	public String saveData() {
@@ -58,8 +62,8 @@ public class Lesson {
 
 		return line;
 	}
-	
-	public void saveLesson( ) {
+
+	public void saveLesson() {
 		try {
 			BufferedWriter pr = new BufferedWriter(new FileWriter(new File("Files/Test2"), false));
 			for (int i = 0; i < Initialize.lessonArr.length; i++) {
@@ -128,6 +132,14 @@ public class Lesson {
 
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
+	}
+
+	public String getLessonName() {
+		return lessonName;
+	}
+
+	public void setLessonName(String lessonName) {
+		this.lessonName = lessonName;
 	}
 
 }

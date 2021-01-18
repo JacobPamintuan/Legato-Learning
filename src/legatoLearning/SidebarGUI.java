@@ -98,7 +98,7 @@ public class SidebarGUI implements MouseListener {
 	private void setInvisible() {
 		Initialize.home.homePane.setVisible(false);
 		Initialize.profile.profilePane.setVisible(false);
-		Initialize.challengeBank.challengePane.setVisible(false);
+		Initialize.results.resultsPane.setVisible(false);
 		Initialize.settings.settingsPane.setVisible(false);
 		
 		
@@ -146,7 +146,7 @@ public class SidebarGUI implements MouseListener {
 				Initialize.profile.profilePane.setVisible(true);
 			} else if (temp == lblChallengeBank) {
 
-				Initialize.challengeBank.challengePane.setVisible(true);
+				Initialize.results.resultsPane.setVisible(true);
 
 			} else if (temp == lblSettings) {
 				Initialize.settings.settingsPane.setVisible(true);

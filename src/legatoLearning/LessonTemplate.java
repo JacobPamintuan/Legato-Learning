@@ -21,6 +21,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 
 	private String difficulty;// = "Beginner";
 	private int lessonNumber;// = 1;
+	private String lessonName;
 
 	public int currentPane;// = 1;
 	private int totalPanes;// = 3;
@@ -67,6 +68,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		currentPane = l.getCurrentPane();
 		totalPanes = l.getTotalPanes();
 		completed = l.isCompleted();
+		lessonName = l.getLessonName();
 
 	}
 
@@ -100,7 +102,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		chevron.setBounds(215 + shiftX(), 69, 32, 32);
 		LessonTempPane.add(chevron);
 
-		lblLesson = new JLabel("Lesson " + lessonNumber);
+		lblLesson = new JLabel("Lesson " + lessonNumber + " - " + lessonName);
 		lblLesson.setBounds(255 + shiftX(), 65, 450, 40);
 		lblLesson.setFont(Fonts.HEADING);
 		LessonTempPane.add(lblLesson);
@@ -158,7 +160,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		JLabel press = (JLabel) e.getSource();
-		
+
 		if (press == lblCourse) {
 			LessonTempPane.setVisible(false);
 			Initialize.iCourse.iCoursePane.setVisible(true);
@@ -171,7 +173,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 			LessonTempPane.setVisible(false);
 			l.saveLesson();
 			Initialize.iCourse.enableQuizzes();
-			//Initialize.home.homePane.setVisible(true);
+			// Initialize.home.homePane.setVisible(true);
 			Initialize.iCourse.iCoursePane.setVisible(true);
 //			Initialize.sidebar.lblHome.setIcon(new ImageIcon("images/Home Light.png"));
 		}
@@ -205,7 +207,6 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		JLabel lbl = (JLabel) e.getSource();
 
 		lbl.setText("<html><u>" + lbl.getText() + "<u><html>");
-
 
 	}
 

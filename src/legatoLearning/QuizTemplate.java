@@ -35,7 +35,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	private int[] numTries;
 
 	private boolean completed;
-	
+
 	private int sumWrong;
 
 	public JPanel QuizPane;
@@ -63,6 +63,13 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	// int parameter - initializes specific quiz within quizArr
 	// Initializes Quiz "q" object
 	// Calls methods to initialize fields and create GUI
+
+	public QuizTemplate(Quiz quiz) {
+		this.q = quiz;
+		initializeFields();
+		initializeGUI();
+	}
+
 	public QuizTemplate(int num) {
 		this.q = Initialize.quizArr[num];
 		initializeFields();
@@ -206,11 +213,11 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 		QuizPane.repaint();
 	}
-	
+
 	public int numWrong() {
-		sumWrong=0;
-		for(int i=0;i<totalPanes;i++) {
-			sumWrong+=numTries[i];
+		sumWrong = 0;
+		for (int i = 0; i < totalPanes; i++) {
+			sumWrong += numTries[i];
 		}
 		return sumWrong;
 	}
@@ -309,6 +316,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 				currentPane = 0;
 				q.saveQuiz();
 
+				Initialize.results.updateChart(Initialize.results.currentFilter);
 				Initialize.iCourse.quizCompleted();
 
 				if (popup() == JOptionPane.YES_OPTION)

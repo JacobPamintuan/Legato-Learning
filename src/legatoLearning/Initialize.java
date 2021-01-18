@@ -3,13 +3,11 @@ package legatoLearning;
 import java.io.BufferedReader;
 import java.io.File;
 
-import javax.swing.ImageIcon;
-
 public class Initialize {
 
 	public static SidebarGUI sidebar;
 	public static HomeGUI home;
-	public static ChallengeBankGUI challengeBank;
+	public static ResultsGUI results;
 	public static ProfileGUI profile;
 	public static SettingsGUI settings;
 
@@ -22,7 +20,6 @@ public class Initialize {
 	public static IntervalCourse iCourse;
 
 	public Initialize() throws Exception {
-
 
 		quizArr = new Quiz[10]; // UPDATE
 		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/Quiz.txt")));
@@ -48,8 +45,8 @@ public class Initialize {
 		home = new HomeGUI();
 //		home.homePane.setVisible(false);
 
-		challengeBank = new ChallengeBankGUI();
-		challengeBank.challengePane.setVisible(false);
+		results = new ResultsGUI();
+		results.resultsPane.setVisible(false);
 
 		profile = new ProfileGUI();
 		profile.profilePane.setVisible(false);

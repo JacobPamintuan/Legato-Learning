@@ -248,27 +248,25 @@ public class IntervalCourse implements MouseListener, ActionListener {
 		iCoursePane.repaint();
 
 	}
-	
-	
 
 	public void quizCompleted() {
 		for (int i = 0; i < 3; i++) {
 			if (Initialize.quizArr[i].isCompleted())
 				bQChecks[i].setVisible(true);
 		}
-		
-		for(int i=3;i<=5;i++) {
+
+		for (int i = 3; i <= 5; i++) {
 			if (Initialize.quizArr[i].isCompleted())
-				iL1QChecks[i-3].setVisible(true);
+				iL1QChecks[i - 3].setVisible(true);
 		}
-		
-		for(int i=6;i<=7;i++) {
+
+		for (int i = 6; i <= 7; i++) {
 			if (Initialize.quizArr[i].isCompleted())
-				iL2QChecks[i-6].setVisible(true);
+				iL2QChecks[i - 6].setVisible(true);
 		}
-		for(int i=8;i<=9;i++) {
+		for (int i = 8; i <= 9; i++) {
 			if (Initialize.quizArr[i].isCompleted())
-				aQChecks[i-8].setVisible(true);
+				aQChecks[i - 8].setVisible(true);
 		}
 	}
 

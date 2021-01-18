@@ -1,10 +1,10 @@
 package legatoLearning;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 
@@ -32,6 +32,30 @@ public class Quiz {
 
 	private String data;
 
+	private double score;
+	private String lessonName;
+	private String quizName;
+
+	public Quiz(String course, String difficulty, String questionTitle, int quizNumber, int currentPane, int totalPanes,
+			int[] ansKey, boolean[] answeredCorrect, int[] numWrong, ImageIcon questionImage,
+			ImageIcon[][] answersImage, String[][] answersText, boolean completed, String quizName, String lessonName) {
+		this.course = course;
+		this.difficulty = difficulty;
+		this.questionTitle = questionTitle;
+		this.quizNumber = quizNumber;
+		this.currentPane = currentPane;
+		this.totalPanes = totalPanes;
+		this.ansKey = ansKey;
+		this.answeredCorrect = answeredCorrect;
+		this.numWrong = numWrong;
+		this.questionImage = questionImage;
+		this.answersImage = answersImage;
+		this.answersText = answersText;
+		this.completed = completed;
+		this.score = getPercentageScore();
+		this.setQuizName(quizName);
+		this.setLessonName(lessonName);
+	}
 
 	public Quiz(String line) {
 		/*
@@ -122,6 +146,9 @@ public class Quiz {
 
 		}
 
+		String quizName = str[14];
+		String lessonName = str[13];
+
 		this.course = course;
 		this.difficulty = difficulty;
 		this.questionTitle = questionTitle;
@@ -135,6 +162,9 @@ public class Quiz {
 		this.answersImage = answersImage;
 		this.answersText = answersText;
 		this.completed = completed;
+		this.score = getPercentageScore();
+		this.setQuizName(quizName);
+		this.setLessonName(lessonName);
 
 		// System.out.println("COMPLETED??? " + this.completed);
 		// return new Quiz(course, diff, q, lessonNum, currPane, numQ, ansKey, correct,
@@ -153,7 +183,8 @@ public class Quiz {
 		boolean complete = false;
 		String ans = "";
 		for (int i = 0; i < ansKey.length; i++) {
-			if(answeredCorrect[i]) complete=true;
+			if (answeredCorrect[i])
+				complete = true;
 			ans += (answeredCorrect[i]) + ",";
 		}
 
@@ -302,161 +333,60 @@ public class Quiz {
 		this.completed = completed;
 	}
 
-}
+	public double getPercentageScore() {
+		return calcScore();
+	}
 
-//package guiScreens;
-//
-//import java.io.BufferedReader;
-//import java.io.File;
-//import java.io.IOException;
-//
-//import javax.swing.ImageIcon;
-//import javax.swing.JButton;
-//import javax.swing.JLabel;
-//import javax.swing.JPanel;
-//
-//public class Quiz {
-//
-//	public Quiz(String course, String difficulty, String questionTitle, int quizNumber, int currentPane, int totalPanes,
-//			int[] ansKey, boolean[] answeredCorrect, int[] numWrong, ImageIcon questionImage,
-//			ImageIcon[][] answersImage, String[][] answersText) {
-//		//super(course, difficulty);
-//
-//		this.course = course;
-//		this.difficulty = difficulty;
-//		this.questionTitle = questionTitle;
-//		this.quizNumber = quizNumber;
-//		this.currentPane = currentPane;
-//		this.totalPanes = totalPanes;
-//		this.ansKey = ansKey;
-//		this.answeredCorrect = answeredCorrect;
-//		this.numWrong = numWrong;
-//		this.questionImage = questionImage;
-//		this.answersImage = answersImage;
-//		this.answersText = answersText;
-//
-//	}
-//	
-//	
-//
-//	private int[] numWrong;
-//	private int[] ansKey;
-//	private boolean[] answeredCorrect;
-//
-//	public JPanel QuizPane;
-//
-//	private String course;
-//
-//	private String difficulty;
-//	private int quizNumber = 1;
-//
-//	private int currentPane = 1;
-//	private int totalPanes = 6;
-//
-//	private String questionTitle;
-//
-//	private ImageIcon questionImage;
-//	private ImageIcon[][] answersImage;
-//	private String[][] answersText;
-//
-//	JButton[] btnAnswers = new JButton[4];
-//	JLabel[][] lblAnswers = new JLabel[4][2];
-//	JLabel qBoxL;
-//
-//	public boolean[] getAnsweredCorrect() {
-//		return answeredCorrect;
-//	}
-//
-//	public void setAnsweredCorrect(boolean[] answeredCorrect) {
-//		this.answeredCorrect = answeredCorrect;
-//	}
-//
-//	public String getCourse() {
-//		return course;
-//	}
-//
-//	public void setCourse(String course) {
-//		this.course = course;
-//	}
-//
-//	public String getDifficulty() {
-//		return difficulty;
-//	}
-//
-//	public void setDifficulty(String difficulty) {
-//		this.difficulty = difficulty;
-//	}
-//
-//	public int getQuizNumber() {
-//		return quizNumber;
-//	}
-//
-//	public void setQuizNumber(int quizNumber) {
-//		this.quizNumber = quizNumber;
-//	}
-//
-//	public int getCurrentPane() {
-//		return currentPane;
-//	}
-//
-//	public void setCurrentPane(int currentPane) {
-//		this.currentPane = currentPane;
-//	}
-//
-//	public int getTotalPanes() {
-//		return totalPanes;
-//	}
-//
-//	public void setTotalPanes(int totalPanes) {
-//		this.totalPanes = totalPanes;
-//	}
-//
-//	public String getQuestionTitle() {
-//		return questionTitle;
-//	}
-//
-//	public void setQuestionTitle(String questionTitle) {
-//		this.questionTitle = questionTitle;
-//	}
-//
-//	public ImageIcon getQuestionImage() {
-//		return questionImage;
-//	}
-//
-//	public void setQuestionImage(ImageIcon questionImage) {
-//		this.questionImage = questionImage;
-//	}
-//
-//	public ImageIcon[][] getAnswersImage() {
-//		return answersImage;
-//	}
-//
-//	public void setAnswersImage(ImageIcon[][] answersImage) {
-//		this.answersImage = answersImage;
-//	}
-//
-//	public String[][] getAnswersText() {
-//		return answersText;
-//	}
-//
-//	public void setAnswersText(String[][] answersText) {
-//		this.answersText = answersText;
-//	}
-//
-//	public int[] getAnsKey() {
-//		return ansKey;
-//	}
-//
-//	public void setAnsKey(int[] ansKey) {
-//		this.ansKey = ansKey;
-//	}
-//
-//	public int[] getNumWrong() {
-//		return numWrong;
-//	}
-//
-//	public void setNumWrong(int[] numWrong) {
-//		this.numWrong = numWrong;
-//	}
-//
-//}
+	public String getStringScore() {
+		if (!completed)
+			return "--";
+		int anumWrong = 0;
+		for (int i = 0; i < totalPanes; i++) {
+			if (numWrong[i] > 0) {
+				anumWrong++;
+			}
+		}
+
+		return (totalPanes - anumWrong + "/" + totalPanes + " (" + String.format("%.1f", calcScore() * 100) + "%)");
+	}
+
+	private double calcScore() {
+		if (!completed)
+			return 101;
+		int anumWrong = 0;
+		for (int i = 0; i < totalPanes; i++) {
+			if (numWrong[i] > 0) {
+				anumWrong++;
+			}
+		}
+
+		return ((totalPanes - anumWrong) / (double) totalPanes);
+	}
+
+	@Override
+	public String toString() {
+		return "Quiz [numWrong=" + Arrays.toString(numWrong) + ", ansKey=" + Arrays.toString(ansKey)
+				+ ", answeredCorrect=" + Arrays.toString(answeredCorrect) + ", course=" + course + ", difficulty="
+				+ difficulty + ", quizNumber=" + quizNumber + ", currentPane=" + currentPane + ", totalPanes="
+				+ totalPanes + ", questionTitle=" + questionTitle + ", questionImage=" + questionImage
+				+ ", answersImage=" + Arrays.toString(answersImage) + ", answersText=" + Arrays.toString(answersText)
+				+ ", completed=" + completed + ", data=" + data + ", score=" + score + "]";
+	}
+
+	public String getLessonName() {
+		return lessonName;
+	}
+
+	public void setLessonName(String lessonName) {
+		this.lessonName = lessonName;
+	}
+
+	public String getQuizName() {
+		return quizName;
+	}
+
+	public void setQuizName(String quizName) {
+		this.quizName = quizName;
+	}
+
+}
