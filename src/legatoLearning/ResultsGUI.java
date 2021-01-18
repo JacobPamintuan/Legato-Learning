@@ -168,7 +168,9 @@ class LowToHigh implements Comparator<Quiz> {
 
 class HighToLow implements Comparator<Quiz> {
 	public int compare(Quiz a, Quiz b) {
-		return Double.compare(b.getPercentageScore(), a.getPercentageScore());
+		if (b.getPercentageScore() != 101) // If there is a valid score
+			return Double.compare(b.getPercentageScore(), a.getPercentageScore());
+		return Double.compare(a.getPercentageScore(), b.getPercentageScore()); // If  in
 	}
 }
 

@@ -15,10 +15,10 @@ public class SidebarGUI implements MouseListener {
 	JLabel logo;
 	public JLabel lblHome;
 	private JLabel lblProfile;
-	private JLabel lblChallengeBank;
+	private JLabel lblResults;
 	private JLabel lblSettings;
 
-	private JLabel isClicked;
+	public JLabel isClicked;
 
 	private JLabel temp;
 	private String imgName;
@@ -59,14 +59,14 @@ public class SidebarGUI implements MouseListener {
 		lblProfile.setBounds(0, 174, 300, 54);
 		sidePane.add(lblProfile);
 
-		lblChallengeBank = new JLabel("Challenge Bank");
-		lblChallengeBank.setIcon(
-				new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/Challenge Bank Dark.png"));
-//		lblChallengeBank.setIcon(new ImageIcon("images/Challenge Bank Dark.png"));
-		lblChallengeBank.addMouseListener(this);
+		lblResults = new JLabel("Results");
+		lblResults.setIcon(
+				new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/Results Dark.png"));
+//		lblChallengeBank.setIcon(new ImageIcon("images/Results Dark.png"));
+		lblResults.addMouseListener(this);
 //		lblChallengeBank.setFont(PLAIN);
-		lblChallengeBank.setBounds(0, 228, 300, 54);
-		sidePane.add(lblChallengeBank);
+		lblResults.setBounds(0, 228, 300, 54);
+		sidePane.add(lblResults);
 
 		lblSettings = new JLabel("Settings");
 		lblSettings.setIcon(
@@ -90,7 +90,7 @@ public class SidebarGUI implements MouseListener {
 
 		lblHome.setIcon(new ImageIcon("images/Home Dark.png"));
 		lblProfile.setIcon(new ImageIcon("images/Profile Dark.png"));
-		lblChallengeBank.setIcon(new ImageIcon("images/Challenge Bank Dark.png"));
+		lblResults.setIcon(new ImageIcon("images/Results Dark.png"));
 		lblSettings.setIcon(new ImageIcon("images/Settings Dark.png"));
 
 	}
@@ -144,7 +144,7 @@ public class SidebarGUI implements MouseListener {
 
 			} else if (temp == lblProfile) {
 				Initialize.profile.profilePane.setVisible(true);
-			} else if (temp == lblChallengeBank) {
+			} else if (temp == lblResults) {
 
 				Initialize.results.resultsPane.setVisible(true);
 

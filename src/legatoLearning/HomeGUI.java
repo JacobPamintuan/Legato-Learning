@@ -127,7 +127,7 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 //			Initialize.lesson.LessonTempPane.revalidate();
 			
 			Initialize.iCourse.iCoursePane.setVisible(true);
-			
+			Initialize.sidebar.isClicked = null;
 			Initialize.home.homePane.setVisible(false);
 			
 		} else if (e.getSource() == lblCourse2Rect) {
