@@ -42,6 +42,8 @@ public class IntervalCourse implements MouseListener, ActionListener {
 	JLabel[] iL1QChecks = new JLabel[3];
 	JLabel[] iL2QChecks = new JLabel[2];
 
+	public QuizTemplate current;
+
 	private void checks() {
 //		JLabel bLCheck = new JLabel();
 //		JLabel aLCheck = new JLabel();
@@ -245,7 +247,7 @@ public class IntervalCourse implements MouseListener, ActionListener {
 //		iCoursePane.add(iLesson2);
 //		iCoursePane.add(aLesson1);
 //		iCoursePane.add(aLesson2);
-		
+
 		enableQuizzes();
 		quizCompleted();
 
@@ -366,7 +368,11 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 		for (int i = 0; i < advancedQ.length; i++)
 			if (btn == advancedQ[i]) {
-				Initialize.quizGUI[i + 8].QuizPane.setVisible(true);
+				if (Initialize.quizArr[i + 8].isCompleted()) {
+					Initialize.quizArr[i + 8] = Initialize.quizOG[i + 8];
+					current = new QuizTemplate(Initialize.quizArr[i + 8]);
+				} else
+					Initialize.quizGUI[i + 8].QuizPane.setVisible(true);
 				iCoursePane.setVisible(false);
 				return;
 			}
@@ -374,14 +380,8 @@ public class IntervalCourse implements MouseListener, ActionListener {
 		for (int i = 0; i < beginnerQ.length; i++)
 			if (btn == beginnerQ[i]) {
 				if (Initialize.quizArr[i].isCompleted()) {
-//					boolean[] arr = new boolean[Initialize.quizArr[i].getAnsKey().length];
-//					Arrays.fill(Initialize.quizArr[i].numWrong, 0);
-//					
-//					Initialize.quizArr[i].setAnsweredCorrect(arr);
 					Initialize.quizArr[i] = Initialize.quizOG[i];
-//					System.out.println(Initialize.quizArr[i].toString());
-//					System.out.println(Initialize.quizOG[i].toString());
-					new QuizTemplate(Initialize.quizArr[i]);
+					current = new QuizTemplate(Initialize.quizArr[i]);
 				} else
 					Initialize.quizGUI[i].QuizPane.setVisible(true);
 
@@ -398,7 +398,11 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 		for (int i = 0; i < 3; i++)
 			if (btn == intermediateQ[0][i]) {
-				Initialize.quizGUI[i + 3].QuizPane.setVisible(true);
+				if (Initialize.quizArr[i + 3].isCompleted()) {
+					Initialize.quizArr[i + 3] = Initialize.quizOG[i + 3];
+					current = new QuizTemplate(Initialize.quizArr[i + 3]);
+				} else
+					Initialize.quizGUI[i + 3].QuizPane.setVisible(true);
 				iCoursePane.setVisible(false);
 				System.out.println("int q" + i);
 				return;
@@ -406,7 +410,11 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 		for (int i = 0; i < 2; i++)
 			if (btn == intermediateQ[1][i]) {
-				Initialize.quizGUI[i + 6].QuizPane.setVisible(true);
+				if (Initialize.quizArr[i + 6].isCompleted()) {
+					Initialize.quizArr[i + 6] = Initialize.quizOG[i + 6];
+					current = new QuizTemplate(Initialize.quizArr[i + 6]);
+				} else
+					Initialize.quizGUI[i + 6].QuizPane.setVisible(true);
 				iCoursePane.setVisible(false);
 				System.out.println("int" + i);
 				return;

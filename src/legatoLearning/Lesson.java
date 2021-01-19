@@ -78,6 +78,18 @@ public class Lesson {
 			e.printStackTrace();
 		}
 	}
+	
+	public void DELETE_ALL_LESSONS() {
+		try {
+			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.lessonSaveData, false));
+			pr.write("");
+			pr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	public String getCourse() {
 		return course;

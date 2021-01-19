@@ -22,11 +22,11 @@ public class Initialize {
 
 	public static IntervalCourse iCourse;
 	
-	public static File quizDataOG = new File("Files/Quiz.txt");
-	public static File quizSaveData = new File("Files/Test");
+	public static File quizDataOG = new File("Files/QuizOG");
+	public static File quizSaveData = new File("Files/QuizSave");
 
-	public static File lessonDataOG = new File("Files/Lesson.txt");
-	public static File lessonSaveData = new File("Files/Test2");
+	public static File lessonDataOG = new File("Files/LessonOG");
+	public static File lessonSaveData = new File("Files/LessonSave");
 	
 	public Initialize() throws Exception {
 
@@ -48,7 +48,7 @@ public class Initialize {
 		br.close();
 
 		quizOG = new Quiz[10];
-		BufferedReader br2 = new BufferedReader(new java.io.FileReader(new File("Files/Quiz.txt")));
+		BufferedReader br2 = new BufferedReader(new java.io.FileReader(quizDataOG));
 		for (int i = 0; i < quizOG.length; i++) {
 			String line = br2.readLine();
 			quizOG[i] = new Quiz(line);

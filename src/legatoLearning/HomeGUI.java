@@ -13,7 +13,7 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 
 	JPanel homePane;
 
-	String name = "asdf";
+	String name = "Mr. Fernandes";
 
 	private JLabel lblTitle;
 	private JLabel lblCourses;
@@ -49,9 +49,9 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 		Frame.frame.getContentPane().add(homePane);
 
 		lblTitle = new JLabel("<html><div style='text-align: center;'><html>Welcome " + name
-				+ ", what would <br>you like to learn today?</div><html>");
+				+ ", what<br>would you like to learn today?</div><html>");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(295, 30, 550, 100);
+		lblTitle.setBounds(269, 30, 602, 100);
 		lblTitle.setFont(Fonts.TITLE1);
 		lblTitle.setForeground(Colours.purp);
 		homePane.add(lblTitle);

@@ -29,6 +29,8 @@ public class ResultsGUI implements ActionListener {
 
 	JButton scoreFilter;
 
+	JButton btnFilter;
+
 	public int currentFilter = 0;
 
 	public ResultsGUI() {
@@ -49,6 +51,11 @@ public class ResultsGUI implements ActionListener {
 		description.setBounds(70, 79, 550, 85);
 		description.setFont(Fonts.SUBHEADING1);
 		resultsPane.add(description);
+
+		JLabel legend = new JLabel();
+		legend.setIcon(new ImageIcon("images/ResultsLegend.png"));
+		legend.setBounds(759, 14, 310, 150);
+		resultsPane.add(legend);
 
 		scoreFilter = new JButton();
 		scoreFilter.setIcon(new ImageIcon("images/chevUp.jpg"));
@@ -94,6 +101,11 @@ public class ResultsGUI implements ActionListener {
 		table.setBounds(70, 176, 1000, 571);
 		resultsPane.add(table);
 
+		btnFilter = new JButton("Filter");
+		btnFilter.setBounds(402, 37, 117, 29);
+		btnFilter.addActionListener(this);
+		resultsPane.add(btnFilter);
+
 		resultsPane.repaint();
 	}
 
@@ -122,6 +134,8 @@ public class ResultsGUI implements ActionListener {
 			Arrays.sort(clone, new LowToHigh());
 		else if (num == 1)
 			Arrays.sort(clone, new HighToLow());
+		else
+			; // No filter - Array not sorted by score, displays as original
 
 		for (int i = 0; i < 10; i++) {
 
@@ -130,7 +144,11 @@ public class ResultsGUI implements ActionListener {
 
 			courseArr[i].setText(clone[i].getDifficulty());
 			lessonArr[i].setText(clone[i].getLessonName());
-			quizArr[i].setText(String.format("%d - %s", clone[i].getQuizNumber(), clone[i].getQuizName()));
+
+			if (clone[i].getDifficulty().equals("Intermediate") && clone[i].getQuizNumber() > 3)
+				quizArr[i].setText(String.format("%d - %s", clone[i].getQuizNumber() - 3, clone[i].getQuizName()));
+			else
+				quizArr[i].setText(String.format("%d - %s", clone[i].getQuizNumber(), clone[i].getQuizName()));
 			scoreArr[i].setText(clone[i].getStringScore());
 			smiley[i].setIcon(calculateSmiley(clone[i].getPercentageScore()));
 
@@ -143,6 +161,8 @@ public class ResultsGUI implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnFilter)
+			currentFilter = -1;
 		if (e.getSource() == scoreFilter) {
 			if (currentFilter == 0) {
 				currentFilter = 1;
@@ -151,13 +171,12 @@ public class ResultsGUI implements ActionListener {
 				currentFilter = 0;
 				scoreFilter.setIcon(new ImageIcon("images/chevUp.jpg"));
 			}
-			updateChart(currentFilter);
-		}
 
+		}
+		updateChart(currentFilter);
 		resultsPane.repaint();
 
 	}
-
 }
 
 class LowToHigh implements Comparator<Quiz> {
@@ -168,9 +187,8 @@ class LowToHigh implements Comparator<Quiz> {
 
 class HighToLow implements Comparator<Quiz> {
 	public int compare(Quiz a, Quiz b) {
-		if (b.getPercentageScore() != 101) // If there is a valid score
-			return Double.compare(b.getPercentageScore(), a.getPercentageScore());
-		return Double.compare(a.getPercentageScore(), b.getPercentageScore()); // If  in
+//		if (b.getPercentageScore() != 101) // If there is a valid score
+		return Double.compare(b.getPercentageScore(), a.getPercentageScore());
+//		return Double.compare(a.getPercentageScore(), b.getPercentageScore()); // If  in
 	}
 }
-

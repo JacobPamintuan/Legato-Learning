@@ -67,7 +67,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		title = l.getTitle();
 		currentPane = l.getCurrentPane();
 		totalPanes = l.getTotalPanes();
-		completed = l.isCompleted();
+		setCompleted(l.isCompleted());
 		lessonName = l.getLessonName();
 
 	}
@@ -224,6 +224,14 @@ public class LessonTemplate implements ActionListener, MouseListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
 	}
 
 }

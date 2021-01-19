@@ -43,7 +43,7 @@ public class SidebarGUI implements MouseListener {
 		lblHome = new JLabel("Home");
 		// lblHome.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music
 		// Theory App/images/Home Dark.png"));
-		lblHome.setIcon(new ImageIcon("images/Home Light.png")); //asdf asdf
+		lblHome.setIcon(new ImageIcon("images/Home Light.png")); // asdf asdf
 		isClicked = lblHome;
 		lblHome.addMouseListener(this);
 //		lblHome.setFont(PLAIN);
@@ -100,27 +100,30 @@ public class SidebarGUI implements MouseListener {
 		Initialize.profile.profilePane.setVisible(false);
 		Initialize.results.resultsPane.setVisible(false);
 		Initialize.settings.settingsPane.setVisible(false);
-		
-		
+
 		for (int i = 0; i < Initialize.quizArr.length; i++) {
 			Initialize.quizGUI[i].QuizPane.setVisible(false);
 		}
-		
-		for (int i = 0; i < Initialize.lessonArr.length; i++) {
-			Initialize.	lessonGUI[i].LessonTempPane.setVisible(false);
+
+		try {
+			Initialize.iCourse.current.QuizPane.setVisible(false);
+		} catch (Exception e) {
 		}
-		
+
+		for (int i = 0; i < Initialize.lessonArr.length; i++) {
+			Initialize.lessonGUI[i].LessonTempPane.setVisible(false);
+		}
+
 		Initialize.iCourse.iCoursePane.setVisible(false);
-		
-		
+
 //		Initialize.quiz.QuizPane.setVisible(false);
-		//System.gc();
+		// System.gc();
 
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) { // MouseListener makes JLabel act as a button
-		
+
 	}
 
 	@Override
@@ -129,31 +132,30 @@ public class SidebarGUI implements MouseListener {
 
 		if (temp == logo)
 			temp = lblHome;
-		//if (isClicked != temp) {
-			setDark(); // Sets all sidebar items to dark
 
-			imgName = temp.getText();
+		setDark(); // Sets all sidebar items to dark
 
-			temp.setIcon(new ImageIcon("images/" + imgName + " Light.png"));
+		imgName = temp.getText();
 
-			setInvisible();
-			if (temp == lblHome) {
+		temp.setIcon(new ImageIcon("images/" + imgName + " Light.png"));
 
-				Initialize.home.homePane.setVisible(true);
+		setInvisible();
+		if (temp == lblHome) {
 
+			Initialize.home.homePane.setVisible(true);
 
-			} else if (temp == lblProfile) {
-				Initialize.profile.profilePane.setVisible(true);
-			} else if (temp == lblResults) {
+		} else if (temp == lblProfile) {
+			Initialize.profile.profilePane.setVisible(true);
+		} else if (temp == lblResults) {
 
-				Initialize.results.resultsPane.setVisible(true);
+			Initialize.results.resultsPane.setVisible(true);
 
-			} else if (temp == lblSettings) {
-				Initialize.settings.settingsPane.setVisible(true);
+		} else if (temp == lblSettings) {
+			Initialize.settings.settingsPane.setVisible(true);
 
-			}
-			isClicked = temp;
-		//}
+		}
+		isClicked = temp;
+		// }
 	}
 
 	@Override
