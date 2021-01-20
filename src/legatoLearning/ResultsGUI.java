@@ -18,8 +18,6 @@ public class ResultsGUI implements ActionListener {
 
 	JButton advanced;
 
-//	int[] scores = new int[10];
-
 	JLabel[] courseArr = new JLabel[10];
 	JLabel[] lessonArr = new JLabel[10];
 	JLabel[] quizArr = new JLabel[10];
@@ -66,23 +64,23 @@ public class ResultsGUI implements ActionListener {
 		for (int i = 0; i < 10; i++) {
 			int space = 52;
 			int shiftY = i * space;
-			courseArr[i] = new JLabel();// ("Intermediate");
+			courseArr[i] = new JLabel();
 			courseArr[i].setBounds(97, 231 + shiftY, 125, 43);
 			courseArr[i].setFont(Fonts.BODY);
 			courseArr[i].setVerticalAlignment(SwingConstants.CENTER);
 			resultsPane.add(courseArr[i]);
 
-			lessonArr[i] = new JLabel();// ("1 - Perfect & Major Intervals");
+			lessonArr[i] = new JLabel();
 			lessonArr[i].setBounds(257, 231 + shiftY, 280, 43);
 			lessonArr[i].setFont(Fonts.BODY);
 			resultsPane.add(lessonArr[i]);
 
-			quizArr[i] = new JLabel();// ("3 - Perfect and Major Intervals");
+			quizArr[i] = new JLabel();
 			quizArr[i].setBounds(547, 231 + shiftY, 275, 43);
 			quizArr[i].setFont(Fonts.BODY);
 			resultsPane.add(quizArr[i]);
 
-			scoreArr[i] = new JLabel();// ("6/6 (100%)");
+			scoreArr[i] = new JLabel();
 			scoreArr[i].setBounds(857, 231 + shiftY, 143, 43);
 			scoreArr[i].setFont(Fonts.BODY);
 			resultsPane.add(scoreArr[i]);
@@ -126,6 +124,23 @@ public class ResultsGUI implements ActionListener {
 			smiley = null;
 		return smiley;
 	}
+	
+	public Color scoreColour(double score) {
+
+		score *= 100;
+
+		if (score >= 85 && score <= 100)
+			return Colours.purp;
+		else if (score >= 70 && score < 85)
+			return Colours.green;
+		else if (score >= 50 && score < 70)
+			return Colours.orange;
+		else if (score >= 0 && score < 50)
+			return Colours.red;
+		else
+			return Color.BLACK;
+		
+	}
 
 	public void updateChart(int num) {
 		Quiz[] clone = Initialize.quizArr.clone();
@@ -139,9 +154,6 @@ public class ResultsGUI implements ActionListener {
 
 		for (int i = 0; i < 10; i++) {
 
-			// arr[i].setText(String.format("%s, %d, %.10f", clone[i].getDifficulty(),
-			// clone[i].getQuizNumber(), clone[i].getScore()));
-
 			courseArr[i].setText(clone[i].getDifficulty());
 			lessonArr[i].setText(clone[i].getLessonName());
 
@@ -150,15 +162,15 @@ public class ResultsGUI implements ActionListener {
 			else
 				quizArr[i].setText(String.format("%d - %s", clone[i].getQuizNumber(), clone[i].getQuizName()));
 			scoreArr[i].setText(clone[i].getStringScore());
+			scoreArr[i].setForeground(scoreColour(clone[i].getPercentageScore()));
 			smiley[i].setIcon(calculateSmiley(clone[i].getPercentageScore()));
-
-//			courseArr[i].setText(String.format("%s, \t%d, %s", clone[i].getDifficulty(), clone[i].getQuizNumber(),
-//					clone[i].getStringScore()));
 
 		}
 
 	}
 
+	// Event Handelers
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnFilter)
@@ -179,6 +191,7 @@ public class ResultsGUI implements ActionListener {
 	}
 }
 
+// Comparators - sorts quiz results by score
 class LowToHigh implements Comparator<Quiz> {
 	public int compare(Quiz a, Quiz b) {
 		return Double.compare(a.getPercentageScore(), b.getPercentageScore());
@@ -187,8 +200,6 @@ class LowToHigh implements Comparator<Quiz> {
 
 class HighToLow implements Comparator<Quiz> {
 	public int compare(Quiz a, Quiz b) {
-//		if (b.getPercentageScore() != 101) // If there is a valid score
 		return Double.compare(b.getPercentageScore(), a.getPercentageScore());
-//		return Double.compare(a.getPercentageScore(), b.getPercentageScore()); // If  in
 	}
 }

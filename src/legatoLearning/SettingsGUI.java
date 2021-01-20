@@ -40,7 +40,7 @@ public class SettingsGUI implements ActionListener {
 		Object[] ob = { "RESET", "CANCEL" };
 
 		return JOptionPane.showOptionDialog(settingsPane, "ARE YOU SURE YOU WANT TO RESET ALL PROGRESS?",
-				"RESET ALL DATA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+				"RESET ALL DATA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
 				new ImageIcon("images/Legato Learning.png"), ob, null);
 
 	}

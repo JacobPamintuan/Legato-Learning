@@ -44,82 +44,6 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 	public QuizTemplate current;
 
-	private void checks() {
-//		JLabel bLCheck = new JLabel();
-//		JLabel aLCheck = new JLabel();
-//		JLabel[] iLChecks = new JLabel[2];
-//
-//		JLabel[] bQChecks = new JLabel[3];
-//		JLabel[] aQChecks = new JLabel[2];
-//
-//		JLabel[] iL1QChecks = new JLabel[3];
-//		JLabel[] iL2QChecks = new JLabel[2];
-
-		// Beginner Lesson
-		bLCheck.setIcon(check);
-		bLCheck.setBounds(346, 182, 15, 15);
-		iCoursePane.add(bLCheck);
-		bLCheck.setVisible(false);
-
-		// Beginner Quizzes
-		for (int i = 0; i < 3; i++) {
-			bQChecks[i] = new JLabel();
-			bQChecks[i].setIcon(check);
-			bQChecks[i].setBounds(346, 238 + i * 57, 15, 15);
-			iCoursePane.add(bQChecks[i]);
-			bQChecks[i].setVisible(false);
-		}
-
-		// Intermediate Lessons
-		for (int i = 0; i < 2; i++) {
-			iLChecks[i] = new JLabel();
-			iLChecks[i].setIcon(check);
-			iLChecks[i].setBounds(722, 182 + i * 225, 15, 15);
-			iCoursePane.add(iLChecks[i]);
-			iLChecks[i].setVisible(false);
-		}
-
-		// Intermediate Lesson 1 Quizzes
-		for (int i = 0; i < 3; i++) {
-			iL1QChecks[i] = new JLabel();
-			iL1QChecks[i].setIcon(check);
-			iL1QChecks[i].setBounds(722, 238 + i * 57, 15, 15);
-			iCoursePane.add(iL1QChecks[i]);
-			iL1QChecks[i].setVisible(false);
-		}
-
-		// Intermediate Lesson 2 Quizzes
-		for (int i = 0; i < 2; i++) {
-			iL2QChecks[i] = new JLabel();
-			iL2QChecks[i].setIcon(check);
-			iL2QChecks[i].setBounds(722, 463 + i * 57, 15, 15);
-			iCoursePane.add(iL2QChecks[i]);
-			iL2QChecks[i].setVisible(false);
-		}
-
-		// Advanced Lesson
-		aLCheck.setIcon(check);
-		aLCheck.setBounds(1098, 182, 15, 15);
-		iCoursePane.add(aLCheck);
-		aLCheck.setVisible(false);
-
-		// Advanced Quizzes
-		for (int i = 0; i < 2; i++) {
-			aQChecks[i] = new JLabel();
-			aQChecks[i].setIcon(check);
-			aQChecks[i].setBounds(1098, 238 + i * 57, 15, 15);
-			iCoursePane.add(aQChecks[i]);
-			aQChecks[i].setVisible(false);
-		}
-
-//		for(int i=0;i<3;i++) bQChecks[i].setIcon(check);
-//		for(int i=0;i<3;i++) iL1QChecks[i].setIcon(check);
-//		for(int i=0;i<2;i++) iL2QChecks[i].setIcon(check);
-//		
-//		for(int i=0;i<2;i++) aQChecks[i].setIcon(check);
-
-	}
-
 	public IntervalCourse() {
 		iCoursePane = new JPanel();
 		iCoursePane.setBounds(300, 0, 1240, 810);
@@ -130,7 +54,7 @@ public class IntervalCourse implements MouseListener, ActionListener {
 		// enableQuizzes();
 		checks();
 
-		HOME = new JLabel("Home");
+		HOME = new JLabel("<html><u>Home<u><html>");
 		HOME.setBounds(65, 20, 91, 40);
 		HOME.setFont(Fonts.BREADCRUMBS);
 		HOME.setVerticalAlignment(SwingConstants.CENTER);
@@ -242,16 +166,71 @@ public class IntervalCourse implements MouseListener, ActionListener {
 		iCoursePane.add(intermediate);
 		iCoursePane.add(advanced);
 
-//		iCoursePane.add(bLesson1);
-//		iCoursePane.add(iLesson1);
-//		iCoursePane.add(iLesson2);
-//		iCoursePane.add(aLesson1);
-//		iCoursePane.add(aLesson2);
-
 		enableQuizzes();
 		quizCompleted();
 
 		iCoursePane.repaint();
+
+	}
+	
+	private void checks() {
+
+		// Beginner Lesson
+		bLCheck.setIcon(check);
+		bLCheck.setBounds(346, 182, 15, 15);
+		iCoursePane.add(bLCheck);
+		bLCheck.setVisible(false);
+
+		// Beginner Quizzes
+		for (int i = 0; i < 3; i++) {
+			bQChecks[i] = new JLabel();
+			bQChecks[i].setIcon(check);
+			bQChecks[i].setBounds(346, 238 + i * 57, 15, 15);
+			iCoursePane.add(bQChecks[i]);
+			bQChecks[i].setVisible(false);
+		}
+
+		// Intermediate Lessons
+		for (int i = 0; i < 2; i++) {
+			iLChecks[i] = new JLabel();
+			iLChecks[i].setIcon(check);
+			iLChecks[i].setBounds(722, 182 + i * 225, 15, 15);
+			iCoursePane.add(iLChecks[i]);
+			iLChecks[i].setVisible(false);
+		}
+
+		// Intermediate Lesson 1 Quizzes
+		for (int i = 0; i < 3; i++) {
+			iL1QChecks[i] = new JLabel();
+			iL1QChecks[i].setIcon(check);
+			iL1QChecks[i].setBounds(722, 238 + i * 57, 15, 15);
+			iCoursePane.add(iL1QChecks[i]);
+			iL1QChecks[i].setVisible(false);
+		}
+
+		// Intermediate Lesson 2 Quizzes
+		for (int i = 0; i < 2; i++) {
+			iL2QChecks[i] = new JLabel();
+			iL2QChecks[i].setIcon(check);
+			iL2QChecks[i].setBounds(722, 463 + i * 57, 15, 15);
+			iCoursePane.add(iL2QChecks[i]);
+			iL2QChecks[i].setVisible(false);
+		}
+
+		// Advanced Lesson
+		aLCheck.setIcon(check);
+		aLCheck.setBounds(1098, 182, 15, 15);
+		iCoursePane.add(aLCheck);
+		aLCheck.setVisible(false);
+
+		// Advanced Quizzes
+		for (int i = 0; i < 2; i++) {
+			aQChecks[i] = new JLabel();
+			aQChecks[i].setIcon(check);
+			aQChecks[i].setBounds(1098, 238 + i * 57, 15, 15);
+			iCoursePane.add(aQChecks[i]);
+			aQChecks[i].setVisible(false);
+		}
 
 	}
 
@@ -333,19 +312,21 @@ public class IntervalCourse implements MouseListener, ActionListener {
 	public void mouseEntered(MouseEvent e) {
 		JLabel lbl = (JLabel) e.getSource();
 
-		lbl.setText("<html><u>" + lbl.getText() + "<u><html>");
+//		lbl.setText("<html><u>" + lbl.getText() + "<u><html>");
+		lbl.setForeground(Colours.purp);
 
-//		JLabel link = new JLabel("<html><u>Link to " + unis[0].getName() + "'s website<u><html>"); // JLabel - Link with
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		JLabel lbl = (JLabel) e.getSource();
+		
+		lbl.setForeground(Color.BLACK);
 
-		String noUnderline = lbl.getText().substring(9, lbl.getText().length() - 9);
-
-		lbl.setText(noUnderline);
+//		String noUnderline = lbl.getText().substring(9, lbl.getText().length() - 9);
+//
+//		lbl.setText(noUnderline);
 
 	}
 

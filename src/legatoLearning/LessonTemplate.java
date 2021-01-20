@@ -85,10 +85,10 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		lblTitle.setForeground(Colours.purp);
 		LessonTempPane.add(lblTitle);
 
-		lblCourse = new JLabel(course);
+		lblCourse = new JLabel("<html><u>" + course + "<u><html>");
 		lblCourse.addMouseListener(this);
 		lblCourse.setBounds(65, 25, 190, 30);
-		lblCourse.setFont(Fonts.BODY);
+		lblCourse.setFont(Fonts.BREADCRUMBS);
 		LessonTempPane.add(lblCourse);
 
 		lblDifficulty = new JLabel(difficulty);
@@ -206,7 +206,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		JLabel lbl = (JLabel) e.getSource();
 
-		lbl.setText("<html><u>" + lbl.getText() + "<u><html>");
+		lbl.setForeground(Colours.purp);
 
 	}
 
@@ -214,9 +214,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 	public void mouseExited(MouseEvent e) {
 		JLabel lbl = (JLabel) e.getSource();
 
-		String noUnderline = lbl.getText().substring(9, lbl.getText().length() - 9);
-
-		lbl.setText(noUnderline);
+		lbl.setForeground(Color.BLACK);
 
 	}
 
