@@ -15,7 +15,7 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 
 	JPanel homePane;
 
-	String name = "Mr. Fernandes";
+	String name;// = "Mr. Fernandes";
 
 	private JLabel lblTitle;
 	private JLabel lblCourses;
@@ -39,6 +39,8 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 
 	// Initialize GUI
 	public HomeGUI() {
+		
+		name = Initialize.user.getName();
 
 		// JPanel Setup
 		homePane = new JPanel();

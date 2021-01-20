@@ -3,6 +3,7 @@ package legatoLearning;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -72,12 +73,25 @@ public class SignUpGUI implements ActionListener {
 				// || confirmPassword.getText().isEmpty()) {
 				error.setText("Empty Fields");
 			} else {
-				if (!LoadUsers.checkUsername(username.getText())) {
+				if (!LoadUsers.checkUsername(username.getText().toLowerCase())) {
 					try {
-						LoadUsers.addUser(username.getText(), password.getText(), tName.getText());
+						Initialize.user = new User(LoadUsers.addUser(username.getText().toLowerCase(),
+								password.getText(), tName.getText()));
+
+						Initialize.user.getQuizSave().createNewFile();
+						Initialize.user.getLessonSave().createNewFile();
+						
+						Initialize.initializeFiles();
+						Initialize.initializeGUIS();
+						
+						System.out.println("Sign up successful");
+						
+						signUpPane.setVisible(false);
+
 					} catch (Exception e1) {
 					}
-				} else error.setText("user already exists");
+				} else
+					error.setText("user already exists");
 
 			}
 		}

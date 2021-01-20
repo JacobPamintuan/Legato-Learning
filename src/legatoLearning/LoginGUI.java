@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -53,7 +54,7 @@ public class LoginGUI implements ActionListener {
 		error = new JLabel("");
 		error.setBounds(100, 210, 400, 20);
 		loginPane.add(error);
-		
+
 		JLabel loginp = new JLabel("Login screen");
 		loginp.setBounds(500, 200, 500, 500);
 		loginPane.add(loginp);
@@ -66,9 +67,21 @@ public class LoginGUI implements ActionListener {
 		if (e.getSource() == login) {
 			if (username.getText().isEmpty() || password.getText().isEmpty())
 				error.setText("Empty fields");//System.out.println("Empty fields");
-			else if (LoadUsers.checkUsername(username.getText())) {
+			else if (LoadUsers.checkUsername(username.getText().toLowerCase())) {
 				if (LoadUsers.checkPassword(username.getText(), password.getText())) {
 					error.setText("Login successful");//System.out.println("Login successful");
+					
+					Initialize.user = new User(LoadUsers.loginSuccessful(username.getText()));
+					
+					try {
+						Initialize.initializeFiles();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					Initialize.initializeGUIS();
+					loginPane.setVisible(false);
+					
+					
 				} else
 					error.setText("Password incorrect");//System.out.println("Password incorrect");
 			} else

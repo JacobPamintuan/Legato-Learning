@@ -38,15 +38,26 @@ public class LoadUsers {
 
 	}
 
-	public static void addUser(String username, String password, String name) throws IOException {
+	public static String addUser(String username, String password, String name) throws IOException {
 		users.add(username);
 		passwords.add(password);
 		names.add(name);
 		BufferedWriter pr = new BufferedWriter(new FileWriter(USERFILE, true));
-		//pr.newLine();
-		pr.write(String.format("%s;%s;%s;Files/QuizSave_%s;Files/LessonSave_%s\n", username, password, name, username,
-				username));
+
+		String line = String.format("%s;%s;%s;Files/QuizSave_%s;Files/LessonSave_%s\n", username, password, name,
+				username, username);
+
+		pr.write(line);
 		pr.close();
+
+		return line;
+	}
+
+	public static String loginSuccessful(String username) {
+		int i = users.indexOf(username);
+		String line = String.format("%s;%s;%s;Files/QuizSave_%s;Files/LessonSave_%s\n", username, passwords.get(i),
+				names.get(i), username, username);
+		return line;
 	}
 
 	public static int getUserIndex(String username) {
