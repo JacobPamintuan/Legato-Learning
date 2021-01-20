@@ -13,23 +13,26 @@ import javax.swing.SwingConstants;
 
 public class LessonTemplate implements ActionListener, MouseListener {
 
+	// Fields
 	Lesson l;
 
-	public JPanel LessonTempPane;
+	// Data fields
 
-	private String course;// ="INTERVALS";
+	private String course;
 
-	private String difficulty;// = "Beginner";
-	private int lessonNumber;// = 1;
+	private String difficulty;
+	private int lessonNumber;
 	private String lessonName;
 
-	public int currentPane;// = 1;
-	private int totalPanes;// = 3;
+	public int currentPane;
+	private int totalPanes;
 
-	private String title;// = "What is an interval?";
+	private String title;
 
 	private boolean completed;
 
+	// GUI fields
+	public JPanel LessonTempPane;
 	private JLabel lblTitle;
 	private JLabel lblCourse;
 	private JLabel lblDifficulty;
@@ -44,22 +47,13 @@ public class LessonTemplate implements ActionListener, MouseListener {
 	private JLabel lblPrevious;
 	private JLabel lblNext;
 
-	public void getLesson() {
-
-	}
-
-	public void saveLesson() {
-
-	}
-
 	public LessonTemplate(int num) {
-//		Lesson lesson = Initialize.lessonArr[num];
-//		l= lesson;
 		this.l = Initialize.lessonArr[num];
 		initializeObject();
 		initializeGUI();
 	}
 
+	// Initialize object/data fields
 	private void initializeObject() {
 		course = l.getCourse();
 		difficulty = l.getDifficulty();
@@ -72,6 +66,7 @@ public class LessonTemplate implements ActionListener, MouseListener {
 
 	}
 
+	// Initialize GUI fields
 	private void initializeGUI() {
 		LessonTempPane = new JPanel();
 		LessonTempPane.setBounds(300, 0, 1140, 810);
@@ -96,14 +91,12 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		lblDifficulty.setFont(Fonts.HEADING);
 		LessonTempPane.add(lblDifficulty);
 
-		// chevron.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music
-		// Theory App/images/chevron.png"));
 		chevron.setIcon(new ImageIcon("images/chevron.png"));
 		chevron.setBounds(215 + shiftX(), 69, 32, 32);
 		LessonTempPane.add(chevron);
 
 		lblLesson = new JLabel("Lesson " + lessonNumber + " - " + lessonName);
-		lblLesson.setBounds(255 + shiftX(), 65, 450, 40);
+		lblLesson.setBounds(255 + shiftX(), 65, 600, 40);
 		lblLesson.setFont(Fonts.HEADING);
 		LessonTempPane.add(lblLesson);
 
@@ -122,7 +115,6 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		LessonTempPane.add(lessonImage);
 
 		lblPrevious = new JLabel("Previous");
-		lblPrevious.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/Previous.png"));
 		lblPrevious.setIcon(new ImageIcon("images/Previous.png"));
 		lblPrevious.setBounds(253, 712, 195, 55);
 		lblPrevious.addMouseListener(this);
@@ -131,7 +123,6 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		lblPrevious.setEnabled(false);
 
 		lblNext = new JLabel("Next");
-		lblNext.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/Next.png"));
 		lblNext.setIcon(new ImageIcon("images/Next.png"));
 		lblNext.setBounds(691, 712, 195, 55);
 		lblNext.addMouseListener(this);
@@ -140,6 +131,8 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		LessonTempPane.repaint();
 	}
 
+	// Shifts cheveron and lesson name a certain amount depedning on difficulty
+	// Different difficulties take up a different amount of space on JLabel
 	private int shiftX() {
 		int xShift = 0;
 		if (difficulty.equals("Beginner"))
@@ -151,9 +144,9 @@ public class LessonTemplate implements ActionListener, MouseListener {
 		return xShift;
 	}
 
+	// Event handlers
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -198,7 +191,6 @@ public class LessonTemplate implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -220,7 +212,6 @@ public class LessonTemplate implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 

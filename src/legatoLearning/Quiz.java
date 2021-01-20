@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 
 public class Quiz {
 
+	// Fields
 	public int[] numWrong;
 	private int[] ansKey;
 	private boolean[] answeredCorrect;
@@ -36,58 +37,37 @@ public class Quiz {
 	private String lessonName;
 	private String quizName;
 
-	public Quiz(String course, String difficulty, String questionTitle, int quizNumber, int currentPane, int totalPanes,
-			int[] ansKey, boolean[] answeredCorrect, int[] numWrong, ImageIcon questionImage,
-			ImageIcon[][] answersImage, String[][] answersText, boolean completed, String quizName, String lessonName) {
-		this.course = course;
-		this.difficulty = difficulty;
-		this.questionTitle = questionTitle;
-		this.quizNumber = quizNumber;
-		this.currentPane = currentPane;
-		this.totalPanes = totalPanes;
-		this.ansKey = ansKey;
-		this.answeredCorrect = answeredCorrect;
-		this.numWrong = numWrong;
-		this.questionImage = questionImage;
-		this.answersImage = answersImage;
-		this.answersText = answersText;
-		this.completed = completed;
-		this.score = getPercentageScore();
-		this.setQuizName(quizName);
-		this.setLessonName(lessonName);
-	}
+//	
+//	public Quiz(String course, String difficulty, String questionTitle, int quizNumber, int currentPane, int totalPanes,
+//			int[] ansKey, boolean[] answeredCorrect, int[] numWrong, ImageIcon questionImage,
+//			ImageIcon[][] answersImage, String[][] answersText, boolean completed, String quizName, String lessonName) {
+//		this.course = course;
+//		this.difficulty = difficulty;
+//		this.questionTitle = questionTitle;
+//		this.quizNumber = quizNumber;
+//		this.currentPane = currentPane;
+//		this.totalPanes = totalPanes;
+//		this.ansKey = ansKey;
+//		this.answeredCorrect = answeredCorrect;
+//		this.numWrong = numWrong;
+//		this.questionImage = questionImage;
+//		this.answersImage = answersImage;
+//		this.answersText = answersText;
+//		this.completed = completed;
+//		this.score = getPercentageScore();
+//		this.setQuizName(quizName);
+//		this.setLessonName(lessonName);
+//	}
 
 	public Quiz(String line) {
-		/*
-		 * super(course, difficulty);
-		 * 
-		 * this.course = course; this.difficulty = difficulty; this.questionTitle =
-		 * questionTitle; this.quizNumber = quizNumber; this.currentPane = currentPane;
-		 * this.totalPanes = totalPanes; this.ansKey = ansKey; this.answeredCorrect =
-		 * answeredCorrect; this.numWrong = numWrong; this.questionImage =
-		 * questionImage; this.answersImage = answersImage; this.answersText =
-		 * answersText;
-		 */
-		// System.out.println("Constructor:" +line);
 		this.data = line;
 		loadData(line);
 	}
 
-	// static Quiz[] QUIZZES = new String[2];
 
 	private void loadData(String line) {
-		// BufferedReader br = new BufferedReader(new java.io.FileReader(new
-		// File("Files/Data.txt")));
 
-		/*
-		 * for (int i = 0; i < 2; i++) { QUIZZES[i] = br.readLine(); }
-		 */
-
-		// System.out.println("Load data: "+line);
 		String[] str = line.trim().split(";");
-
-		// for (int i = 0; i < str.length; i++)
-		// System.out.println(str[i]);
 
 		String course = str[0];
 		String difficulty = str[1];
@@ -121,10 +101,6 @@ public class Quiz {
 		boolean completed = Boolean.parseBoolean(str[12]);
 
 		for (int i = 0; i < totalPanes; i++) {
-			// System.out.println(answers[i]);//
-		}
-
-		for (int i = 0; i < totalPanes; i++) {
 			String[] tempText = answers[i].trim().split(",");
 			String[] tempImage = ansImages[i].trim().split(",");
 			for (int j = 0; j < 4; j++) {
@@ -135,12 +111,10 @@ public class Quiz {
 				}
 				if (tempImage[j].equalsIgnoreCase("null")) {
 					answersImage[i][j] = null;
-					// System.out.println("NULL IMAGE");
 				}
 
 				else {
 					answersImage[i][j] = new ImageIcon(tempImage[j]);// Temp[j]);
-					// System.out.println("Valiud IMAGE " + tempImage[j]);
 				}
 			}
 
@@ -166,9 +140,6 @@ public class Quiz {
 		this.setQuizName(quizName);
 		this.setLessonName(lessonName);
 
-		// System.out.println("COMPLETED??? " + this.completed);
-		// return new Quiz(course, diff, q, lessonNum, currPane, numQ, ansKey, correct,
-		// numWrong, qImage, ansArr, ansText);
 	}
 
 	public String saveData(int curr) {
@@ -215,7 +186,6 @@ public class Quiz {
 	public void saveQuiz() {
 
 		try {
-//			BufferedWriter pr = new BufferedWriter(new FileWriter(new File("Files/Test"), false));
 			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.quizSaveData, false));
 			for (int i = 0; i < Initialize.quizArr.length; i++) {
 				pr.write(Initialize.quizArr[i].saveData(Initialize.quizArr[i].getCurrentPane()));
@@ -229,18 +199,19 @@ public class Quiz {
 		}
 
 	}
-	
+
 	public void DELETE_ALL_QUIZZES() {
 		try {
 			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.quizSaveData, false));
 			pr.write("");
 			pr.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
+
+	// Getters and setters
 
 	public boolean[] getAnsweredCorrect() {
 		return answeredCorrect;
@@ -346,10 +317,12 @@ public class Quiz {
 		this.completed = completed;
 	}
 
+	// Returns score as a double -> 0.xx
 	public double getPercentageScore() {
 		return calcScore();
 	}
 
+	// Return score in String format -> x/y (xx.x%)
 	public String getStringScore() {
 		if (!completed)
 			return "--";
@@ -363,9 +336,10 @@ public class Quiz {
 		return (totalPanes - anumWrong + "/" + totalPanes + " (" + String.format("%.1f", calcScore() * 100) + "%)");
 	}
 
+	// Helper method - calculates score in decimal
 	private double calcScore() {
 		if (!completed)
-			return 101;
+			return 101; // Return an impossible score
 		int anumWrong = 0;
 		for (int i = 0; i < totalPanes; i++) {
 			if (numWrong[i] > 0) {
@@ -374,16 +348,6 @@ public class Quiz {
 		}
 
 		return ((totalPanes - anumWrong) / (double) totalPanes);
-	}
-
-	@Override
-	public String toString() {
-		return "Quiz [numWrong=" + Arrays.toString(numWrong) + ", ansKey=" + Arrays.toString(ansKey)
-				+ ", answeredCorrect=" + Arrays.toString(answeredCorrect) + ", course=" + course + ", difficulty="
-				+ difficulty + ", quizNumber=" + quizNumber + ", currentPane=" + currentPane + ", totalPanes="
-				+ totalPanes + ", questionTitle=" + questionTitle + ", questionImage=" + questionImage
-				+ ", answersImage=" + Arrays.toString(answersImage) + ", answersText=" + Arrays.toString(answersText)
-				+ ", completed=" + completed + ", data=" + data + ", score=" + score + "]";
 	}
 
 	public String getLessonName() {
@@ -402,5 +366,14 @@ public class Quiz {
 		this.quizName = quizName;
 	}
 
-}
+	@Override
+	public String toString() {
+		return "Quiz [numWrong=" + Arrays.toString(numWrong) + ", ansKey=" + Arrays.toString(ansKey)
+				+ ", answeredCorrect=" + Arrays.toString(answeredCorrect) + ", course=" + course + ", difficulty="
+				+ difficulty + ", quizNumber=" + quizNumber + ", currentPane=" + currentPane + ", totalPanes="
+				+ totalPanes + ", questionTitle=" + questionTitle + ", questionImage=" + questionImage
+				+ ", answersImage=" + Arrays.toString(answersImage) + ", answersText=" + Arrays.toString(answersText)
+				+ ", completed=" + completed + ", data=" + data + ", score=" + score + "]";
+	}
 
+}

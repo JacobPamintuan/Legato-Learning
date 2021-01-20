@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.Comparator;
 
 import javax.swing.*;
 
-public class ResultsGUI implements ActionListener {
+public class ResultsGUI implements ActionListener, MouseListener {
 
 	JPanel resultsPane;
 
@@ -27,7 +29,7 @@ public class ResultsGUI implements ActionListener {
 
 	JButton scoreFilter;
 
-	JButton btnFilter;
+	JLabel difficultyFilter;
 
 	public int currentFilter = 0;
 
@@ -60,6 +62,12 @@ public class ResultsGUI implements ActionListener {
 		scoreFilter.addActionListener(this);
 		scoreFilter.setBounds(1035, 191, 23, 23);
 		resultsPane.add(scoreFilter);
+
+		difficultyFilter = new JLabel();
+		difficultyFilter.setIcon(new ImageIcon("images/chevDown.png"));
+		difficultyFilter.setBounds(189, 191, 23, 23);
+		difficultyFilter.addMouseListener(this);
+		resultsPane.add(difficultyFilter);
 
 		for (int i = 0; i < 10; i++) {
 			int space = 52;
@@ -99,11 +107,6 @@ public class ResultsGUI implements ActionListener {
 		table.setBounds(70, 176, 1000, 571);
 		resultsPane.add(table);
 
-		btnFilter = new JButton("Filter");
-		btnFilter.setBounds(402, 37, 117, 29);
-		btnFilter.addActionListener(this);
-		resultsPane.add(btnFilter);
-
 		resultsPane.repaint();
 	}
 
@@ -124,7 +127,7 @@ public class ResultsGUI implements ActionListener {
 			smiley = null;
 		return smiley;
 	}
-	
+
 	public Color scoreColour(double score) {
 
 		score *= 100;
@@ -139,7 +142,7 @@ public class ResultsGUI implements ActionListener {
 			return Colours.red;
 		else
 			return Color.BLACK;
-		
+
 	}
 
 	public void updateChart(int num) {
@@ -155,7 +158,9 @@ public class ResultsGUI implements ActionListener {
 		for (int i = 0; i < 10; i++) {
 
 			courseArr[i].setText(clone[i].getDifficulty());
-			lessonArr[i].setText(clone[i].getLessonName());
+
+			lessonArr[i].setText("<html><u>" + clone[i].getLessonName() + "<u><html>");
+			lessonArr[i].addMouseListener(this);
 
 			if (clone[i].getDifficulty().equals("Intermediate") && clone[i].getQuizNumber() > 3)
 				quizArr[i].setText(String.format("%d - %s", clone[i].getQuizNumber() - 3, clone[i].getQuizName()));
@@ -170,11 +175,9 @@ public class ResultsGUI implements ActionListener {
 	}
 
 	// Event Handelers
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnFilter)
-			currentFilter = -1;
 		if (e.getSource() == scoreFilter) {
 			if (currentFilter == 0) {
 				currentFilter = 1;
@@ -183,10 +186,70 @@ public class ResultsGUI implements ActionListener {
 				currentFilter = 0;
 				scoreFilter.setIcon(new ImageIcon("images/chevUp.jpg"));
 			}
-
+			difficultyFilter.setEnabled(true);
 		}
 		updateChart(currentFilter);
 		resultsPane.repaint();
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		JLabel lbl = (JLabel) e.getSource();
+
+		if (lbl == difficultyFilter) {
+			difficultyFilter.setEnabled(false);
+			currentFilter = -1;
+			updateChart(currentFilter);
+			resultsPane.repaint();
+		} else {
+			String lesson = lbl.getText().substring(9, lbl.getText().length() - 9);
+
+			if (lesson.equals("1 - Intro to Intervals")) {
+				Initialize.lessonGUI[0].LessonTempPane.setVisible(true);
+			}
+
+			else if (lesson.equals("1 - Perfect & Major Intervals")) {
+				Initialize.lessonGUI[1].LessonTempPane.setVisible(true);
+			}
+
+			else if (lesson.equals("2 - Minor Intervals" + "")) {
+				Initialize.lessonGUI[1].LessonTempPane.setVisible(true);
+			}
+
+			else if (lesson.equals("1 - Augmented & Diminished")) {
+				Initialize.lessonGUI[3].LessonTempPane.setVisible(true);
+
+			}
+
+			resultsPane.setVisible(false);
+			Initialize.sidebar.setDark();
+			Initialize.sidebar.isClicked = null;
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		JLabel lbl = (JLabel) e.getSource();
+
+		lbl.setForeground(Colours.purp);
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		JLabel lbl = (JLabel) e.getSource();
+
+		lbl.setForeground(Color.BLACK);
 
 	}
 }
