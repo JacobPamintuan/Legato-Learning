@@ -1,97 +1,157 @@
 package legatoLearning;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
+import javax.swing.JCheckBox;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
-public class LoginGUI implements ActionListener {
+import java.awt.Font;
+
+public class LoginGUI implements ActionListener, ItemListener {
+	// Fields
 
 	public JPanel loginPane;
 
-	private JLabel lblUser, lblPass;
 	private JLabel error;
 	private JTextField username;
 	private JPasswordField password;
 
-	private JButton signUP, login;
+	private JCheckBox chckbxShowPassword;
+	
+	private JButton signUp;
+	private JButton login;
 
+	// Constructor - no parameters
 	public LoginGUI() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
+	//Initialize the contents of the frame.
 	private void initialize() {
+		// JPanel setup
 		loginPane = new JPanel();
 		loginPane.setBounds(0, 0, 1440, 810);
-		loginPane.setBackground(Color.white);
+		loginPane.setBackground(Colours.vDarkBlue);
 		loginPane.setLayout(null);
 		Frame.frame.getContentPane().add(loginPane);
 
-		username = new JTextField("Username");
-		username.setBounds(100, 100, 100, 20);
+		// Text field
+		username = new JTextField();
+		username.setBounds(835, 241, 364, 46);
+		username.setBackground(Colours.vDarkBlue);
+		username.setForeground(Color.WHITE);
+		username.setFont(Fonts.BODY);
 		loginPane.add(username);
 
-		password = new JPasswordField("Password");
-		password.setBounds(100, 130, 100, 20);
+		// Password field
+		password = new JPasswordField();
+		password.setBounds(835, 353, 364, 46);
+		password.setBackground(Colours.vDarkBlue);
+		password.setForeground(Color.WHITE);
+		password.setFont(Fonts.BODY);
 		loginPane.add(password);
+		
+		// Checkbox - Show/hide passwords
+		chckbxShowPassword = new JCheckBox("Show Password");
+		chckbxShowPassword.setForeground(Color.WHITE);
+		chckbxShowPassword.setFont(new Font("Helvetica Neue", Font.PLAIN, 15));
+		chckbxShowPassword.setBounds(835, 400, 264, 23);
+		chckbxShowPassword.addItemListener(this);
+		loginPane.add(chckbxShowPassword);
 
-		login = new JButton("Login");
-		login.setBounds(160, 160, 40, 20);
+
+		// JLabel - error message
+		error = new JLabel("");
+		error.setBounds(832, 425, 375, 38);
+		error.setFont(Fonts.BODY);
+		error.setForeground(Color.WHITE);
+		error.setVerticalAlignment(SwingConstants.CENTER);
+		error.setHorizontalAlignment(SwingConstants.CENTER);
+		loginPane.add(error);
+
+		// Main image - within JLabel
+		JLabel loginImage = new JLabel();
+		loginImage.setBounds(0, 0, 1440, 810);
+		loginImage.setIcon(new ImageIcon("images/LoginScreen.png"));
+		loginPane.add(loginImage);
+
+		// JButtons
+		login = new JButton();
+		login.setBounds(832, 466, 375, 46);
 		login.addActionListener(this);
 		loginPane.add(login);
 
-		signUP = new JButton("Sign Up");
-		signUP.setBounds(100, 160, 40, 20);
-		signUP.addActionListener(this);
-		loginPane.add(signUP);
-
-		error = new JLabel("");
-		error.setBounds(100, 210, 400, 20);
-		loginPane.add(error);
-
-		JLabel loginp = new JLabel("Login screen");
-		loginp.setBounds(500, 200, 500, 500);
-		loginPane.add(loginp);
+		signUp = new JButton();
+		signUp.setBounds(832, 558, 375, 46);
+		signUp.addActionListener(this);
+		loginPane.add(signUp);
 
 		loginPane.repaint();
 	}
-
+	
+	// Event handlers
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == login) {
+
+		if (e.getSource() == login) { // Login attempt
+			error.setText("");
+			
+			// Check for empty text fields and display appropriate message
 			if (username.getText().isEmpty() || password.getText().isEmpty())
-				error.setText("Empty fields");//System.out.println("Empty fields");
+				error.setText("Empty fields");
+			
+			// Check if user exists
 			else if (LoadUsers.checkUsername(username.getText().toLowerCase())) {
+				
+				// User exists - check if password matches
 				if (LoadUsers.checkPassword(username.getText(), password.getText())) {
-					error.setText("Login successful");//System.out.println("Login successful");
-					
+
+					// Initialize user
 					Initialize.user = new User(LoadUsers.loginSuccessful(username.getText()));
-					
+
+					// Initialize save files associated with user
 					try {
 						Initialize.initializeFiles();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 					Initialize.initializeGUIS();
-					loginPane.setVisible(false);
-					
-					
-				} else
-					error.setText("Password incorrect");//System.out.println("Password incorrect");
-			} else
-				error.setText("Username does not exist");//System.out.println("Username does not exist");
-		} else if (e.getSource() == signUP) {
+					loginPane.setVisible(false); // Hide current pane
+
+				} else 
+					error.setText("Password incorrect");
+			
+			} else // User nonexistent
+				error.setText("Username does not exist");
+			
+		} else if (e.getSource() == signUp) { // Sign up instead
 			Initialize.signUp.signUpPane.setVisible(true);
 			loginPane.setVisible(false);
-			System.out.println("Sign Up");
 		}
 
 	}
 
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) // Checkbox clicked/selected
+			// Show passwords (plain text)
+			password.setEchoChar((char) 0);
+		else
+			// Hide passwords
+			password.setEchoChar('●');
+
+	}
+	
 }

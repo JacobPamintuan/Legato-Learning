@@ -3,97 +3,198 @@ package legatoLearning;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JCheckBox;
+import java.awt.Font;
 
-public class SignUpGUI implements ActionListener {
+public class SignUpGUI implements ActionListener, ItemListener {
+
+	// Fields
 
 	public JPanel signUpPane;
 
-	private JLabel fName, lblUser, lblPass;
 	private JLabel error;
-	private JTextField tName, username;
-	private JPasswordField password, confirmPassword;
 
-	JButton login, signUp;
+	private JTextField firstName;
+	private JTextField lastName;
+	private JTextField username;
 
+	private JPasswordField password;
+	private JPasswordField confirmPassword;
+
+	private JCheckBox chckbxShowPassword;
+
+	private JButton login;
+	private JButton signUp;
+
+	// Constructor, no parameters
 	public SignUpGUI() {
-		signUpPane = new JPanel();
+		initialize();
+	}
+
+	// Initialize GUI
+	private void initialize() {
+		signUpPane = new JPanel(); // JPanel setup
 		signUpPane.setBounds(0, 0, 1440, 810);
-		signUpPane.setBackground(Color.white);
+		signUpPane.setBackground(Colours.vDarkBlue);
 		signUpPane.setLayout(null);
 		Frame.frame.getContentPane().add(signUpPane);
 
-		tName = new JTextField("tFName");
-		tName.setBounds(100, 370, 100, 20);
-		signUpPane.add(tName);
+		// Textfields
+		firstName = new JTextField();
+		firstName.setBounds(472, 263, 232, 45);
+		firstName.setBackground(Colours.vDarkBlue);
+		firstName.setForeground(Color.WHITE);
+		firstName.setFont(Fonts.BODY);
+		signUpPane.add(firstName);
 
-		username = new JTextField("Username");
-		username.setBounds(100, 400, 100, 20);
+		lastName = new JTextField();
+		lastName.setBounds(736, 263, 232, 45);
+		lastName.setBackground(Colours.vDarkBlue);
+		lastName.setForeground(Color.WHITE);
+		lastName.setFont(Fonts.BODY);
+		signUpPane.add(lastName);
+
+		username = new JTextField();
+		username.setBounds(472, 358, 496, 45);
+		username.setBackground(Colours.vDarkBlue);
+		username.setForeground(Color.WHITE);
+		username.setFont(Fonts.BODY);
 		signUpPane.add(username);
 
-		password = new JPasswordField("Password");
-		password.setBounds(100, 430, 100, 20);
+		// Password Fields
+		password = new JPasswordField();
+		password.setBounds(472, 453, 232, 45);
+		password.setBackground(Colours.vDarkBlue);
+		password.setForeground(Color.WHITE);
+		password.setFont(Fonts.BODY);
 		signUpPane.add(password);
 
-		login = new JButton("Login instead");
-		login.setBounds(160, 460, 40, 20);
-		login.addActionListener(this);
-		signUpPane.add(login);
+		confirmPassword = new JPasswordField();
+		confirmPassword.setBounds(736, 453, 232, 45);
+		confirmPassword.setBackground(Colours.vDarkBlue);
+		confirmPassword.setForeground(Color.WHITE);
+		confirmPassword.setFont(Fonts.BODY);
+		signUpPane.add(confirmPassword);
 
+		// Checkbox - Show/hide passwords
+		chckbxShowPassword = new JCheckBox("Show Password");
+		chckbxShowPassword.setFont(new Font("Helvetica Neue", Font.PLAIN, 15));
+		chckbxShowPassword.setForeground(Color.WHITE);
+		chckbxShowPassword.addItemListener(this);
+		chckbxShowPassword.setBounds(470, 501, 264, 23);
+		signUpPane.add(chckbxShowPassword);
+
+		// Error - JLabel
+		error = new JLabel("");
+		error.setBounds(470, 530, 499, 52);
+		error.setHorizontalAlignment(SwingConstants.CENTER);
+		error.setVerticalAlignment(SwingConstants.CENTER);
+		error.setFont(Fonts.BODY);
+		error.setForeground(Color.white);
+		signUpPane.add(error);
+
+		// Main image - within JLabel
+		JLabel signUpImage = new JLabel();
+		signUpImage.setIcon(new ImageIcon("images/SignupScreen.png"));
+		signUpImage.setBounds(0, 0, 1440, 810);
+		signUpPane.add(signUpImage);
+
+		// Buttons ("invisible" - behind image)
 		signUp = new JButton("Sign Up");
-		signUp.setBounds(100, 460, 40, 20);
+		signUp.setBounds(532, 582, 375, 46);
 		signUp.addActionListener(this);
 		signUpPane.add(signUp);
 
-		error = new JLabel("");
-		error.setBounds(100, 510, 400, 20);
-		signUpPane.add(error);
-
-		JLabel loginp = new JLabel("SignUp screen");
-		loginp.setBounds(500, 200, 500, 500);
-		signUpPane.add(loginp);
+		login = new JButton("Login instead");
+		login.setBounds(532, 691, 375, 46);
+		login.addActionListener(this);
+		signUpPane.add(login);
 
 		signUpPane.repaint();
 	}
+	
+	// Helper method - returns boolean, whether or not the password and confirm
+	// password are the same
+	private boolean checkPasswords() {
+		return password.getText().equals(confirmPassword.getText());
+	}
 
+	// Event Handlers
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == login) {
+		if (e.getSource() == login) { // Switch to login screen
+
 			Initialize.login.loginPane.setVisible(true);
 			signUpPane.setVisible(false);
-			System.out.println("Login");
-		} else if (e.getSource() == signUp) {
-			if (tName.getText().isEmpty() || username.getText().isEmpty() || password.getText().isEmpty()) {
-				// || confirmPassword.getText().isEmpty()) {
-				error.setText("Empty Fields");
-			} else {
-				if (!LoadUsers.checkUsername(username.getText().toLowerCase())) {
-					try {
-						Initialize.user = new User(LoadUsers.addUser(username.getText().toLowerCase(),
-								password.getText(), tName.getText()));
 
+		} else if (e.getSource() == signUp) { // Sign-up attempt
+
+			// Check if any fields are empty - display appropriate error message
+			if (firstName.getText().isEmpty() || lastName.getText().isEmpty() || username.getText().isEmpty()
+					|| password.getText().isEmpty() || confirmPassword.getText().isEmpty()) {
+				error.setText("Please complete all fields");
+
+			} else {
+
+				// If username taken and passwords do not match
+				if (LoadUsers.checkUsername(username.getText().toLowerCase()) && !checkPasswords())
+					error.setText("Username already taken. Passwords do not match");
+
+				// If only username taken
+				else if (LoadUsers.checkUsername(username.getText().toLowerCase()))
+					error.setText("Username already taken");
+
+				// If only passwords do not match
+				else if (!checkPasswords())
+					error.setText("Passwords do not match");
+
+				else { // Username valid, passwords match
+					try {
+						// Initialize the user
+						Initialize.user = new User(LoadUsers.addUser(username.getText().toLowerCase(),
+								password.getText(), firstName.getText(), lastName.getText()));
+
+						// Create new save files (for each user)
 						Initialize.user.getQuizSave().createNewFile();
 						Initialize.user.getLessonSave().createNewFile();
-						
+
+						// Initialize files and GUI for rest of program
 						Initialize.initializeFiles();
 						Initialize.initializeGUIS();
-						
-						System.out.println("Sign up successful");
-						
-						signUpPane.setVisible(false);
+
+						error.setText("Sign up successful"); // Display success
+
+						signUpPane.setVisible(false); // Hide current pane
 
 					} catch (Exception e1) {
 					}
-				} else
-					error.setText("user already exists");
-
+				}
 			}
+		}
+
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) { // Checkbox clicked
+			// Show passwords (plain text)
+			password.setEchoChar((char) 0);
+			confirmPassword.setEchoChar((char) 0);
+		} else {
+			// Hide passwords
+			password.setEchoChar('●');
+			confirmPassword.setEchoChar('●');
 		}
 
 	}

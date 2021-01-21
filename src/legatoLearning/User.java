@@ -4,31 +4,41 @@ import java.io.File;
 
 public class User {
 
+	// Fields
+	
 	private String username;
 	private String password;
-	private String name;
+	private String firstName;
+	private String lastName;
 
 	private File lessonSave;
 	private File quizSave;
-	
+
+	// Constructor - String parameter
 	public User(String line) {
-		String str[] = line.split(";");
 		
+		// Formatted -> username;password;first name;last name;quiz save file;lesson save file
+		String str[] = line.split(";"); 
+
 		username = str[0];
 		password = str[1];
-		name = str[2];
-		quizSave = new File(str[3]);
-		lessonSave = new File(str[4]);
+		firstName = str[2];
+		lastName = str[3];
+		quizSave = new File(str[4]);
+		lessonSave = new File(str[5]);
 	}
 
-	public User(String username, String password, String fName, File lessonSave, File quizSave) {
+	// Constructor - parameters for all fields
+	public User(String username, String password, String firstName, String lastName, File lessonSave, File quizSave) {
 		this.username = username;
 		this.password = password;
-		this.name = fName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.lessonSave = lessonSave;
 		this.quizSave = quizSave;
 	}
 
+	// Getters and Setters
 	public String getUsername() {
 		return username;
 	}
@@ -46,11 +56,11 @@ public class User {
 	}
 
 	public String getName() {
-		return name;
+		return firstName;
 	}
 
 	public void setName(String fName) {
-		this.name = fName;
+		this.firstName = fName;
 	}
 
 	public File getLessonSave() {
@@ -71,7 +81,15 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", fName=" + name + "]";
+		return "User [username=" + username + ", password=" + password + ", fName=" + firstName + "]";
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 }

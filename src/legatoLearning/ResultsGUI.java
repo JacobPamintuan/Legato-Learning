@@ -219,7 +219,7 @@ public class ResultsGUI implements ActionListener, MouseListener {
 			}
 
 			else if (lesson.equals("2 - Minor Intervals" + "")) {
-				Initialize.lessonGUI[1].LessonTempPane.setVisible(true);
+				Initialize.lessonGUI[2].LessonTempPane.setVisible(true);
 			}
 
 			else if (lesson.equals("1 - Augmented & Diminished")) {

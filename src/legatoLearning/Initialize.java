@@ -35,7 +35,7 @@ public class Initialize {
 	public static File lessonDataOG = new File("Files/LessonOG");
 	public static File lessonSaveData;// = new File("Files/LessonSave");
 
-	public Initialize() throws Exception {
+	public Initialize() {
 		
 		login = new LoginGUI();
 		
