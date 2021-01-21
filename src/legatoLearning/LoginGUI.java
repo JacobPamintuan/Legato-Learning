@@ -49,18 +49,22 @@ public class LoginGUI implements ActionListener, ItemListener {
 
 		// Text field
 		username = new JTextField();
-		username.setBounds(835, 241, 364, 46);
+		username.setBounds(841, 244, 354, 38);
 		username.setBackground(Colours.vDarkBlue);
 		username.setForeground(Color.WHITE);
+		username.setCaretColor(Color.WHITE);
 		username.setFont(Fonts.BODY);
+		username.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		loginPane.add(username);
 
 		// Password field
 		password = new JPasswordField();
-		password.setBounds(835, 353, 364, 46);
+		password.setBounds(841, 356, 354, 38);
 		password.setBackground(Colours.vDarkBlue);
 		password.setForeground(Color.WHITE);
+		password.setCaretColor(Color.WHITE);
 		password.setFont(Fonts.BODY);
+		password.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		loginPane.add(password);
 		
 		// Checkbox - Show/hide passwords
@@ -128,6 +132,12 @@ public class LoginGUI implements ActionListener, ItemListener {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+					
+					// Remove text from text/password fields
+					username.setText("");
+					password.setText("");
+					
+					// Initialize program
 					Initialize.initializeGUIS();
 					loginPane.setVisible(false); // Hide current pane
 
@@ -138,8 +148,12 @@ public class LoginGUI implements ActionListener, ItemListener {
 				error.setText("Username does not exist");
 			
 		} else if (e.getSource() == signUp) { // Sign up instead
+
+			// Remove text from text/password fields
 			username.setText("");
 			password.setText("");
+			error.setText("");
+			
 			Initialize.signUp.signUpPane.setVisible(true);
 			loginPane.setVisible(false);
 		}

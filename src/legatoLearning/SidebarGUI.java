@@ -1,5 +1,8 @@
 package legatoLearning;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,7 +19,9 @@ public class SidebarGUI implements MouseListener {
 	public JLabel lblHome;
 	private JLabel lblProfile;
 	private JLabel lblResults;
-	private JLabel lblSettings;
+
+	private JLabel lblLogout;
+	private JLabel logoutIcon;
 
 	public JLabel isClicked;
 
@@ -49,20 +54,25 @@ public class SidebarGUI implements MouseListener {
 		lblResults.addMouseListener(this);
 		lblResults.setBounds(0, 174, 300, 54);
 		sidePane.add(lblResults);
-		
+
 		lblProfile = new JLabel("Profile");
 		lblProfile.setIcon(new ImageIcon("images/Profile Dark.png"));
 		lblProfile.addMouseListener(this);
 		lblProfile.setBounds(0, 228, 300, 54);
 		sidePane.add(lblProfile);
 
-	
+		lblLogout = new JLabel("Logout");
+		lblLogout.addMouseListener(this);
+		lblLogout.setForeground(Color.WHITE);
+		lblLogout.setFont(Fonts.BODY);
+		lblLogout.setBounds(69, 745, 100, 32);
+		sidePane.add(lblLogout);
 
-		lblSettings = new JLabel("Settings");
-		lblSettings.setIcon(new ImageIcon("images/Settings Dark.png"));
-		lblSettings.addMouseListener(this);
-		lblSettings.setBounds(0, 282, 300, 54);
-		sidePane.add(lblSettings);
+		logoutIcon = new JLabel();
+		logoutIcon.addMouseListener(this);
+		logoutIcon.setIcon(new ImageIcon("images/Logout Icon.png"));
+		logoutIcon.setBounds(21, 746, 42, 30);
+		sidePane.add(logoutIcon);
 
 		sidePane.repaint();
 
@@ -74,7 +84,6 @@ public class SidebarGUI implements MouseListener {
 		lblHome.setIcon(new ImageIcon("images/Home Dark.png"));
 		lblProfile.setIcon(new ImageIcon("images/Profile Dark.png"));
 		lblResults.setIcon(new ImageIcon("images/Results Dark.png"));
-		lblSettings.setIcon(new ImageIcon("images/Settings Dark.png"));
 
 	}
 
@@ -83,7 +92,6 @@ public class SidebarGUI implements MouseListener {
 		Initialize.home.homePane.setVisible(false);
 		Initialize.profile.profilePane.setVisible(false);
 		Initialize.results.resultsPane.setVisible(false);
-		Initialize.settings.settingsPane.setVisible(false);
 
 		// All original quiz panes
 		for (int i = 0; i < Initialize.quizArr.length; i++) {
@@ -124,7 +132,8 @@ public class SidebarGUI implements MouseListener {
 
 		imgName = temp.getText();
 
-		temp.setIcon(new ImageIcon("images/" + imgName + " Light.png")); // Set pressed Label to light mode
+		if(temp!=lblLogout&&temp!=logoutIcon)
+			temp.setIcon(new ImageIcon("images/" + imgName + " Light.png")); // Set pressed Label to light mode
 
 		setInvisible(); // Set all other panels invisible
 
@@ -136,10 +145,14 @@ public class SidebarGUI implements MouseListener {
 			Initialize.profile.errorOrSuccess.setText("");
 		} else if (temp == lblResults) {
 			Initialize.results.resultsPane.setVisible(true);
-		} else if (temp == lblSettings) {
-			Initialize.settings.settingsPane.setVisible(true);
-
 		}
+		
+		else if(temp==lblLogout||temp==logoutIcon) {
+			Initialize.login.loginPane.setVisible(true);
+			sidePane.setVisible(false);
+		}
+			
+			
 
 		// Set isClicked to the current button
 		// (So that it will not change color with mouseEntered/Exit)
@@ -157,7 +170,14 @@ public class SidebarGUI implements MouseListener {
 
 		// Hover state - when mouse enters the JLabel, change it to light mode
 		temp = (JLabel) e.getSource();
-		if (temp != logo) {
+
+		temp.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		if (temp == lblLogout || temp == logoutIcon) {
+			lblLogout.setText("<html><u>Logout<u><html>");
+			lblLogout.setFont(new Font("Helvetica Neue", Font.BOLD, 20));
+			
+		} else if (temp != logo) {
 			imgName = temp.getText();
 
 			if (temp != isClicked) { // Unless the JLabel has already been clicked
@@ -172,7 +192,13 @@ public class SidebarGUI implements MouseListener {
 
 		// Hover state - when mouse exits JLabel, change it back to dark
 		temp = (JLabel) e.getSource();
-		if (temp != logo) {
+
+		temp.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+		if (temp == lblLogout || temp == logoutIcon) {
+			lblLogout.setText("Logout");
+			lblLogout.setFont(Fonts.BODY);
+		} else if (temp != logo) {
 			imgName = temp.getText();
 
 			if (temp != isClicked) { // Unless the JLabel has already been clicked

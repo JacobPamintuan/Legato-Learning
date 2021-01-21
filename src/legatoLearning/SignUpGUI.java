@@ -52,39 +52,49 @@ public class SignUpGUI implements ActionListener, ItemListener {
 
 		// Textfields
 		firstName = new JTextField();
-		firstName.setBounds(472, 263, 232, 45);
+		firstName.setBounds(480, 269, 217, 32);
 		firstName.setBackground(Colours.vDarkBlue);
 		firstName.setForeground(Color.WHITE);
+		firstName.setCaretColor(Color.WHITE);
 		firstName.setFont(Fonts.BODY);
+		firstName.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		signUpPane.add(firstName);
 
 		lastName = new JTextField();
-		lastName.setBounds(736, 263, 232, 45);
+		lastName.setBounds(744, 269, 212, 32);
 		lastName.setBackground(Colours.vDarkBlue);
 		lastName.setForeground(Color.WHITE);
+		lastName.setCaretColor(Color.WHITE);
 		lastName.setFont(Fonts.BODY);
+		lastName.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		signUpPane.add(lastName);
 
 		username = new JTextField();
-		username.setBounds(472, 358, 496, 45);
+		username.setBounds(480, 364, 476, 32);
 		username.setBackground(Colours.vDarkBlue);
 		username.setForeground(Color.WHITE);
+		username.setCaretColor(Color.WHITE);
 		username.setFont(Fonts.BODY);
+		username.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		signUpPane.add(username);
 
 		// Password Fields
 		password = new JPasswordField();
-		password.setBounds(472, 453, 232, 45);
+		password.setBounds(480, 459, 217, 32);
 		password.setBackground(Colours.vDarkBlue);
 		password.setForeground(Color.WHITE);
+		password.setCaretColor(Color.WHITE);
 		password.setFont(Fonts.BODY);
+		password.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		signUpPane.add(password);
 
 		confirmPassword = new JPasswordField();
-		confirmPassword.setBounds(736, 453, 232, 45);
+		confirmPassword.setBounds(744, 459, 217, 32);
 		confirmPassword.setBackground(Colours.vDarkBlue);
 		confirmPassword.setForeground(Color.WHITE);
+		confirmPassword.setCaretColor(Color.WHITE);
 		confirmPassword.setFont(Fonts.BODY);
+		confirmPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		signUpPane.add(confirmPassword);
 
 		// Checkbox - Show/hide passwords
@@ -106,7 +116,8 @@ public class SignUpGUI implements ActionListener, ItemListener {
 
 		// Main image - within JLabel
 		JLabel signUpImage = new JLabel();
-		signUpImage.setIcon(new ImageIcon("images/SignupScreen.png"));
+		signUpImage.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/SignupScreen.png"));
+//		signUpImage.setIcon(new ImageIcon("images/SignupScreen.png"));
 		signUpImage.setBounds(0, 0, 1440, 810);
 		signUpPane.add(signUpImage);
 
@@ -141,6 +152,7 @@ public class SignUpGUI implements ActionListener, ItemListener {
 			username.setText("");
 			password.setText("");
 			confirmPassword.setText("");
+			error.setText("");
 
 			Initialize.login.loginPane.setVisible(true);
 			signUpPane.setVisible(false);
