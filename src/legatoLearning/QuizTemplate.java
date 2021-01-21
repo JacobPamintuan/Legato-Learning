@@ -320,9 +320,10 @@ public class QuizTemplate implements ActionListener, MouseListener {
 				Initialize.iCourse.quizCompleted();
 
 				if (popup() == JOptionPane.YES_OPTION)
-					QuizPane.setVisible(false);
+					Initialize.iCourse.iCoursePane.setVisible(true);
+				else
+					Initialize.results.resultsPane.setVisible(true);
 
-				Initialize.iCourse.iCoursePane.setVisible(true);
 				QuizPane.setVisible(false);
 
 				actionListenerQBox(false);
@@ -388,12 +389,13 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 	private int popup() {
 
-		Object[] ob = { "Back to Course" };
+		Object[] ob = { "Back to Course", "See results" };
 
-		return JOptionPane.showOptionDialog(QuizPane,
-				"Congratulations! You have completed " + course + "; " + difficulty + ", Quiz " + quizNumber,
-				"Quiz Complete!", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon("images/Legato Learning.png"), ob, null);
+		String message = "Congratulations! You have completed: \n" + course + "; " + difficulty + ", Quiz " + quizNumber
+				+ ".\nOn your first try you got a score of " + q.getStringScore();
+
+		return JOptionPane.showOptionDialog(QuizPane, message, "Quiz Complete!", JOptionPane.YES_NO_OPTION,
+				JOptionPane.INFORMATION_MESSAGE, null, ob, null);
 
 	}
 

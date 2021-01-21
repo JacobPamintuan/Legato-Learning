@@ -89,7 +89,7 @@ public class LoadUsers {
 
 	// Check if password matches user
 	public static boolean checkPassword(String username, String pass) {
-		if (users.contains(username)) {
+		if (users.contains(username.toLowerCase())) {
 			int i = users.indexOf(username);
 			if (pass.equals(passwords.get(i)))
 				return true;

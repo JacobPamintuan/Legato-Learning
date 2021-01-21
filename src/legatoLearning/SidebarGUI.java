@@ -44,17 +44,19 @@ public class SidebarGUI implements MouseListener {
 		lblHome.setBounds(0, 120, 300, 54);
 		sidePane.add(lblHome);
 
-		lblProfile = new JLabel("Profile");
-		lblProfile.setIcon(new ImageIcon("images/Profile Dark.png"));
-		lblProfile.addMouseListener(this);
-		lblProfile.setBounds(0, 174, 300, 54);
-		sidePane.add(lblProfile);
-
 		lblResults = new JLabel("Results");
 		lblResults.setIcon(new ImageIcon("images/Results Dark.png"));
 		lblResults.addMouseListener(this);
-		lblResults.setBounds(0, 228, 300, 54);
+		lblResults.setBounds(0, 174, 300, 54);
 		sidePane.add(lblResults);
+		
+		lblProfile = new JLabel("Profile");
+		lblProfile.setIcon(new ImageIcon("images/Profile Dark.png"));
+		lblProfile.addMouseListener(this);
+		lblProfile.setBounds(0, 228, 300, 54);
+		sidePane.add(lblProfile);
+
+	
 
 		lblSettings = new JLabel("Settings");
 		lblSettings.setIcon(new ImageIcon("images/Settings Dark.png"));

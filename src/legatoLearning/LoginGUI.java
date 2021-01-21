@@ -104,6 +104,7 @@ public class LoginGUI implements ActionListener, ItemListener {
 	// Event handlers
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 
 		if (e.getSource() == login) { // Login attempt
 			error.setText("");
@@ -116,10 +117,10 @@ public class LoginGUI implements ActionListener, ItemListener {
 			else if (LoadUsers.checkUsername(username.getText().toLowerCase())) {
 				
 				// User exists - check if password matches
-				if (LoadUsers.checkPassword(username.getText(), password.getText())) {
+				if (LoadUsers.checkPassword(username.getText().toLowerCase(), password.getText())) {
 
 					// Initialize user
-					Initialize.user = new User(LoadUsers.loginSuccessful(username.getText()));
+					Initialize.user = new User(LoadUsers.loginSuccessful(username.getText().toLowerCase()));
 
 					// Initialize save files associated with user
 					try {

@@ -23,7 +23,7 @@ public class Initialize {
 	public static QuizTemplate[] quizGUI;
 
 	public static Quiz[] quizArr;
-	public static Quiz[] quizOG;
+//	public static Quiz[] quizOG;
 	public static String[] QuizData;
 	public static Lesson[] lessonArr;
 
@@ -85,13 +85,13 @@ public class Initialize {
 		}
 		br.close();
 
-		quizOG = new Quiz[10]; // Default quiz array
-		br = new BufferedReader(new java.io.FileReader(quizDataOG)); // Default text file
-		for (int i = 0; i < quizOG.length; i++) {
-			String line = br.readLine();
-			quizOG[i] = new Quiz(line);
-		}
-		br.close();
+//		quizOG = new Quiz[10]; // Default quiz array
+//		br = new BufferedReader(new java.io.FileReader(quizDataOG)); // Default text file
+//		for (int i = 0; i < quizOG.length; i++) {
+//			String line = br.readLine();
+//			quizOG[i] = new Quiz(line);
+//		}
+//		br.close();
 
 		lessonArr = new Lesson[4];
 		if (lessonSaveData.length() == 0) // If save file is empty - first time user/never completed any lessons
