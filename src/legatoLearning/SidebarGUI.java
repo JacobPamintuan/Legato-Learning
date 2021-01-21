@@ -133,6 +133,7 @@ public class SidebarGUI implements MouseListener {
 			Initialize.home.homePane.setVisible(true);
 		} else if (temp == lblProfile) {
 			Initialize.profile.profilePane.setVisible(true);
+			Initialize.profile.errorOrSuccess.setText("");
 		} else if (temp == lblResults) {
 			Initialize.results.resultsPane.setVisible(true);
 		} else if (temp == lblSettings) {

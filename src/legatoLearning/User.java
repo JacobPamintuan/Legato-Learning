@@ -5,7 +5,7 @@ import java.io.File;
 public class User {
 
 	// Fields
-	
+
 	private String username;
 	private String password;
 	private String firstName;
@@ -16,9 +16,10 @@ public class User {
 
 	// Constructor - String parameter
 	public User(String line) {
-		
-		// Formatted -> username;password;first name;last name;quiz save file;lesson save file
-		String str[] = line.split(";"); 
+
+		// Formatted -> username;password;first name;last name;quiz save file;lesson
+		// save file
+		String str[] = line.split(";");
 
 		username = str[0];
 		password = str[1];
@@ -55,12 +56,20 @@ public class User {
 		this.password = password;
 	}
 
-	public String getName() {
+	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setName(String fName) {
+	public void setFirstName(String fName) {
 		this.firstName = fName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public File getLessonSave() {
@@ -82,14 +91,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", fName=" + firstName + "]";
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 }

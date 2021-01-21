@@ -39,8 +39,8 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 
 	// Initialize GUI
 	public HomeGUI() {
-		
-		name = Initialize.user.getName();
+
+		name = Initialize.user.getFirstName();
 
 		// JPanel Setup
 		homePane = new JPanel();
@@ -72,8 +72,9 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 		lblIntervalTitle.setFont(Fonts.SUBHEADING1);
 		homePane.add(lblIntervalTitle);
 
-		lblIntervalDescription = new JLabel("<html>In music theory, an interval is the difference in pitch between two sounds. "
-				+ "<br><br>Complete this course to learn about and practice different types of intervals. <html>");
+		lblIntervalDescription = new JLabel(
+				"<html>In music theory, an interval is the difference in pitch between two sounds. "
+						+ "<br><br>Complete this course to learn about and practice different types of intervals. <html>");
 		lblIntervalDescription.setVerticalAlignment(SwingConstants.TOP);
 		lblIntervalDescription.setBounds(462, 285, 500, 150);
 		lblIntervalDescription.setFont(Fonts.BODY);
@@ -88,9 +89,15 @@ public class HomeGUI implements ActionListener {// , MouseListener {
 		purp.setBounds(75, 210, 992, 252);
 		homePane.add(purp);
 
-
 		homePane.repaint();
 
+	}
+
+	public void newName() {
+		name = Initialize.user.getFirstName();
+		lblTitle.setText(("<html><div style='text-align: center;'><html>Welcome " + name
+				+ ", what would you like to learn today?</div><html>"));
+		homePane.repaint();
 	}
 
 	// Event handler

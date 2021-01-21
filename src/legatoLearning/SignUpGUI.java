@@ -134,6 +134,13 @@ public class SignUpGUI implements ActionListener, ItemListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == login) { // Switch to login screen
+			
+			// Make text/password fields blank
+			firstName.setText("");
+			lastName.setText("");
+			username.setText("");
+			password.setText("");
+			confirmPassword.setText("");
 
 			Initialize.login.loginPane.setVisible(true);
 			signUpPane.setVisible(false);

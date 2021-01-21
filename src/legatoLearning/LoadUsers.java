@@ -20,16 +20,19 @@ public class LoadUsers {
 
 	// Constructor
 	public LoadUsers() throws Exception {
+		
 		loadUsers();
 	}
 
 	// Helper method - loads user values into arraylists
 	private void loadUsers() throws IOException {
+		
 		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/Users")));
 
 		// Formatted -> username;password;first name;last name;quiz save file;lesson save file
 		String line;
-		
+
+		// Reading file
 		while ((line = br.readLine()) != null) {
 			String str[] = line.split(";");
 			users.add(str[0]);
@@ -45,9 +48,39 @@ public class LoadUsers {
 
 	}
 
+	// Saves values of current to user arraylists
+	public static void userChange(String username) throws IOException {
+		int userIndex = users.indexOf(username);
+
+		firstNames.set(userIndex, Initialize.user.getFirstName());
+		lastNames.set(userIndex, Initialize.user.getLastName());
+		passwords.set(userIndex, Initialize.user.getPassword());
+
+		// Save to file
+		userChangeSave();
+
+	}
+
+	// Re-writes user file - when a user makes changes on profile screen
+	public static void userChangeSave() throws IOException {
+		BufferedWriter pr = new BufferedWriter(new FileWriter(USERFILE, false));
+		for (int i = 0; i < users.size(); i++) {
+			// Formatted -> username;password;first name;last name;quiz save file;lesson
+			// save file
+			String line = String.format("%s;%s;%s;%s;Files/QuizSave_%s;Files/LessonSave_%s\n", users.get(i),
+					passwords.get(i), firstNames.get(i), lastNames.get(i), users.get(i), users.get(i));
+
+			pr.write(line);
+		}
+		pr.close();
+
+	}
+
 	// New user - save to User file
 	public static String addUser(String username, String password, String firstName, String lastName)
 			throws IOException {
+		
+		// Add values to respective arraylists
 		users.add(username);
 		passwords.add(password);
 		firstNames.add(firstName);
@@ -66,23 +99,21 @@ public class LoadUsers {
 
 	// Existing user - load data from user file
 	public static String loginSuccessful(String username) {
-		
+
 		// Location of user within text file
 		int i = users.indexOf(username);
-		
+
 		// Formatted -> username;password;first name;last name;quiz save file;lesson save file
 		String line = String.format("%s;%s;%s;%s;Files/QuizSave_%s;Files/LessonSave_%s\n", username, passwords.get(i),
 				firstNames.get(i), lastNames.get(i), username, username);
 		return line;
 	}
 
-//	public static int getUserIndex(String username) {
-//		return users.indexOf(username);
-//	}
 
-	// Check if user exists 
+	// Check if user exists
 	public static boolean checkUsername(String username) {
-		if (users.contains(username))
+
+		if (users.contains(username)) 
 			return true;
 		return false;
 	}

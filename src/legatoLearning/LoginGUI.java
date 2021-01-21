@@ -138,6 +138,8 @@ public class LoginGUI implements ActionListener, ItemListener {
 				error.setText("Username does not exist");
 			
 		} else if (e.getSource() == signUp) { // Sign up instead
+			username.setText("");
+			password.setText("");
 			Initialize.signUp.signUpPane.setVisible(true);
 			loginPane.setVisible(false);
 		}
