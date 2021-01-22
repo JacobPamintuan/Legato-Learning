@@ -30,6 +30,10 @@ public class Lesson {
 
 	// Load data to object
 	private void loadData(String line) {
+		
+		//Format:
+		//course;difficulty;title;lesson number;current pane;total panes;boolean complete;lesson name
+		
 		String[] str = line.trim().split(";");
 
 		String course = str[0];
@@ -83,14 +87,19 @@ public class Lesson {
 		return line;
 	}
 
+	// Delete data from lesson save file
 	public void DELETE_ALL_LESSONS() {
 		try {
+			
 			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.lessonSaveData, false));
+			
 			pr.write("");
 			pr.close();
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+			
 		}
 
 	}

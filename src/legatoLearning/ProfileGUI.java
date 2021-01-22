@@ -19,6 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 
 public class ProfileGUI implements ActionListener, ItemListener {
+	
+	// Fields
 
 	JPanel profilePane;
 
@@ -39,6 +41,7 @@ public class ProfileGUI implements ActionListener, ItemListener {
 	private JButton save;
 	private JButton RESET;
 
+	// Initialize GUI
 	public ProfileGUI() {
 
 		profilePane = new JPanel();
@@ -55,21 +58,27 @@ public class ProfileGUI implements ActionListener, ItemListener {
 
 		// Textfields
 		firstName = new JTextField();
+		firstName.setText(Initialize.user.getFirstName());
 		firstName.setBounds(99, 258, 230, 45);
 		firstName.setFont(Fonts.BODY);
 		profilePane.add(firstName);
 
 		lastName = new JTextField();
+		lastName.setText(Initialize.user.getLastName());
 		lastName.setBounds(365, 257, 230, 45);
 		lastName.setFont(Fonts.BODY);
 		profilePane.add(lastName);
 
+		// PasswordFields and checkboxes
+		
+		// PasswordField
 		oldPassword = new JPasswordField();
 		oldPassword.setBounds(99, 360, 491, 39);
 		oldPassword.setFont(Fonts.BODY);
 		profilePane.add(oldPassword);
 		oldPassword.setColumns(10);
 
+		// Checkbox - Shows/hides old password ONLY
 		chckbxShowPasswordOLD = new JCheckBox("Show password");
 		chckbxShowPasswordOLD.setBounds(99, 400, 165, 23);
 		chckbxShowPasswordOLD.setFont(new Font("Helvetica Neue", Font.PLAIN, 15));
@@ -81,37 +90,42 @@ public class ProfileGUI implements ActionListener, ItemListener {
 		newPassword.setBounds(99, 455, 230, 39);
 		newPassword.setFont(Fonts.BODY);
 		profilePane.add(newPassword);
-
+		
 		confirmPassword = new JPasswordField();
 		confirmPassword.setBounds(365, 455, 230, 39);
 		confirmPassword.setFont(Fonts.BODY);
 		profilePane.add(confirmPassword);
 
+		// Checkbox - shows/hides BOTH new and confirm password
 		chckbxShowPasswordNEW = new JCheckBox("Show password");
 		chckbxShowPasswordNEW.setBounds(99, 499, 165, 23);
 		chckbxShowPasswordNEW.setFont(new Font("Helvetica Neue", Font.PLAIN, 15));
 		chckbxShowPasswordNEW.addItemListener(this);
 		profilePane.add(chckbxShowPasswordNEW);
 
+		
+		// Error - JLabel
 		errorOrSuccess = new JLabel();
 		errorOrSuccess.setBounds(365, 539, 230, 32);
 		errorOrSuccess.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		errorOrSuccess.setForeground(Colours.purp);
 		profilePane.add(errorOrSuccess);
 
+
+		// JLabel bg image
 		profileImage = new JLabel();
-//		profileImage
-//				.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/Profile 1.png")); // DELETE
 		profileImage.setIcon(new ImageIcon("images/Profile 1.png"));
 		profileImage.setVerticalAlignment(SwingConstants.TOP);
 		profileImage.setBounds(58, 142, 580, 662);
 		profilePane.add(profileImage);
 
+		// Save button (behind image)
 		save = new JButton("Save");
 		save.setBounds(99, 534, 165, 45);
 		save.addActionListener(this);
 		profilePane.add(save);
 
+		// RESET button (behind image)
 		RESET = new JButton("reset");
 		RESET.setBounds(99, 704, 165, 45);
 		RESET.addActionListener(this);
@@ -121,6 +135,9 @@ public class ProfileGUI implements ActionListener, ItemListener {
 
 	}
 
+	// Helper methods
+	
+	// Reset warning
 	private int popupWarning() {
 
 		Object[] ob = { "RESET", "CANCEL" };
@@ -131,36 +148,49 @@ public class ProfileGUI implements ActionListener, ItemListener {
 
 	}
 
+	// Reset message - logout
 	private void popupProceed() {
 
-		JOptionPane.showMessageDialog(profilePane, "Please restart the program");
+		JOptionPane.showMessageDialog(profilePane, "Please log out to reset all progress");
 
 	}
+	
+
+	// Determine if passwords match
+	private boolean checkPasswords() {
+		return newPassword.getText().equals(confirmPassword.getText());
+	}
+	
+	// Event Handlers
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.print("ACTION:");
 		JButton b = (JButton) e.getSource();
 
 		if (b == RESET) {
-			System.out.println(" reset");
 
-			if (popupWarning() == JOptionPane.YES_OPTION) {
+			// If user chooses to reset on popup
+			if (popupWarning() == JOptionPane.YES_OPTION) { 
 
+				// Display confirmation - logout
 				popupProceed();
 
+				// Delete data
 				Initialize.lessonArr[0].DELETE_ALL_LESSONS();
 				Initialize.quizArr[0].DELETE_ALL_QUIZZES();
 
-				System.exit(0);
-
+				// Back to login page
+				Initialize.login.loginPane.setVisible(true);
+				Initialize.sidebar.sidePane.setVisible(false);
+				Initialize.sidebar.setInvisible();
+				
 			}
 		} else if (b == save) {
-			System.out.println(" save" + "");
 
 			// If all fields are empty
 			if (firstName.getText().isEmpty() && lastName.getText().isEmpty() && oldPassword.getText().isEmpty()
 					&& newPassword.getText().isEmpty() && confirmPassword.getText().isEmpty())
+				
 				errorOrSuccess.setText("<html>Fill out at least one field to edit profile<html>");
 
 			else {
@@ -169,15 +199,14 @@ public class ProfileGUI implements ActionListener, ItemListener {
 				if (!(oldPassword.getText().isEmpty() && newPassword.getText().isEmpty()
 						&& confirmPassword.getText().isEmpty())) {
 
-					System.out.println("ASDF");
-					// At least one password field is empty
+					// At least one password field is empty - Appropriate error message
 					if (oldPassword.getText().isEmpty() || newPassword.getText().isEmpty()
 							|| confirmPassword.getText().isEmpty()) {
 
 						errorOrSuccess.setText("<html>To change password, fill out all password fields<html>");
 						return;
 
-						// Old password incorrect
+						// Old password incorrect  - Appropriate error message
 					} else if (!oldPassword.getText().equals(Initialize.user.getPassword()))
 
 						errorOrSuccess.setText("Password incorrect");
@@ -185,7 +214,7 @@ public class ProfileGUI implements ActionListener, ItemListener {
 					// Old password correct
 					else if (oldPassword.getText().equals(Initialize.user.getPassword())) {
 
-						// Check if passwords match
+						// Check if passwords match - Appropriate error message
 						if (!checkPasswords())
 							errorOrSuccess.setText("New passwords do not match");
 						else
@@ -194,23 +223,31 @@ public class ProfileGUI implements ActionListener, ItemListener {
 
 				}
 				
+				// User changing first name
 				if (!firstName.getText().isEmpty())
 					Initialize.user.setFirstName(firstName.getText());
 
+				// User changing last name
 				if (!lastName.getText().isEmpty())
 					Initialize.user.setLastName(lastName.getText());
 
+				// Update user within Initialize
+				// Update users file
 				try {
 					LoadUsers.userChange(Initialize.user.getUsername());
 					errorOrSuccess.setText("Profile updated");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
+			
+			// Change name on home screen
 			Initialize.home.newName();
 			
-			firstName.setText("");
-			lastName.setText("");
+			// Set new names
+			firstName.setText(Initialize.user.getFirstName());
+			lastName.setText(Initialize.user.getLastName());
+
+			// Remove text from password fields
 			oldPassword.setText("");
 			newPassword.setText("");
 			confirmPassword.setText("");
@@ -218,11 +255,6 @@ public class ProfileGUI implements ActionListener, ItemListener {
 			}
 		}
 
-	}
-
-	// Determine if passwords match
-	private boolean checkPasswords() {
-		return newPassword.getText().equals(confirmPassword.getText());
 	}
 
 	@Override

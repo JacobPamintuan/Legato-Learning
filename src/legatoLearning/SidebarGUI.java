@@ -88,7 +88,7 @@ public class SidebarGUI implements MouseListener {
 	}
 
 	// Sets all JPanels in the program to invisible
-	private void setInvisible() {
+	public void setInvisible() {
 		Initialize.home.homePane.setVisible(false);
 		Initialize.profile.profilePane.setVisible(false);
 		Initialize.results.resultsPane.setVisible(false);

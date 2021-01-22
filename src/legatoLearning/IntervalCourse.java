@@ -270,58 +270,33 @@ public class IntervalCourse implements MouseListener, ActionListener {
 	// Set checkmark beside quiz to visible
 	public void quizCompleted() {
 
-		int numCompleted = 0;
-
 		// Beginner quizzes
 		for (int i = 0; i < 3; i++) {
-			
-			if (Initialize.quizArr[i].isCompleted()) {
-				
+
+			if (Initialize.quizArr[i].isCompleted())
+
 				bQChecks[i].setVisible(true);
-				numCompleted++;
-				
-			}
 		}
 
 		// Intermediate Lesson 1 quizzes
 		for (int i = 3; i <= 5; i++) {
-			if (Initialize.quizArr[i].isCompleted()) {
-				
+			if (Initialize.quizArr[i].isCompleted())
 				iL1QChecks[i - 3].setVisible(true);
-				numCompleted++;
-				
-			}
 		}
 
 		// Intermediate Lesson 2 quizzes
 		for (int i = 6; i <= 7; i++) {
-
-			if (Initialize.quizArr[i].isCompleted()) {
-			
+			if (Initialize.quizArr[i].isCompleted())
 				iL2QChecks[i - 6].setVisible(true);
-				numCompleted++;
-				
-			}
+
 		}
 
 		// Advanced quizzes
 		for (int i = 8; i <= 9; i++) {
-			
-			if (Initialize.quizArr[i].isCompleted()) {
-			
+			if (Initialize.quizArr[i].isCompleted())
 				aQChecks[i - 8].setVisible(true);
-				numCompleted++;
-				
-			}
 		}
-		
-		// Display popup if course complete (all quizzes complete)
-		if(numCompleted == 10) {
-			String message = "CONGRATULATIONS!!! YOU HAVE COMPLETED THE INTERVALS COURSE";
-			new JOptionPane();
-			JOptionPane.showMessageDialog(iCoursePane, message);
-		}
-		
+
 	}
 
 	// Enables quizzes if/when respective lesson is completed
@@ -329,9 +304,7 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 		// Beginner Lesson 1
 		if (Initialize.lessonArr[0].isCompleted()) {
-
 			bLCheck.setVisible(true);
-
 			for (int i = 0; i < 3; i++)
 				beginnerQ[i].setEnabled(true);
 		}
@@ -352,12 +325,28 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 		// Advanced Lesson 1
 		if (Initialize.lessonArr[3].isCompleted()) {
-
 			aLCheck.setVisible(true);
 			for (int i = 0; i < advancedQ.length; i++)
 				advancedQ[i].setEnabled(true);
 		}
 
+	}
+
+	// // Display popup if course complete (all quizzes complete)
+	public void courseComplete() {
+
+		int numCompleted=0;
+		
+		for(int i=0;i<Initialize.quizArr.length;i++) 
+			if(Initialize.quizArr[i].isCompleted())
+				numCompleted++;
+		
+		
+		if (numCompleted == 10) {
+			String message = "CONGRATULATIONS!!! YOU HAVE COMPLETED THE INTERVALS COURSE";
+			new JOptionPane();
+			JOptionPane.showMessageDialog(iCoursePane, message);
+		}
 	}
 
 	// Event Handlers
@@ -529,7 +518,7 @@ public class IntervalCourse implements MouseListener, ActionListener {
 				return;
 
 			}
-		
+
 	}
 
 }
