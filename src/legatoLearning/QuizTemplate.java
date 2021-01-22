@@ -19,6 +19,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	// Fields
 	public Quiz q;
 
+	// Data fields
 	private int[] ansKey;
 	public boolean[] answeredCorrect;
 
@@ -39,6 +40,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 	private int sumWrong;
 
+	// GUI Fields
 	public JPanel QuizPane;
 	private JLabel lblTitle;
 	private JLabel lblCourse;
@@ -60,24 +62,33 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	private static ImageIcon correct = new ImageIcon("images/Correct.png");
 	private static ImageIcon incorrect = new ImageIcon("images/Incorrect.png");
 
+
+	// Constructor with quiz parameter
+	// Initializes Quiz "q" object
+	// Calls methods to initialize fields and create GUI
+	public QuizTemplate(Quiz quiz) {
+		
+		this.q = quiz;
+		
+		initializeFields();
+		initializeGUI();
+		
+	}
+
 	// Constructor
 	// int parameter - initializes specific quiz within quizArr
 	// Initializes Quiz "q" object
 	// Calls methods to initialize fields and create GUI
-
-	public QuizTemplate(Quiz quiz) {
-		this.q = quiz;
-		initializeFields();
-		initializeGUI();
-	}
-
 	public QuizTemplate(int num) {
+		
 		this.q = Initialize.quizArr[num];
+		
 		initializeFields();
 		initializeGUI();
+		
 	}
 
-	// Initializes fields
+	// Initializes data fields
 	private void initializeFields() {
 		course = q.getCourse();
 
@@ -98,6 +109,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 	}
 
 	// Create GUI
+	// Initialize GUI fields
 	private void initializeGUI() {
 		// JPanel setup
 		QuizPane = new JPanel();
@@ -232,14 +244,15 @@ public class QuizTemplate implements ActionListener, MouseListener {
 
 	// X-value in pixels to shift chevron and lesson name
 	private int shiftX() {
-		int xShift = 0;
+		
 		if (difficulty.equals("Beginner"))
-			xShift = 0;
+			return 0;
 		else if (difficulty.equals("Advanced"))
-			xShift = 10;
+			return 10;
 		else if (difficulty.equals("Intermediate"))
-			xShift = 50;
-		return xShift;
+			return 50;
+		
+		return -1;
 	}
 
 	// Reset choices to all unselected

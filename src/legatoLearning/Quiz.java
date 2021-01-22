@@ -70,7 +70,6 @@ public class Quiz {
 		int currentPane = Integer.parseInt(str[4]);
 		int totalPanes = Integer.parseInt(str[5]);
 
-	
 		// Split str[x] into another 1-D
 		String[] ans = str[6].trim().split(",");
 		int[] ansKey = new int[totalPanes];
@@ -87,12 +86,9 @@ public class Quiz {
 			answeredCorrect[i] = Boolean.parseBoolean(bool[i]);
 			numWrong[i] = Integer.parseInt(wrong[i]);
 		}
-		
 
 		ImageIcon questionImage = new ImageIcon(str[9]);
 
-		
-		
 		// Split str[x] further into a 1-D array
 		String[] ansImages = str[10].split(":");
 		ImageIcon[][] answersImage = new ImageIcon[totalPanes][4];
@@ -156,7 +152,7 @@ public class Quiz {
 
 	// Return data line to save
 	public String saveData(int curr) {
-		
+
 		// Get old data line
 		String[] str = data.trim().split(";");
 		String line = "";
@@ -165,22 +161,21 @@ public class Quiz {
 		str[4] = String.valueOf(curr); // current Pane, int -> String
 
 		boolean complete = false;
-		
+
 		// Turn answeredCorrect array to string
 		String ans = "";
 		for (int i = 0; i < ansKey.length; i++) {
-			
+
 			if (answeredCorrect[i])
 				complete = true;
-			
+
 			ans += (answeredCorrect[i]) + ",";
-		
+
 		}
 
 		// Remove "," at very end of answeredCorrect
 		str[7] = ans.substring(0, ans.length() - 1);
 
-		
 		// Turn numWrong array into string
 		String wrong = "";
 
@@ -196,10 +191,10 @@ public class Quiz {
 		// Build line, seperate values with ";"
 		for (int i = 0; i < str.length; i++)
 			line += str[i] + ";";
-		
+
 		// Remove ";" at very end of line
 		line = line.substring(0, line.length() - 1);
-		
+
 		return line;
 
 	}
@@ -210,31 +205,74 @@ public class Quiz {
 		// Overwrite save file with new data
 		try {
 			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.quizSaveData, false));
-			
+
 			for (int i = 0; i < Initialize.quizArr.length; i++) {
-			
+
 				// Call save data to get String line
 				pr.write(Initialize.quizArr[i].saveData(Initialize.quizArr[i].getCurrentPane()));
 				pr.newLine();
 
 			}
+
 			pr.close();
+
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
+
 		}
 
 	}
 
+	// Delete all data by overwrting the file with ""
 	public void DELETE_ALL_QUIZZES() {
+
 		try {
+
 			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.quizSaveData, false));
+
 			pr.write("");
 			pr.close();
+
 		} catch (IOException e) {
+
 			e.printStackTrace();
+
 		}
 
+	}
+
+	// Returns score as a double -> 0.xx
+	public double getPercentageScore() {
+		return calcScore();
+	}
+
+	// Return score in String format -> x/y (xx.x%)
+	public String getStringScore() {
+		if (!completed)
+			return "--";
+		int anumWrong = 0;
+		for (int i = 0; i < totalPanes; i++) {
+			if (numWrong[i] > 0) {
+				anumWrong++;
+			}
+		}
+
+		return (totalPanes - anumWrong + "/" + totalPanes + " (" + String.format("%.1f", calcScore() * 100) + "%)");
+	}
+
+	// Helper method - calculates score in decimal
+	private double calcScore() {
+		if (!completed)
+			return 101; // Return an impossible score
+		int anumWrong = 0;
+		for (int i = 0; i < totalPanes; i++) {
+			if (numWrong[i] > 0) {
+				anumWrong++;
+			}
+		}
+
+		return ((totalPanes - anumWrong) / (double) totalPanes);
 	}
 
 	// Getters and setters
@@ -341,39 +379,6 @@ public class Quiz {
 
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
-	}
-
-	// Returns score as a double -> 0.xx
-	public double getPercentageScore() {
-		return calcScore();
-	}
-
-	// Return score in String format -> x/y (xx.x%)
-	public String getStringScore() {
-		if (!completed)
-			return "--";
-		int anumWrong = 0;
-		for (int i = 0; i < totalPanes; i++) {
-			if (numWrong[i] > 0) {
-				anumWrong++;
-			}
-		}
-
-		return (totalPanes - anumWrong + "/" + totalPanes + " (" + String.format("%.1f", calcScore() * 100) + "%)");
-	}
-
-	// Helper method - calculates score in decimal
-	private double calcScore() {
-		if (!completed)
-			return 101; // Return an impossible score
-		int anumWrong = 0;
-		for (int i = 0; i < totalPanes; i++) {
-			if (numWrong[i] > 0) {
-				anumWrong++;
-			}
-		}
-
-		return ((totalPanes - anumWrong) / (double) totalPanes);
 	}
 
 	public String getLessonName() {
