@@ -28,7 +28,7 @@ public class LoginGUI implements ActionListener, ItemListener {
 	private JPasswordField password;
 
 	private JCheckBox chckbxShowPassword;
-	
+
 	private JButton signUp;
 	private JButton login;
 
@@ -37,8 +37,7 @@ public class LoginGUI implements ActionListener, ItemListener {
 		initialize();
 	}
 
-	
-	//Initialize the contents of the frame.
+	// Initialize the contents of the frame.
 	private void initialize() {
 		// JPanel setup
 		loginPane = new JPanel();
@@ -66,7 +65,7 @@ public class LoginGUI implements ActionListener, ItemListener {
 		password.setFont(Fonts.BODY);
 		password.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		loginPane.add(password);
-		
+
 		// Checkbox - Show/hide passwords
 		chckbxShowPassword = new JCheckBox("Show Password");
 		chckbxShowPassword.setForeground(Color.WHITE);
@@ -74,7 +73,6 @@ public class LoginGUI implements ActionListener, ItemListener {
 		chckbxShowPassword.setBounds(835, 400, 264, 23);
 		chckbxShowPassword.addItemListener(this);
 		loginPane.add(chckbxShowPassword);
-
 
 		// JLabel - error message
 		error = new JLabel("");
@@ -104,22 +102,21 @@ public class LoginGUI implements ActionListener, ItemListener {
 
 		loginPane.repaint();
 	}
-	
+
 	// Event handlers
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 
 		if (e.getSource() == login) { // Login attempt
 			error.setText("");
-			
+
 			// Check for empty text fields and display appropriate message
 			if (username.getText().isEmpty() || password.getText().isEmpty())
 				error.setText("Empty fields");
-			
+
 			// Check if user exists
 			else if (LoadUsers.checkUsername(username.getText().toLowerCase())) {
-				
+
 				// User exists - check if password matches
 				if (LoadUsers.checkPassword(username.getText().toLowerCase(), password.getText())) {
 
@@ -132,28 +129,28 @@ public class LoginGUI implements ActionListener, ItemListener {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-					
+
 					// Remove text from text/password fields
 					username.setText("");
 					password.setText("");
-					
+
 					// Initialize program
 					Initialize.initializeGUIS();
 					loginPane.setVisible(false); // Hide current pane
 
-				} else 
+				} else
 					error.setText("Password incorrect");
-			
+
 			} else // User nonexistent
 				error.setText("Username does not exist");
-			
+
 		} else if (e.getSource() == signUp) { // Sign up instead
 
 			// Remove text from text/password fields
 			username.setText("");
 			password.setText("");
 			error.setText("");
-			
+
 			Initialize.signUp.signUpPane.setVisible(true);
 			loginPane.setVisible(false);
 		}
@@ -170,5 +167,5 @@ public class LoginGUI implements ActionListener, ItemListener {
 			password.setEchoChar('●');
 
 	}
-	
+
 }

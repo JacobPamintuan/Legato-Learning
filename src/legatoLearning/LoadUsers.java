@@ -50,6 +50,7 @@ public class LoadUsers {
 
 	// Saves values of current to user arraylists
 	public static void userChange(String username) throws IOException {
+		
 		int userIndex = users.indexOf(username);
 
 		firstNames.set(userIndex, Initialize.user.getFirstName());
@@ -63,8 +64,11 @@ public class LoadUsers {
 
 	// Re-writes user file - when a user makes changes on profile screen
 	public static void userChangeSave() throws IOException {
+		
 		BufferedWriter pr = new BufferedWriter(new FileWriter(USERFILE, false));
+		
 		for (int i = 0; i < users.size(); i++) {
+			
 			// Formatted -> username;password;first name;last name;quiz save file;lesson
 			// save file
 			String line = String.format("%s;%s;%s;%s;Files/QuizSave_%s;Files/LessonSave_%s\n", users.get(i),
@@ -72,6 +76,7 @@ public class LoadUsers {
 
 			pr.write(line);
 		}
+		
 		pr.close();
 
 	}
@@ -115,16 +120,23 @@ public class LoadUsers {
 
 		if (users.contains(username)) 
 			return true;
+		
 		return false;
+		
 	}
 
 	// Check if password matches user
 	public static boolean checkPassword(String username, String pass) {
+		
 		if (users.contains(username.toLowerCase())) {
+		
 			int i = users.indexOf(username);
+			
 			if (pass.equals(passwords.get(i)))
 				return true;
+			
 		}
+		
 		return false;
 	}
 

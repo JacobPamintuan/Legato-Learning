@@ -1,13 +1,14 @@
 package legatoLearning;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedReader;
-import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -15,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class IntervalCourse implements MouseListener, ActionListener {
+
+	// Fields
 
 	public JPanel iCoursePane;
 
@@ -46,15 +49,17 @@ public class IntervalCourse implements MouseListener, ActionListener {
 	public QuizTemplate current;
 
 	public IntervalCourse() {
+		// Panel setup
 		iCoursePane = new JPanel();
 		iCoursePane.setBounds(300, 0, 1240, 810);
 		iCoursePane.setBackground(Color.white);
 		iCoursePane.setLayout(null);
 		Frame.frame.getContentPane().add(iCoursePane);
 
-		// enableQuizzes();
+		// Create checkmarks
 		checks();
 
+		// Title JLabels
 		HOME = new JLabel("<html><u>Home<u><html>");
 		HOME.setBounds(65, 20, 91, 40);
 		HOME.setFont(Fonts.BREADCRUMBS);
@@ -75,6 +80,7 @@ public class IntervalCourse implements MouseListener, ActionListener {
 		INTERVALS.setFont(Fonts.TITLE2);
 		INTERVALS.setForeground(Colours.purp);
 
+		// Difficulty Labels
 		beginner = new JLabel("Beginner");
 		beginner.setHorizontalAlignment(SwingConstants.CENTER);
 		beginner.setBounds(96, 130, 196, 40);
@@ -90,40 +96,56 @@ public class IntervalCourse implements MouseListener, ActionListener {
 		advanced.setBounds(848, 130, 196, 40);
 		advanced.setFont(Fonts.SUBHEADING2);
 
-		beginnerL = new JButton(new ImageIcon("IntCourse/BL1.png"));
-		beginnerL.setBounds(21, 180, 345, 42);
-		beginnerL.addActionListener(this);
-		iCoursePane.add(beginnerL);
+		// Lessons and Quizzes, JButtons and purple rectangle images
 
+		// Purple rectangle around Beginner
 		JLabel bRect = new JLabel();
 		bRect.setIcon(new ImageIcon("IntCourse/BeginnerRect.png"));
 		bRect.setBounds(11, 130, 366, 281);
 		iCoursePane.add(bRect);
 
+		// Beginner Lesson
+		beginnerL = new JButton(new ImageIcon("IntCourse/BL1.png"));
+		beginnerL.setBounds(21, 180, 345, 42);
+		beginnerL.addActionListener(this);
+		iCoursePane.add(beginnerL);
+
+		// Beginner quizzes
 		beginnerQ = new JButton[3];
+
 		for (int i = 0; i < beginnerQ.length; i++) {
+
 			beginnerQ[i] = new JButton(new ImageIcon("IntCourse/BQ" + (i + 1) + ".png"));
 			beginnerQ[i].setBounds(21, 236 + 55 * i, 345, 42);
 			beginnerQ[i].addActionListener(this);
 			iCoursePane.add(beginnerQ[i]);
 			beginnerQ[i].setEnabled(false);
+
 		}
 
+		// Purple rectangle around Intermediate
 		JLabel IRect = new JLabel();
 		IRect.setIcon(new ImageIcon("IntCourse/IntermediateRect.png"));
 		IRect.setBounds(387, 130, 366, 451);
 		iCoursePane.add(IRect);
 
+		// Intermediate lessons
 		intermediateL = new JButton[2];
+
 		for (int i = 0; i < intermediateL.length; i++) {
+
 			intermediateL[i] = new JButton(new ImageIcon("IntCourse/IL" + (i + 1) + ".png"));
 			intermediateL[i].setBounds(397, 180 + i * 225, 345, 42);
 			intermediateL[i].addActionListener(this);
 			iCoursePane.add(intermediateL[i]);
+
 		}
 
+		// Intermediate Lesson 1 Quizzes
 		intermediateQ = new JButton[2][3];
+
 		for (int i = 0; i < 3; i++) {
+
 			intermediateQ[0][i] = new JButton(new ImageIcon("IntCourse/IQ1" + (i + 1) + ".png"));
 			intermediateQ[0][i].setBounds(397, 236 + 55 * i, 345, 42);
 			intermediateQ[0][i].addActionListener(this);
@@ -131,7 +153,9 @@ public class IntervalCourse implements MouseListener, ActionListener {
 			intermediateQ[0][i].setEnabled(false);
 		}
 
+		// Intermediate Lesson 2 Quizzes
 		for (int i = 0; i < 2; i++) {
+
 			intermediateQ[1][i] = new JButton(new ImageIcon("IntCourse/IQ2" + (i + 1) + ".png"));
 			intermediateQ[1][i].setBounds(397, 461 + 55 * i, 345, 42);
 			intermediateQ[1][i].addActionListener(this);
@@ -139,16 +163,19 @@ public class IntervalCourse implements MouseListener, ActionListener {
 			intermediateQ[1][i].setEnabled(false);
 		}
 
+		// Purple Rectangle around Advanced
 		JLabel ARect = new JLabel();
 		ARect.setIcon(new ImageIcon("IntCourse/AdvancedRect.png"));
 		ARect.setBounds(762, 130, 366, 226);
 		iCoursePane.add(ARect);
 
+		// Advanced Lesson
 		advancedL = new JButton(new ImageIcon("IntCourse/AL1.png"));
 		advancedL.setBounds(773, 180, 345, 42);
 		advancedL.addActionListener(this);
 		iCoursePane.add(advancedL);
 
+		// Advanced Quizzes
 		advancedQ = new JButton[2];
 		for (int i = 0; i < advancedQ.length; i++) {
 			advancedQ[i] = new JButton(new ImageIcon("IntCourse/AQ" + (i + 1) + ".png"));
@@ -158,6 +185,7 @@ public class IntervalCourse implements MouseListener, ActionListener {
 			advancedQ[i].setEnabled(false);
 		}
 
+		// Label Packing
 		iCoursePane.add(HOME);
 		iCoursePane.add(COURSES);
 		iCoursePane.add(chevron);
@@ -167,6 +195,7 @@ public class IntervalCourse implements MouseListener, ActionListener {
 		iCoursePane.add(intermediate);
 		iCoursePane.add(advanced);
 
+		// Update GUI based on user progress
 		enableQuizzes();
 		quizCompleted();
 
@@ -174,6 +203,8 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 	}
 
+	// Create checkmarks beside each lesson/quiz
+	// Set to invisible
 	private void checks() {
 
 		// Beginner Lesson
@@ -235,28 +266,68 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 	}
 
+	// Check if each quiz is completed
+	// Set checkmark beside quiz to visible
 	public void quizCompleted() {
+
+		int numCompleted = 0;
+
+		// Beginner quizzes
 		for (int i = 0; i < 3; i++) {
-			if (Initialize.quizArr[i].isCompleted())
+			
+			if (Initialize.quizArr[i].isCompleted()) {
+				
 				bQChecks[i].setVisible(true);
+				numCompleted++;
+				
+			}
 		}
 
+		// Intermediate Lesson 1 quizzes
 		for (int i = 3; i <= 5; i++) {
-			if (Initialize.quizArr[i].isCompleted())
+			if (Initialize.quizArr[i].isCompleted()) {
+				
 				iL1QChecks[i - 3].setVisible(true);
+				numCompleted++;
+				
+			}
 		}
 
+		// Intermediate Lesson 2 quizzes
 		for (int i = 6; i <= 7; i++) {
-			if (Initialize.quizArr[i].isCompleted())
+
+			if (Initialize.quizArr[i].isCompleted()) {
+			
 				iL2QChecks[i - 6].setVisible(true);
+				numCompleted++;
+				
+			}
 		}
+
+		// Advanced quizzes
 		for (int i = 8; i <= 9; i++) {
-			if (Initialize.quizArr[i].isCompleted())
+			
+			if (Initialize.quizArr[i].isCompleted()) {
+			
 				aQChecks[i - 8].setVisible(true);
+				numCompleted++;
+				
+			}
 		}
+		
+		// Display popup if course complete (all quizzes complete)
+		if(numCompleted == 10) {
+			String message = "CONGRATULATIONS!!! YOU HAVE COMPLETED THE INTERVALS COURSE";
+			new JOptionPane();
+			JOptionPane.showMessageDialog(iCoursePane, message);
+		}
+		
 	}
 
+	// Enables quizzes if/when respective lesson is completed
 	public void enableQuizzes() {
+
+		// Beginner Lesson 1
 		if (Initialize.lessonArr[0].isCompleted()) {
 
 			bLCheck.setVisible(true);
@@ -264,18 +335,22 @@ public class IntervalCourse implements MouseListener, ActionListener {
 			for (int i = 0; i < 3; i++)
 				beginnerQ[i].setEnabled(true);
 		}
+
+		// Intermediate Lesson 1
 		if (Initialize.lessonArr[1].isCompleted()) {
 			iLChecks[0].setVisible(true);
 			for (int i = 0; i < 3; i++)
 				intermediateQ[0][i].setEnabled(true);
 		}
 
+		// Intermediate Lesson 2
 		if (Initialize.lessonArr[2].isCompleted()) {
 			iLChecks[1].setVisible(true);
 			for (int i = 0; i < 2; i++)
 				intermediateQ[1][i].setEnabled(true);
 		}
 
+		// Advanced Lesson 1
 		if (Initialize.lessonArr[3].isCompleted()) {
 
 			aLCheck.setVisible(true);
@@ -285,9 +360,9 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 	}
 
+	// Event Handlers
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -295,6 +370,7 @@ public class IntervalCourse implements MouseListener, ActionListener {
 	public void mousePressed(MouseEvent e) {
 		JLabel lbl = (JLabel) e.getSource();
 
+		// Send user back to home page
 		if (lbl == HOME) {
 			iCoursePane.setVisible(false);
 			Initialize.home.homePane.setVisible(true);
@@ -305,7 +381,6 @@ public class IntervalCourse implements MouseListener, ActionListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -313,8 +388,9 @@ public class IntervalCourse implements MouseListener, ActionListener {
 	public void mouseEntered(MouseEvent e) {
 		JLabel lbl = (JLabel) e.getSource();
 
-//		lbl.setText("<html><u>" + lbl.getText() + "<u><html>");
+		// Enter hover state - color change, cursor change
 		lbl.setForeground(Colours.purp);
+		lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 	}
 
@@ -322,11 +398,9 @@ public class IntervalCourse implements MouseListener, ActionListener {
 	public void mouseExited(MouseEvent e) {
 		JLabel lbl = (JLabel) e.getSource();
 
+		// Exit hover state - color change, cursor change
 		lbl.setForeground(Color.BLACK);
-
-//		String noUnderline = lbl.getText().substring(9, lbl.getText().length() - 9);
-//
-//		lbl.setText(noUnderline);
+		lbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
 	}
 
@@ -334,84 +408,128 @@ public class IntervalCourse implements MouseListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 
+		// Initialize array of all Quiz objects
+		// Used if user is redoing a quiz
 		Quiz[] quizOG = new Quiz[10]; // Default quiz array
 		try {
 			BufferedReader br = new BufferedReader(new java.io.FileReader(Initialize.quizDataOG)); // Default text file
+
 			for (int i = 0; i < quizOG.length; i++) {
+
 				String line = br.readLine();
 				quizOG[i] = new Quiz(line);
 
 			}
+
 			br.close();
+
 		} catch (Exception e1) {
+
 			e1.printStackTrace();
+
 		}
 
+		// Beginner lesson 1
 		if (btn == beginnerL) {
+
 			Initialize.lessonGUI[0].LessonTempPane.setVisible(true);
 			iCoursePane.setVisible(false);
 			return;
+
 		}
 
-		if (btn == advancedL) {
-			Initialize.lessonGUI[3].LessonTempPane.setVisible(true);
-			iCoursePane.setVisible(false);
-			return;
-		}
-
-		for (int i = 0; i < advancedQ.length; i++)
-			if (btn == advancedQ[i]) {
-				if (Initialize.quizArr[i + 8].isCompleted()) {
-					Initialize.quizArr[i + 8] = quizOG[i + 8];
-					current = new QuizTemplate(Initialize.quizArr[i + 8]);
-
-				} else
-					Initialize.quizGUI[i + 8].QuizPane.setVisible(true);
-				iCoursePane.setVisible(false);
-				return;
-			}
-
+		// Beginner Quizzes
 		for (int i = 0; i < beginnerQ.length; i++)
+
 			if (btn == beginnerQ[i]) {
+
 				if (Initialize.quizArr[i].isCompleted()) {
-					Initialize.quizArr[i] = quizOG[i];
+					Initialize.quizArr[i] = quizOG[i]; // Use values from Default
 					current = new QuizTemplate(Initialize.quizArr[i]);
+
 				} else
+
 					Initialize.quizGUI[i].QuizPane.setVisible(true);
 
 				iCoursePane.setVisible(false);
 				return;
+
 			}
 
+		// Intermediate Lessons
 		for (int i = 0; i < intermediateL.length; i++)
+
 			if (btn == intermediateL[i]) {
+
 				Initialize.lessonGUI[i + 1].LessonTempPane.setVisible(true);
 				iCoursePane.setVisible(false);
 				return;
+
 			}
 
+		// Intermediate Lesson 1 Quizzes
 		for (int i = 0; i < 3; i++)
+
 			if (btn == intermediateQ[0][i]) {
+
 				if (Initialize.quizArr[i + 3].isCompleted()) {
-					Initialize.quizArr[i + 3] = quizOG[i + 3];
+					Initialize.quizArr[i + 3] = quizOG[i + 3]; // Use values from Default
 					current = new QuizTemplate(Initialize.quizArr[i + 3]);
+
 				} else
+
 					Initialize.quizGUI[i + 3].QuizPane.setVisible(true);
+
 				iCoursePane.setVisible(false);
-				System.out.println("int q" + i);
 				return;
 			}
 
+		// Intermediate Lesson 2 Quizzes
 		for (int i = 0; i < 2; i++)
+
 			if (btn == intermediateQ[1][i]) {
+
 				if (Initialize.quizArr[i + 6].isCompleted()) {
-					Initialize.quizArr[i + 6] = quizOG[i + 6];
+
+					Initialize.quizArr[i + 6] = quizOG[i + 6]; // Use values from Default
 					current = new QuizTemplate(Initialize.quizArr[i + 6]);
+
 				} else
+
 					Initialize.quizGUI[i + 6].QuizPane.setVisible(true);
+
 				iCoursePane.setVisible(false);
 				System.out.println("int" + i);
 				return;
 			}
+		// Advanced Lesson 1
+		if (btn == advancedL) {
+
+			Initialize.lessonGUI[3].LessonTempPane.setVisible(true);
+			iCoursePane.setVisible(false);
+			return;
+
+		}
+
+		// Advanced Quizzes
+		for (int i = 0; i < advancedQ.length; i++)
+
+			if (btn == advancedQ[i]) {
+
+				if (Initialize.quizArr[i + 8].isCompleted()) {
+
+					Initialize.quizArr[i + 8] = quizOG[i + 8]; // Use values from Default
+					current = new QuizTemplate(Initialize.quizArr[i + 8]);
+
+				} else
+
+					Initialize.quizGUI[i + 8].QuizPane.setVisible(true);
+
+				iCoursePane.setVisible(false);
+				return;
+
+			}
+		
 	}
+
 }
