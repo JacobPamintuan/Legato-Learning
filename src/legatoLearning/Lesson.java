@@ -4,6 +4,13 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/*
+ * Lesson Object class
+ * Contains fields for lesson
+ * Writes text files
+ * Initializes lesson through constructor
+ */
+
 public class Lesson {
 
 	// Fields

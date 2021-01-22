@@ -6,6 +6,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+/*
+ * Home screen
+ * First screen user sees after login
+ * Links to Courses
+ * Instructions for navigating through lessons and quizzes
+ */
+
 public class HomeGUI implements ActionListener {
 
 	// Fields

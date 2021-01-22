@@ -2,6 +2,12 @@ package legatoLearning;
 
 import java.io.File;
 
+/*
+ * User class
+ * Holds user fields
+ * Setters and getters
+ */
+
 public class User {
 
 	// Fields

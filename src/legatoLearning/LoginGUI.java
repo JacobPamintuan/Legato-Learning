@@ -18,6 +18,14 @@ import javax.swing.JButton;
 
 import java.awt.Font;
 
+/*
+ * Login screen
+ * First screen that the user sees
+ * Text fields for username and password
+ * Goes to home screen if login successful
+ * Can go to signup screen if new user
+ */
+
 public class LoginGUI implements ActionListener, ItemListener {
 	// Fields
 

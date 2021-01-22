@@ -18,6 +18,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 
+/*
+ * Profile GUI
+ * Allows users to edit their profile
+ * 		- Change password
+ * 		- Change name
+ * Also allows user to reset all progress
+ * Accessible through side bar
+ */
+
 public class ProfileGUI implements ActionListener, ItemListener {
 	
 	// Fields

@@ -14,6 +14,16 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.JOptionPane;
 
+/*
+ * Quiz GUI template class
+ * Template for all quizzes
+ * Initializes fields through quiz object
+ * Keeps track of right and wrong answers
+ * Updates Results screen once quiz complete
+ * Displays correct answer
+ * Accessible from Interval Course page
+ */
+
 public class QuizTemplate implements ActionListener, MouseListener {
 
 	// Fields

@@ -4,6 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 
+/*
+ * Initializes all objects after login
+ * Initializes GUI panels
+ * Reads user's quiz and lesson save file
+ */
+
 public class Initialize {
 
 	// Fields
@@ -104,14 +110,13 @@ public class Initialize {
 		for (int i = 0; i < lessonArr.length; i++) {
 			
 			String line = br.readLine();
-			lessonArr[i] = new Lesson(line);
-			System.out.printf("Lesson %d: %s\n", i, line);
-			
+			lessonArr[i] = new Lesson(line);			
 		}
 		
 		br.close();
 
 		// Load all quizzes and lessons and set visible false
+		
 		quizGUI = new QuizTemplate[quizArr.length]; // QuizTemplate array
 		
 		for (int i = 0; i < quizArr.length; i++) {
@@ -130,6 +135,9 @@ public class Initialize {
 			lessonGUI[i].LessonTempPane.setVisible(false);
 			
 		}
+		
+		System.out.println("Load complete");
+		
 	}
 
 }

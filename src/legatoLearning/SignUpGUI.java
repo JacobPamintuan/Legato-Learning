@@ -16,6 +16,15 @@ import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 import java.awt.Font;
 
+/*
+ * Sign up screen
+ * Gets values to create new user
+ * Calls LoadUsers for validation and creation of new user
+ * Goes to home screen if login successful
+ * Able to go to login screen if user wants to login instead
+ * Accessible through login screen
+ */
+
 public class SignUpGUI implements ActionListener, ItemListener {
 
 	// Fields

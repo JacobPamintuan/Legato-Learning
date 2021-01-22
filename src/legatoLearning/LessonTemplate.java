@@ -10,6 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+/*
+ * Lesson GUI template class
+ * Template for all lessons
+ * Initializes fields through lesson object
+ * Accessible from Interval Course page
+ */
+
 public class LessonTemplate implements MouseListener {
 
 	// Fields

@@ -7,6 +7,14 @@ import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 
+/*
+ * Quiz Object class
+ * Contains fields for quiz
+ * Writes text files
+ * Initializes quiz through constructor
+ */
+
+
 public class Quiz {
 
 	// Fields
@@ -204,6 +212,7 @@ public class Quiz {
 
 		// Overwrite save file with new data
 		try {
+			
 			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.quizSaveData, false));
 
 			for (int i = 0; i < Initialize.quizArr.length; i++) {

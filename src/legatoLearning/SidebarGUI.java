@@ -10,6 +10,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/*
+ * Sidebar GUI
+ * Allows user to navigate through the GUI
+ * Allows access to Home page, Results Page, and Profile page
+ * Logout button on very bottom
+ * Logo also acts as a link to home page
+ * Loaded along side home page when user logs in / signs up
+ * Is always visible after log in / sign up
+ */
+
 public class SidebarGUI implements MouseListener {
 
 	// Fields

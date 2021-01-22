@@ -11,10 +11,19 @@ import java.util.Comparator;
 
 import javax.swing.*;
 
+/*
+ * ResultsGUI
+ * Displays results of quizzes and sorts them
+ * User can choose to sort low to high, high to low, or in order of difficulty
+ * 		- Allows user to see their strengths and weaknesses
+ * Contains links to each corresponding lesson
+ * Accessible through sidebar
+ */
+
 public class ResultsGUI implements ActionListener, MouseListener {
 
 	// Fields
-	
+
 	JPanel resultsPane;
 
 	public static boolean isIntervals;
@@ -27,7 +36,7 @@ public class ResultsGUI implements ActionListener, MouseListener {
 	JLabel[] quizArr = new JLabel[10];
 	JLabel[] scoreArr = new JLabel[10];
 	JLabel[] smiley = new JLabel[10];
-	
+
 	JLabel table;
 
 	JButton scoreFilter;
@@ -38,14 +47,13 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 	// Initialize GUI
 	public ResultsGUI() {
-		
+
 		// JPanel setup
 		resultsPane = new JPanel();
 		resultsPane.setBounds(300, 0, 1140, 810);
 		resultsPane.setBackground(Color.white);
 		resultsPane.setLayout(null);
 		Frame.frame.getContentPane().add(resultsPane);
-
 
 		JLabel title = new JLabel("Quiz Results");
 		title.setBounds(70, 37, 250, 50);
@@ -79,10 +87,10 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 		// Initialize Table
 		for (int i = 0; i < 10; i++) {
-			
+
 			int space = 52;
 			int shiftY = i * space;
-			
+
 			courseArr[i] = new JLabel();
 			courseArr[i].setBounds(97, 231 + shiftY, 125, 43);
 			courseArr[i].setFont(Fonts.BODY);
@@ -121,7 +129,7 @@ public class ResultsGUI implements ActionListener, MouseListener {
 		resultsPane.add(table);
 
 		resultsPane.repaint();
-		
+
 	}
 
 	// Calculates smiley face based on score
@@ -162,18 +170,18 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 	// Update chart based on filter
 	public void updateChart(int num) {
-		
+
 		Quiz[] sorted = Initialize.quizArr.clone();
-		
+
 		currentFilter = num;
-		
+
 		// Use comparators to sort array
 		if (num == 0)
 			Arrays.sort(sorted, new LowToHigh());
-		
+
 		else if (num == 1)
 			Arrays.sort(sorted, new HighToLow());
-		
+
 		else
 			; // No filter - Array not sorted by score, displays as original
 
@@ -189,13 +197,13 @@ public class ResultsGUI implements ActionListener, MouseListener {
 			// If Intermediate lesson 2, subtract 3 from quizNumber
 			if (sorted[i].getDifficulty().equals("Intermediate") && sorted[i].getQuizNumber() > 3)
 				quizArr[i].setText(String.format("%d - %s", sorted[i].getQuizNumber() - 3, sorted[i].getQuizName()));
-	
+
 			else
 				quizArr[i].setText(String.format("%d - %s", sorted[i].getQuizNumber(), sorted[i].getQuizName()));
-			
+
 			scoreArr[i].setText(sorted[i].getStringScore());
 			scoreArr[i].setForeground(scoreColour(sorted[i].getPercentageScore()));
-			
+
 			smiley[i].setIcon(calculateSmiley(sorted[i].getPercentageScore()));
 
 		}
@@ -206,26 +214,26 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		// Update chart based on score filter
 		if (e.getSource() == scoreFilter) {
-		
+
 			if (currentFilter == 0) {
-			
+
 				currentFilter = 1;
 				scoreFilter.setIcon(new ImageIcon("images/chevDown.jpg"));
-			
+
 			} else {
-			
+
 				currentFilter = 0;
 				scoreFilter.setIcon(new ImageIcon("images/chevUp.jpg"));
-			
+
 			}
-			
+
 			difficultyFilter.setEnabled(true);
-		
+
 		}
-		
+
 		updateChart(currentFilter);
 		resultsPane.repaint();
 
@@ -238,25 +246,25 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
+
 		JLabel lbl = (JLabel) e.getSource();
 
 		// Update chart with difficulty filter
 		if (lbl == difficultyFilter) {
-			
+
 			difficultyFilter.setEnabled(false);
-			
+
 			currentFilter = -1;
-			
+
 			updateChart(currentFilter);
-			
+
 			resultsPane.repaint();
-		
-		} 
-		
-		// Open lesson 
+
+		}
+
+		// Open lesson
 		else {
-			
+
 			// Get name of lesson - between "<html><u>...<u><html>"
 			String lesson = lbl.getText().substring(9, lbl.getText().length() - 9);
 
@@ -280,7 +288,7 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 			// Hide current pane
 			resultsPane.setVisible(false);
-			
+
 			// Change sidebar
 			Initialize.sidebar.setDark();
 			Initialize.sidebar.isClicked = null;
@@ -294,24 +302,24 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-	
+
 		JLabel lbl = (JLabel) e.getSource();
 
 		// Enter hover state - Color, cursor change
 		lbl.setForeground(Colours.purple);
 		lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+
 		JLabel lbl = (JLabel) e.getSource();
 
 		// Exit hover state - Color, cursor change
 		lbl.setForeground(Color.BLACK);
 		lbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		
+
 	}
 }
 
