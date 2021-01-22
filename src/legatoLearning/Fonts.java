@@ -4,6 +4,8 @@ import java.awt.Font;
 
 /*
  * Fonts frequently used throughout project
+ * Implementation similar to Colours class
+ * 		- Implementation inspired by Michael Li
  */
 
 public class Fonts {

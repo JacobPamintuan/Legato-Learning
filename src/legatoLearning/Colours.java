@@ -5,6 +5,7 @@ import java.awt.Color.*;
 
 /**
  * Color scheme of project
+ * Inspired by Michael Li
  */
 
 public class Colours {
