@@ -43,6 +43,7 @@ public class Initialize {
 
 		signUp = new SignUpGUI();
 		signUp.signUpPane.setVisible(false);
+
 	}
 
 	// Rest of program 
@@ -76,7 +77,6 @@ public class Initialize {
 		BufferedReader br;
 		
 		if (quizSaveData.length() == 0) // If save file is empty - first time user/never completed any quizzes
-			
 			br = new BufferedReader(new java.io.FileReader(quizDataOG)); // Use default text file
 		
 		else
@@ -96,7 +96,6 @@ public class Initialize {
 		lessonArr = new Lesson[4];
 		
 		if (lessonSaveData.length() == 0) // If save file is empty - first time user/never completed any lessons
-			
 			br = new BufferedReader(new java.io.FileReader(lessonDataOG)); // Use default text file
 		
 		else

@@ -44,6 +44,7 @@ public class ProfileGUI implements ActionListener, ItemListener {
 	// Initialize GUI
 	public ProfileGUI() {
 
+		// JPanel setup
 		profilePane = new JPanel();
 		profilePane.setBounds(300, 0, 1140, 810);
 		profilePane.setBackground(Color.white);
@@ -53,7 +54,7 @@ public class ProfileGUI implements ActionListener, ItemListener {
 		JLabel lbl = new JLabel("Profile");
 		lbl.setFont(Fonts.TITLE2);
 		lbl.setBounds(64, 29, 247, 54);
-		lbl.setForeground(Colours.purp);
+		lbl.setForeground(Colours.purple);
 		profilePane.add(lbl);
 
 		// Textfields
@@ -108,7 +109,7 @@ public class ProfileGUI implements ActionListener, ItemListener {
 		errorOrSuccess = new JLabel();
 		errorOrSuccess.setBounds(365, 539, 230, 32);
 		errorOrSuccess.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
-		errorOrSuccess.setForeground(Colours.purp);
+		errorOrSuccess.setForeground(Colours.purple);
 		profilePane.add(errorOrSuccess);
 
 
@@ -187,15 +188,16 @@ public class ProfileGUI implements ActionListener, ItemListener {
 			}
 		} else if (b == save) {
 
-			// If all fields are empty
+			// If all fields are empty  - Appropriate error message
 			if (firstName.getText().isEmpty() && lastName.getText().isEmpty() && oldPassword.getText().isEmpty()
 					&& newPassword.getText().isEmpty() && confirmPassword.getText().isEmpty())
 				
 				errorOrSuccess.setText("<html>Fill out at least one field to edit profile<html>");
 
+		
 			else {
 
-				// If any password fields are not empty (if all are empty, do nothing)
+				// If any password fields are not empty (if all password fields empty, do nothing)
 				if (!(oldPassword.getText().isEmpty() && newPassword.getText().isEmpty()
 						&& confirmPassword.getText().isEmpty())) {
 
@@ -233,11 +235,17 @@ public class ProfileGUI implements ActionListener, ItemListener {
 
 				// Update user within Initialize
 				// Update users file
+				// Success message
 				try {
+				
 					LoadUsers.userChange(Initialize.user.getUsername());
+					
 					errorOrSuccess.setText("Profile updated");
+				
 				} catch (IOException e1) {
+				
 					e1.printStackTrace();
+					
 				}
 			
 			// Change name on home screen

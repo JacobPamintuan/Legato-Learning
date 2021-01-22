@@ -110,7 +110,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		lblTitle = new JLabel(questionTitle);
 		lblTitle.setBounds(65, 130, 995, 55);
 		lblTitle.setFont(Fonts.TITLE1);
-		lblTitle.setForeground(Colours.purp);
+		lblTitle.setForeground(Colours.purple);
 		QuizPane.add(lblTitle);
 
 		lblCourse = new JLabel("<html><u>" + course + "<u><html>");
@@ -202,7 +202,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		lblProgress.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblProgress.setBounds(795, 64, 280, 40);
 		lblProgress.setFont(Fonts.HEADING);
-		lblProgress.setForeground(Colours.purp);
+		lblProgress.setForeground(Colours.purple);
 		QuizPane.add(lblProgress);
 
 		// Question Image
@@ -230,7 +230,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		QuizPane.repaint();
 	}
 
-	// X-value in pixels to shift cheveron and lesson name
+	// X-value in pixels to shift chevron and lesson name
 	private int shiftX() {
 		int xShift = 0;
 		if (difficulty.equals("Beginner"))
@@ -412,7 +412,7 @@ public class QuizTemplate implements ActionListener, MouseListener {
 		JLabel lbl = (JLabel) e.getSource();
 
 		// Enter hover state - Color and cursor change
-		lbl.setForeground(Colours.purp);
+		lbl.setForeground(Colours.purple);
 		lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 	}

@@ -1,7 +1,7 @@
 package legatoLearning;
 
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -13,6 +13,8 @@ import javax.swing.*;
 
 public class ResultsGUI implements ActionListener, MouseListener {
 
+	// Fields
+	
 	JPanel resultsPane;
 
 	public static boolean isIntervals;
@@ -25,6 +27,7 @@ public class ResultsGUI implements ActionListener, MouseListener {
 	JLabel[] quizArr = new JLabel[10];
 	JLabel[] scoreArr = new JLabel[10];
 	JLabel[] smiley = new JLabel[10];
+	
 	JLabel table;
 
 	JButton scoreFilter;
@@ -33,16 +36,20 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 	public int currentFilter = 0;
 
+	// Initialize GUI
 	public ResultsGUI() {
+		
+		// JPanel setup
 		resultsPane = new JPanel();
 		resultsPane.setBounds(300, 0, 1140, 810);
 		resultsPane.setBackground(Color.white);
 		resultsPane.setLayout(null);
 		Frame.frame.getContentPane().add(resultsPane);
 
+
 		JLabel title = new JLabel("Quiz Results");
 		title.setBounds(70, 37, 250, 50);
-		title.setForeground(Colours.purp);
+		title.setForeground(Colours.purple);
 		title.setFont(Fonts.TITLE1);
 		resultsPane.add(title);
 
@@ -57,6 +64,7 @@ public class ResultsGUI implements ActionListener, MouseListener {
 		legend.setBounds(759, 14, 310, 150);
 		resultsPane.add(legend);
 
+		// Filter button/JLabel+mouseListener
 		scoreFilter = new JButton();
 		scoreFilter.setIcon(new ImageIcon("images/chevUp.jpg"));
 		scoreFilter.addActionListener(this);
@@ -69,9 +77,12 @@ public class ResultsGUI implements ActionListener, MouseListener {
 		difficultyFilter.addMouseListener(this);
 		resultsPane.add(difficultyFilter);
 
+		// Initialize Table
 		for (int i = 0; i < 10; i++) {
+			
 			int space = 52;
 			int shiftY = i * space;
+			
 			courseArr[i] = new JLabel();
 			courseArr[i].setBounds(97, 231 + shiftY, 125, 43);
 			courseArr[i].setFont(Fonts.BODY);
@@ -100,40 +111,44 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 		}
 
+		// Fill chart with data
 		updateChart(0);
 
+		// Table image behind data
 		table = new JLabel();
 		table.setIcon(new ImageIcon("images/Table.png"));
 		table.setBounds(70, 176, 1000, 571);
 		resultsPane.add(table);
 
 		resultsPane.repaint();
+		
 	}
 
+	// Calculates smiley face based on score
 	public ImageIcon calculateSmiley(double score) {
-		ImageIcon smiley = null;
 
 		score *= 100;
 
 		if (score >= 85 && score <= 100)
-			smiley = new ImageIcon("emojis/sunglasses.png");
+			return new ImageIcon("emojis/sunglasses.png");
 		else if (score >= 70 && score < 85)
-			smiley = new ImageIcon("emojis/hearts.png");
+			return new ImageIcon("emojis/hearts.png");
 		else if (score >= 50 && score < 70)
-			smiley = new ImageIcon("emojis/smile.png");
+			return new ImageIcon("emojis/smile.png");
 		else if (score >= 0 && score < 50)
-			smiley = new ImageIcon("emojis/puzzled.png");
+			return new ImageIcon("emojis/puzzled.png");
 		else
-			smiley = null;
-		return smiley;
+			return null;
+
 	}
 
+	// Calculates color based on score
 	public Color scoreColour(double score) {
 
 		score *= 100;
 
 		if (score >= 85 && score <= 100)
-			return Colours.purp;
+			return Colours.purple;
 		else if (score >= 70 && score < 85)
 			return Colours.green;
 		else if (score >= 50 && score < 70)
@@ -145,49 +160,72 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 	}
 
+	// Update chart based on filter
 	public void updateChart(int num) {
-		Quiz[] clone = Initialize.quizArr.clone();
+		
+		Quiz[] sorted = Initialize.quizArr.clone();
+		
 		currentFilter = num;
+		
+		// Use comparators to sort array
 		if (num == 0)
-			Arrays.sort(clone, new LowToHigh());
+			Arrays.sort(sorted, new LowToHigh());
+		
 		else if (num == 1)
-			Arrays.sort(clone, new HighToLow());
+			Arrays.sort(sorted, new HighToLow());
+		
 		else
 			; // No filter - Array not sorted by score, displays as original
 
+		// Display data in order based on filter
 		for (int i = 0; i < 10; i++) {
 
-			courseArr[i].setText(clone[i].getDifficulty());
+			courseArr[i].setText(sorted[i].getDifficulty());
 
-			lessonArr[i].setText("<html><u>" + clone[i].getLessonName() + "<u><html>");
+			// Clickable links to lessons
+			lessonArr[i].setText("<html><u>" + sorted[i].getLessonName() + "<u><html>");
 			lessonArr[i].addMouseListener(this);
 
-			if (clone[i].getDifficulty().equals("Intermediate") && clone[i].getQuizNumber() > 3)
-				quizArr[i].setText(String.format("%d - %s", clone[i].getQuizNumber() - 3, clone[i].getQuizName()));
+			// If Intermediate lesson 2, subtract 3 from quizNumber
+			if (sorted[i].getDifficulty().equals("Intermediate") && sorted[i].getQuizNumber() > 3)
+				quizArr[i].setText(String.format("%d - %s", sorted[i].getQuizNumber() - 3, sorted[i].getQuizName()));
+	
 			else
-				quizArr[i].setText(String.format("%d - %s", clone[i].getQuizNumber(), clone[i].getQuizName()));
-			scoreArr[i].setText(clone[i].getStringScore());
-			scoreArr[i].setForeground(scoreColour(clone[i].getPercentageScore()));
-			smiley[i].setIcon(calculateSmiley(clone[i].getPercentageScore()));
+				quizArr[i].setText(String.format("%d - %s", sorted[i].getQuizNumber(), sorted[i].getQuizName()));
+			
+			scoreArr[i].setText(sorted[i].getStringScore());
+			scoreArr[i].setForeground(scoreColour(sorted[i].getPercentageScore()));
+			
+			smiley[i].setIcon(calculateSmiley(sorted[i].getPercentageScore()));
 
 		}
 
 	}
 
-	// Event Handelers
+	// Event Handlers
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		// Update chart based on score filter
 		if (e.getSource() == scoreFilter) {
+		
 			if (currentFilter == 0) {
+			
 				currentFilter = 1;
 				scoreFilter.setIcon(new ImageIcon("images/chevDown.jpg"));
+			
 			} else {
+			
 				currentFilter = 0;
 				scoreFilter.setIcon(new ImageIcon("images/chevUp.jpg"));
+			
 			}
+			
 			difficultyFilter.setEnabled(true);
+		
 		}
+		
 		updateChart(currentFilter);
 		resultsPane.repaint();
 
@@ -200,16 +238,29 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		
 		JLabel lbl = (JLabel) e.getSource();
 
+		// Update chart with difficulty filter
 		if (lbl == difficultyFilter) {
+			
 			difficultyFilter.setEnabled(false);
+			
 			currentFilter = -1;
+			
 			updateChart(currentFilter);
+			
 			resultsPane.repaint();
-		} else {
+		
+		} 
+		
+		// Open lesson 
+		else {
+			
+			// Get name of lesson - between "<html><u>...<u><html>"
 			String lesson = lbl.getText().substring(9, lbl.getText().length() - 9);
 
+			// Open respective lesson
 			if (lesson.equals("1 - Intro to Intervals")) {
 				Initialize.lessonGUI[0].LessonTempPane.setVisible(true);
 			}
@@ -227,7 +278,10 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 			}
 
+			// Hide current pane
 			resultsPane.setVisible(false);
+			
+			// Change sidebar
 			Initialize.sidebar.setDark();
 			Initialize.sidebar.isClicked = null;
 		}
@@ -240,17 +294,24 @@ public class ResultsGUI implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+	
 		JLabel lbl = (JLabel) e.getSource();
 
-		lbl.setForeground(Colours.purp);
+		// Enter hover state - Color, cursor change
+		lbl.setForeground(Colours.purple);
+		lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		
 		JLabel lbl = (JLabel) e.getSource();
 
+		// Exit hover state - Color, cursor change
 		lbl.setForeground(Color.BLACK);
-
+		lbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		
 	}
 }
 

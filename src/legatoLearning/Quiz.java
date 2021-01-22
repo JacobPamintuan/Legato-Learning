@@ -1,7 +1,6 @@
 package legatoLearning;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
@@ -37,45 +36,42 @@ public class Quiz {
 	private String lessonName;
 	private String quizName;
 
-//	
-//	public Quiz(String course, String difficulty, String questionTitle, int quizNumber, int currentPane, int totalPanes,
-//			int[] ansKey, boolean[] answeredCorrect, int[] numWrong, ImageIcon questionImage,
-//			ImageIcon[][] answersImage, String[][] answersText, boolean completed, String quizName, String lessonName) {
-//		this.course = course;
-//		this.difficulty = difficulty;
-//		this.questionTitle = questionTitle;
-//		this.quizNumber = quizNumber;
-//		this.currentPane = currentPane;
-//		this.totalPanes = totalPanes;
-//		this.ansKey = ansKey;
-//		this.answeredCorrect = answeredCorrect;
-//		this.numWrong = numWrong;
-//		this.questionImage = questionImage;
-//		this.answersImage = answersImage;
-//		this.answersText = answersText;
-//		this.completed = completed;
-//		this.score = getPercentageScore();
-//		this.setQuizName(quizName);
-//		this.setLessonName(lessonName);
-//	}
-
+	// Constructor
 	public Quiz(String line) {
+
 		this.data = line;
 		loadData(line);
+
 	}
 
-
+	// Initialize Quiz object
 	private void loadData(String line) {
+
+		// Format
+		// course;difficulty;question title;quiz number;current pane;total panes;
+		// [answer, key, array,];[completed, boolean, array];
+		// [num, wrong, array];
+		// question image;[answer,images: array];[answer,text:array];
+		// boolean completed;quiz name;lesson name
+
+		// Fields separated by ";"
+		// 1-D arrays separated by "," -> ;0,0,0,0;
+		// 2-D arrays organized by "," and ";",
+		// -> ;a,a,a,a:b,b,b,b:c,c,c,c;
 
 		String[] str = line.trim().split(";");
 
 		String course = str[0];
 		String difficulty = str[1];
 		String questionTitle = str[2];
+
+		// Parse String to Integer
 		int quizNumber = Integer.parseInt(str[3]);
 		int currentPane = Integer.parseInt(str[4]);
 		int totalPanes = Integer.parseInt(str[5]);
 
+	
+		// Split str[x] into another 1-D
 		String[] ans = str[6].trim().split(",");
 		int[] ansKey = new int[totalPanes];
 
@@ -84,45 +80,61 @@ public class Quiz {
 
 		String[] wrong = str[8].trim().split(",");
 		int[] numWrong = new int[totalPanes];
+
+		// Parse String values to boolean and integer
 		for (int i = 0; i < totalPanes; i++) {
 			ansKey[i] = Integer.parseInt(ans[i]);
 			answeredCorrect[i] = Boolean.parseBoolean(bool[i]);
 			numWrong[i] = Integer.parseInt(wrong[i]);
 		}
+		
 
 		ImageIcon questionImage = new ImageIcon(str[9]);
 
+		
+		
+		// Split str[x] further into a 1-D array
 		String[] ansImages = str[10].split(":");
 		ImageIcon[][] answersImage = new ImageIcon[totalPanes][4];
 
 		String[] answers = str[11].split(":");
 		String[][] answersText = new String[totalPanes][4];
 
-		boolean completed = Boolean.parseBoolean(str[12]);
+		// Convert 1-D array to 2-D
 
 		for (int i = 0; i < totalPanes; i++) {
+
 			String[] tempText = answers[i].trim().split(",");
 			String[] tempImage = ansImages[i].trim().split(",");
+
+			// Initialize 2-D array
 			for (int j = 0; j < 4; j++) {
+
+				// Text
 				if (tempText[j].equalsIgnoreCase("null"))
 					answersText[i][j] = null;
-				else {
-					answersText[i][j] = tempText[j];
-				}
-				if (tempImage[j].equalsIgnoreCase("null")) {
-					answersImage[i][j] = null;
-				}
 
-				else {
-					answersImage[i][j] = new ImageIcon(tempImage[j]);// Temp[j]);
-				}
+				else
+					answersText[i][j] = tempText[j];
+
+				// Images
+				if (tempImage[j].equalsIgnoreCase("null"))
+					answersImage[i][j] = null;
+
+				else
+					answersImage[i][j] = new ImageIcon(tempImage[j]);
+
 			}
 
 		}
 
+		// Parse String to boolean
+		boolean completed = Boolean.parseBoolean(str[12]);
+
 		String quizName = str[14];
 		String lessonName = str[13];
 
+		// Initialize Object fields
 		this.course = course;
 		this.difficulty = difficulty;
 		this.questionTitle = questionTitle;
@@ -142,52 +154,66 @@ public class Quiz {
 
 	}
 
+	// Return data line to save
 	public String saveData(int curr) {
-
-		// Currentpane - 4, answeredCorrect[] - 7,numWrong[] - 8,
-
+		
+		// Get old data line
 		String[] str = data.trim().split(";");
 		String line = "";
 
-		str[4] = String.valueOf(curr);
+		// Overwrite certain parts of data line
+		str[4] = String.valueOf(curr); // current Pane, int -> String
 
 		boolean complete = false;
+		
+		// Turn answeredCorrect array to string
 		String ans = "";
 		for (int i = 0; i < ansKey.length; i++) {
+			
 			if (answeredCorrect[i])
 				complete = true;
+			
 			ans += (answeredCorrect[i]) + ",";
+		
 		}
 
+		// Remove "," at very end of answeredCorrect
 		str[7] = ans.substring(0, ans.length() - 1);
 
+		
+		// Turn numWrong array into string
 		String wrong = "";
+
 		for (int i = 0; i < ansKey.length; i++)
 			wrong += String.valueOf(numWrong[i]) + ",";
 
+		// Remove "," at very end of wrong
 		str[8] = wrong.substring(0, wrong.length() - 1);
 
-		System.out.println("\n" + data);
-		System.out.println(str[4]);
-		System.out.println(str[7]);
-		System.out.println(str[8]);
-
+		// Boolean -> String
 		str[12] = String.valueOf(complete);
 
+		// Build line, seperate values with ";"
 		for (int i = 0; i < str.length; i++)
 			line += str[i] + ";";
+		
+		// Remove ";" at very end of line
 		line = line.substring(0, line.length() - 1);
-		System.out.println(line);
-
+		
 		return line;
 
 	}
 
+	// Save quiz data to file
 	public void saveQuiz() {
 
+		// Overwrite save file with new data
 		try {
 			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.quizSaveData, false));
+			
 			for (int i = 0; i < Initialize.quizArr.length; i++) {
+			
+				// Call save data to get String line
 				pr.write(Initialize.quizArr[i].saveData(Initialize.quizArr[i].getCurrentPane()));
 				pr.newLine();
 

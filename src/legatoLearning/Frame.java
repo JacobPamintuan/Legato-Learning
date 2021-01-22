@@ -2,6 +2,10 @@ package legatoLearning;
 
 import javax.swing.JFrame;
 
+/*
+ * Initialize Frame
+ */
+
 public class Frame {
 
 	public static JFrame frame;
@@ -11,7 +15,7 @@ public class Frame {
 
 	public Frame() {
 
-		frame = new JFrame("Music Theory");
+		frame = new JFrame("Legato Learning");
 		frame.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

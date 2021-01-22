@@ -2,6 +2,10 @@ package legatoLearning;
 
 import java.awt.Font;
 
+/*
+ * Fonts frequently used throughout project
+ */
+
 public class Fonts {
 
 	public static final Font TITLE1 = new Font("Helvetica Neue", Font.BOLD, 40);

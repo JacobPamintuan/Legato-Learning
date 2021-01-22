@@ -1,7 +1,6 @@
 package legatoLearning;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -58,30 +57,39 @@ public class Lesson {
 		this.setLessonName(lessonName);
 	}
 
-	// Save data t
+	// Save data to file
 	public void saveLesson() {
+		
 		try {
+			
 			BufferedWriter pr = new BufferedWriter(new FileWriter(Initialize.lessonSaveData, false));
+			
 			for (int i = 0; i < Initialize.lessonArr.length; i++) {
 				pr.write(Initialize.lessonArr[i].saveData());
 				pr.newLine();
 
 			}
+			
 			pr.close();
+		
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
+		
 		}
 	}
 
 	// Format and return string to be saved
 	public String saveData() {
+		
 		String[] str = data.trim().split(";");
 		String line = "";
+		
 		str[6] = String.valueOf(this.completed);
 
 		for (int i = 0; i < str.length; i++)
 			line += str[i] + ";";
+		
 		line = line.substring(0, line.length() - 1);
 
 		return line;
@@ -103,6 +111,8 @@ public class Lesson {
 		}
 
 	}
+	
+	// Getters and Setters
 
 	public String getCourse() {
 		return course;

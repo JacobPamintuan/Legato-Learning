@@ -44,7 +44,7 @@ public class HomeGUI implements ActionListener {
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(269, 30, 602, 100);
 		lblTitle.setFont(Fonts.TITLE1);
-		lblTitle.setForeground(Colours.purp);
+		lblTitle.setForeground(Colours.purple);
 		homePane.add(lblTitle);
 
 		// "Courses" JLabel
@@ -97,10 +97,14 @@ public class HomeGUI implements ActionListener {
 
 	// Set name within welcome message
 	public void newName() {
+		
 		name = Initialize.user.getFirstName();
+		 
 		lblTitle.setText(("<html><div style='text-align: center;'><html>Welcome " + name
 				+ ", what would you like to learn today?</div><html>"));
+		
 		homePane.repaint();
+		
 	}
 
 	// Event handler

@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -116,8 +115,7 @@ public class SignUpGUI implements ActionListener, ItemListener {
 
 		// Main image - within JLabel
 		JLabel signUpImage = new JLabel();
-		signUpImage.setIcon(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Music Theory App/images/SignupScreen.png"));
-//		signUpImage.setIcon(new ImageIcon("images/SignupScreen.png"));
+		signUpImage.setIcon(new ImageIcon("images/SignupScreen.png"));
 		signUpImage.setBounds(0, 0, 1440, 810);
 		signUpPane.add(signUpImage);
 

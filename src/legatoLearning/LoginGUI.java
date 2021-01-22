@@ -34,11 +34,14 @@ public class LoginGUI implements ActionListener, ItemListener {
 
 	// Constructor - no parameters
 	public LoginGUI() {
+	
 		initialize();
+	
 	}
 
 	// Initialize the contents of the frame.
 	private void initialize() {
+		
 		// JPanel setup
 		loginPane = new JPanel();
 		loginPane.setBounds(0, 0, 1440, 810);
