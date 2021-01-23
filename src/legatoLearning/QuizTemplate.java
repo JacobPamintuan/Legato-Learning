@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;
 
 /*
  * Quiz GUI template class
- * Template for all quizzes
- * Initializes fields through quiz object
+ * Template GUI for all quizzes
+ * Initializes JComponents through quiz object values
  * Keeps track of right and wrong answers
  * Updates Results screen once quiz complete
  * Displays correct answer

@@ -151,6 +151,9 @@ public class SignUpGUI implements ActionListener, ItemListener {
 	// Event Handlers
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		error.setText("");
+		
 		if (e.getSource() == login) { // Switch to login screen
 			
 			// Make text/password fields blank

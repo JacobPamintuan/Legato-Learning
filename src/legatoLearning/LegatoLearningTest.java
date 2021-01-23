@@ -33,14 +33,14 @@ package legatoLearning;
  *  - 
  * 
  * Areas of Concern
- * 		- Please run on an apple computer
+ * 		- Please run on an computer running MacOS
  * 		- Screen size of at least 1440x820 (just barely fits on MacBook Pro 13-inch)
  * 		- Wait at least 2 seconds logging/signing in 
  * 				to allow the program to load
  * 			- "Load complete" will appear in console
  * 
  * Credits:
- *  - All lessons and quizzes were taken/based off of the book (images):
+ *  - All lessons and quizzes (images) were taken/based off of the book:
  * 		Mark Sarnecki, M. S. (2021). The Complete Elementary Music Rudiments, 2nd Edition. Music One Select.
  *  
  *  - Implementation of Colours and Fonts class inspired by Michael Li

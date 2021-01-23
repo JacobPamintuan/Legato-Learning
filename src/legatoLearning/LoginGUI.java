@@ -118,6 +118,8 @@ public class LoginGUI implements ActionListener, ItemListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		error.setText("");
+		
 		if (e.getSource() == login) { // Login attempt
 			error.setText("");
 

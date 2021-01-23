@@ -1,11 +1,10 @@
 package legatoLearning;
 
 import java.awt.Color;
-import java.awt.Color.*;
 
 /**
  * Color scheme of project
- * Inspired by Michael Li
+ * Implementation inspired by Michael Li
  */
 
 public class Colours {
