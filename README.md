@@ -36,7 +36,6 @@ Areas of Concern
   - "Load complete" will appear in console
   
 Credits:
-  - All lessons and quizzes (images) were taken/based off of the book: Mark Sarnecki, M. S. (2021). The Complete Elementary Music Rudiments, 2nd Edition. Music One Select.
- 
+  - All lessons and quizzes (images) were taken/based off of the book: Mark Sarnecki, M. S. (2021). The Complete Elementary Music Rudiments, 2nd Edition. Music One Select. 
   - Implementation of Colours and Fonts class inspired by Michael Li
   - Reading and writing files to similar to previous project
