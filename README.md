@@ -1,4 +1,4 @@
-![Logo](https://user-images.githubusercontent.com/36178603/112568788-694c3400-8db9-11eb-832a-8794e347465e.png)
+<p align="center">![Logo](https://user-images.githubusercontent.com/36178603/112568788-694c3400-8db9-11eb-832a-8794e347465e.png)</p>
 
 Legato Learning is the final culminating project for the ICS4U course. 
 
