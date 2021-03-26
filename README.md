@@ -32,4 +32,20 @@ After logging in or signimg up, you are first greeted by the home screen, based 
 
 
 <img width="1552" alt="Course page" src="https://user-images.githubusercontent.com/36178603/112569828-47ec4780-8dbb-11eb-86af-60e92e6af7b0.png">
+###### Course Page - Intervals
 
+The course page is the portal to all the lessons and quizzes. In order to unlock the quizzes, the user must complete their respective lesson first. Completed lessons/quizzes are marked with a green checkmark, and locked quizzes are greyed out.
+
+![Lesson](https://user-images.githubusercontent.com/36178603/112570044-b03b2900-8dbb-11eb-9c3a-5e2f712eb86b.png)
+###### Sample lesson - Augmented and Diminished Intervals
+
+The user can complete the lessons at their own pace. It is essentially a powerpoint presentation and the user navigates by pressing next or previous. Once completed, the user is directed back to the course page, and the corresponding quizzes are now unlocked. 
+
+<img width="1552" alt="Quiz Plain" src="https://user-images.githubusercontent.com/36178603/112570377-4f602080-8dbc-11eb-93f9-769127ed4e62.png">
+The quizzes in Legato Learning are all multiple choice. In this specifc course, intervals, a staff is presented to the user with diffrent 
+
+
+![Quiz Correct](https://user-images.githubusercontent.com/36178603/112570173-ed9fb680-8dbb-11eb-934c-36f6acbac3c0.png)
+###### Sample Quiz - User gets question correct
+
+The quizzes in Legato Learning are all multiple choice. In this specifc course, intervals, a staff is presented to the user with diffrent 
