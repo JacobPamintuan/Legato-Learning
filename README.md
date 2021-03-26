@@ -42,10 +42,19 @@ The course page is the portal to all the lessons and quizzes. In order to unlock
 The user can complete the lessons at their own pace. It is essentially a powerpoint presentation and the user navigates by pressing next or previous. Once completed, the user is directed back to the course page, and the corresponding quizzes are now unlocked. 
 
 <img width="1552" alt="Quiz Plain" src="https://user-images.githubusercontent.com/36178603/112570377-4f602080-8dbc-11eb-93f9-769127ed4e62.png">
-The quizzes in Legato Learning are all multiple choice. In this specifc course, intervals, a staff is presented to the user with diffrent 
+###### Sample Quiz - Before answering, Name the Interval
+
+The quizzes in Legato Learning are all multiple choice. In this specifc course, intervals, a staff is presented to the user with diffrent intervals, and the purple rectangle dictates which question must be answered. There are two types of quizzes in this course, Naming the Interval and Selecting the Interval that Satisfies the corresponding note; see below.
 
 
 ![Quiz Correct](https://user-images.githubusercontent.com/36178603/112570173-ed9fb680-8dbb-11eb-934c-36f6acbac3c0.png)
 ###### Sample Quiz - User gets question correct
 
-The quizzes in Legato Learning are all multiple choice. In this specifc course, intervals, a staff is presented to the user with diffrent 
+This is an example of the user selecting the correct answer, it is highlighted in green with a checkmark. 
+
+![Quiz Incorrect](https://user-images.githubusercontent.com/36178603/112570635-ca293b80-8dbc-11eb-9410-9aef87a18092.png)
+###### Sample Quiz - User gets question incorrect
+
+This is an example of the user selecting the incorrect answer. Their selection is higlighted red, and the correct answer is highlighted in green with a checkmark. After completing the quiz once, it will repeat with the incorrect answers until the user gets everything correct.
+
+
