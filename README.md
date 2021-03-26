@@ -66,6 +66,7 @@ This is an example of the user selecting the incorrect answer. Their selection i
 ###### Results Page - In order of difficulty
 
 The results page allows the user to track their progress. They can redo quizzes to try to achieve higher scores. Additionally, there are different ways to sort the scores, shown is the difficulty, but it is also possible to sort by worst to best and best to worst. 
+
 ---
 
 ### Challenges I faced
@@ -73,11 +74,22 @@ The results page allows the user to track their progress. They can redo quizzes 
 It was my first time attempting file saving, i.e. reading and writing data to a text files. I had to learn from previous group projects and understand the code in order to implement it in my program. Furthermore, Java is not a front end language, and it was quite difficult to get it looking how I wanted. If I had not prototyped in Figma, I doubt I could have accomplished such a clean UI. I originally planned to do two courses instead of one, but decided to focus on quality rather than quantity, adding the smallest of features and details to make the user experience as best as I could.
 
 In addition, it was my first time using Figma, so I had to learn how to use a completley new software, but it helped in the end. 
-One of the hardest and most time intensive parts of the project was creating the quizzes. I had to painstakingly scan all of the "questions" and tweak them in Figma, which is not really designed to edit images in such a way, unlike photoshop, so that it would line up with the purple box, as you can see in the quiz pages. Also, for all of the "Select the Interval" quizzes, 
+One of the hardest and most time intensive parts of the project was creating the quizzes. I had to painstakingly scan all of the "questions" and tweak them in Figma, which is not really designed to edit images in such a way, unlike photoshop, so that it would line up with the purple box, as you can see in the quiz pages. Also, for all of the "Select the Interval" quizzes, I had to create all of the diffrent selections in MuseScore, screenshot them and color them.
+
+After that, I had to create the files for the quizzes, which housed all of the data, essentially a formatting nightmare. 
 
 ### Accomplishments
 
-This was by far the most complex and best-looking GUI I have done so far
+This was by far the most complex and best-looking GUI I have created so far, and especially proud since I was able to create it on Java Swing, which is know to be outdated and clunky. 
 
+- Used a new prototyping software
+- Implemented a variety of Swing features
+- Learned how to use Comparators to sort data
+- Created a Modern UI with an outdated, non front-end language
+- Learned how to read and write text files
 
-
+### Areas of Concern
+  - Only runs on MacOS (UI doesnt load at all on Windows)
+  - Screen size of at least 1440x820 (just barely fits on MacBook Pro 13-inch)
+  - Wait at least 2 seconds logging/signing in to allow the program to load
+      - "Load complete" will appear in console
