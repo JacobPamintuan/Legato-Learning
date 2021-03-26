@@ -87,7 +87,8 @@ After that, I had to create the files for the quizzes, which housed all of the d
 
 This was by far the most complex and best-looking GUI I have created so far, and especially proud since I was able to create it on Java Swing, which is know to be outdated and clunky. 
 
-- Used a new prototyping software
+- Used a new prototyping software: Figma
+- Used MuseScore 3
 - Implemented a variety of Swing features
 - Learned how to use Comparators to sort data
 - Created a Modern UI with an outdated, non front-end language
@@ -102,5 +103,6 @@ This was by far the most complex and best-looking GUI I have created so far, and
 ### Credits:
   - All lessons and quizzes (images) were taken/based off of the book: Mark Sarnecki, M. S. (2021). 
       - The Complete Elementary Music Rudiments, 2nd Edition. Music One Select. 
+      - Multiple choice selection images created by me
   - Implementation of Colours and Fonts class inspired by @itslinotlie
   - Reading and writing files to similar to previous project - Post-secondary-app
