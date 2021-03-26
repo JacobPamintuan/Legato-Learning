@@ -1,7 +1,4 @@
-![Login](https://user-images.githubusercontent.com/36178603/112567227-dca07680-8db6-11eb-9581-190f4e69df90.png)
-
-###### Legato Learning Login Page
-
+![Logo](https://user-images.githubusercontent.com/36178603/112568788-694c3400-8db9-11eb-832a-8794e347465e.png)
 
 Legato Learning is the final culminating project for the ICS4U course. 
 
@@ -13,6 +10,17 @@ I mainly focused on the UI and UX aspect rather than the complexity of the progr
 I took insparation from several learning websites like Duolingo and Quizlet when it came to how the user interacts with the progarm, and the different visual cues to help the user navigate though the UI seemlessly. 
 
 ### Screenshots:
-![Home](https://user-images.githubusercontent.com/36178603/112568050-43725f80-8db8-11eb-96c9-c9b2a3e11b5d.png)
+![Login](https://user-images.githubusercontent.com/36178603/112567227-dca07680-8db6-11eb-9581-190f4e69df90.png)
+###### Legato Learning Login Page
 
-You are first greeted by the home screen, based on the time frame that I was given, I decided to create only one course package, however it would not be that difficult to add a second or a third.
+Returning user? Simply just enter your username and password. First time? Click on "Create an account" to be redirected to the SignUp page.
+
+![Signup](https://user-images.githubusercontent.com/36178603/112568420-d612fe80-8db8-11eb-9525-744f0e49c96e.png)
+###### Sign Up Page
+
+Create an account by entering your first and last name, as well as username and password. However, unfortunately if the username is already taken, you need to choose a diffrent one.
+
+![Home](https://user-images.githubusercontent.com/36178603/112568050-43725f80-8db8-11eb-96c9-c9b2a3e11b5d.png)
+###### Home
+
+After logging in or signimg up, you are first greeted by the home screen, based on the time frame that I was given, I decided to create only one course package, however it would not be that difficult to add a second or a third. Each course would have a profile photo, as well as a short description of the content. By clicking on a course, it would bring the user to the corresponding course page.
