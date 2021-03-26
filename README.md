@@ -19,11 +19,14 @@ I took insparation from several learning websites like Duolingo and Quizlet when
 
 Returning user? Simply just enter your username and password. First time? Click on "Create an account" to be redirected to the SignUp page.
 
+
 ![Signup](https://user-images.githubusercontent.com/36178603/112568420-d612fe80-8db8-11eb-9525-744f0e49c96e.png)
 ###### Sign Up Page
 
 Create an account by entering your first and last name, as well as username and password. However, unfortunately if the username is already taken, you need to choose a diffrent one.
 All user information is saved onto a text file, and each user has their own quiz and lesson file which is loaded upon login. If it is a first time user, new text files get created.
+
+---
 
 ![Home](https://user-images.githubusercontent.com/36178603/112568050-43725f80-8db8-11eb-96c9-c9b2a3e11b5d.png)
 ###### Home
@@ -31,7 +34,7 @@ All user information is saved onto a text file, and each user has their own quiz
 After logging in or signimg up, you are first greeted by the home screen, based on the time frame that I was given, I decided to create only one course package, however it would not be that difficult to add a second or a third. Each course would have a profile photo, as well as a short description of the content. By clicking on a course, it would bring the user to the corresponding course page.
 
 
-![Course Page]("https://user-images.githubusercontent.com/36178603/112569828-47ec4780-8dbb-11eb-86af-60e92e6af7b0.png")
+![Course Page](https://user-images.githubusercontent.com/36178603/112569828-47ec4780-8dbb-11eb-86af-60e92e6af7b0.png)
 ###### Course Page - Intervals
 
 The course page is the portal to all the lessons and quizzes. In order to unlock the quizzes, the user must complete their respective lesson first. Completed lessons/quizzes are marked with a green checkmark, and locked quizzes are greyed out.
@@ -50,10 +53,12 @@ The user can complete the lessons at their own pace. It is essentially a powerpo
 
 The quizzes in Legato Learning are all multiple choice. In this specifc course, intervals, a staff is presented to the user with diffrent intervals, and the purple rectangle dictates which question must be answered. There are two types of quizzes in this course, Naming the Interval and Selecting the Interval that Satisfies the corresponding note; see below.
 
+
 ![Quiz Correct](https://user-images.githubusercontent.com/36178603/112570173-ed9fb680-8dbb-11eb-934c-36f6acbac3c0.png)
 ###### Sample Quiz - User gets question correct
 
 This is an example of the user selecting the correct answer, it is highlighted in green with a checkmark. 
+
 
 ![Quiz Incorrect](https://user-images.githubusercontent.com/36178603/112570635-ca293b80-8dbc-11eb-9410-9aef87a18092.png)
 ###### Sample Quiz - User gets question incorrect
