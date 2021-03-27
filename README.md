@@ -2,7 +2,7 @@
 
 ---
 
-Legato Learning is the final, culminating project for the ICS4U course. 
+Legato Learning is the final, solo-culminating project for the ICS4U course. 
 
 Legato Learning is an application designed to introduce musicians to the world of Music Theory.
 Learn through the lessons provided and test your knowledge by completing the quizzes.
