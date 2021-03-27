@@ -19,7 +19,7 @@ I took inspiration from several learning websites like Duolingo and Quizlet when
 ![Login](https://user-images.githubusercontent.com/36178603/112567227-dca07680-8db6-11eb-9581-190f4e69df90.png)
 ###### Legato Learning Login Page
 
-Returning user? Simply just enter your username and password. First time? Click on "Create an account" to be redirected to the SignUp page.
+Returning user? Simply just enter your username and password. First time? Click on "Create an account" to be redirected to the Sign Up page.
 
 
 ![Signup](https://user-images.githubusercontent.com/36178603/112568420-d612fe80-8db8-11eb-9525-744f0e49c96e.png)
