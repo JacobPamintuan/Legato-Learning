@@ -53,7 +53,7 @@ The user can complete the lessons at their own pace. It is essentially a PowerPo
 ![Quiz Plain](https://user-images.githubusercontent.com/36178603/112570377-4f602080-8dbc-11eb-93f9-769127ed4e62.png)
 ###### Sample Quiz - Before answering, Name the Interval
 
-The quizzes in Legato Learning are all multiple choice. In this specific course, intervals, a staff is presented to the user with different intervals, and the purple rectangle dictates which question must be answered. There are two types of quizzes in this course, Naming the Interval and Selecting the Interval that Satisfies the corresponding note; see below.
+The quizzes in Legato Learning are all multiple choice. In this specific course, Intervals, a staff is presented to the user with different intervals, and the purple rectangle dictates which question must be answered. There are two types of quizzes in this course, 'Name the following interval' and 'Select the interval that satisfies the note', see below.
 
 
 ![Quiz Correct](https://user-images.githubusercontent.com/36178603/112570173-ed9fb680-8dbb-11eb-934c-36f6acbac3c0.png)
@@ -80,18 +80,18 @@ The results page allows the user to track their progress. They can redo quizzes 
 
 Several all-nighters were pulled.
 
-It was my first time attempting file saving, i.e. reading and writing data to text files. I had to learn from previous group projects and understand the code to implement it in my program. Furthermore, Java is not a front-end language, and it was quite difficult to get it looking how I wanted. If I had not prototyped in Figma, I doubt I could have accomplished such a clean UI. I originally planned to do two courses instead of one but decided to focus on quality rather than quantity, adding the smallest of features and details to make the user experience as best as I could.
+It was my first time attempting file-saving, i.e. reading and writing data to text files. I had to learn from previous group projects and understand the code to implement it in my program. Furthermore, Java is not a front-end language, and it was quite difficult to get it looking how I wanted. If I had not prototyped in Figma, I doubt I could have accomplished such a clean UI. I originally planned to do two courses instead of one but decided to focus on quality rather than quantity, adding the smallest of features and details to make the user experience as best as I could.
 
 Also, it was my first time using Figma, so I had to learn how to use completely new software, but it helped in the end. 
-One of the hardest and most time-intensive parts of the project was creating the quizzes. I had to painstakingly scan all of the "questions" and tweak them in Figma, which is not really designed to edit images in such a way, unlike photoshop, so that it would line up with the purple box, as you can see in the quiz pages. Also, for all of the "Select the Interval" quizzes, I had to create all of the different selections in MuseScore, screenshot them, and color them.
+One of the hardest and most time-intensive parts of the project was creating the quizzes. I had to painstakingly scan all of the "questions" and tweak them in Figma, which is not really designed to edit images in such a way, unlike Photoshop, so that it would line up with the purple box, as you can see in the quiz pages. Also, for all of the "Select the interval" quizzes, I had to create all of the different selections in MuseScore 3, screenshot them, and color them.
 
 After that, I had to create the files for the quizzes, which housed all of the data, essentially a formatting nightmare. 
 
 ### Accomplishments
 
-This was by far the most complex and best-looking GUI I have created so far, and especially proud since I was able to create it on Java Swing, which is known to be outdated and clunky. 
+This was by far the most complex and best-looking GUI I have created so far, and am especially proud since I was able to create it on Java Swing, which is known to be outdated and clunky. 
 
-- Used a new prototyping software: Figma
+- Leanred a new prototyping software: Figma
 - Used MuseScore 3
 - Implemented a variety of Swing features
 - Learned how to use Comparators to sort data
@@ -109,4 +109,4 @@ This was by far the most complex and best-looking GUI I have created so far, and
       - The Complete Elementary Music Rudiments, 2nd Edition. Music One Select. 
       - Multiple choice selection images created by me
   - Implementation of Colours and Fonts class inspired by @itslinotlie
-  - Reading and writing files to similar to the previous project - Post-secondary-app
+  - Reading and writing files to similar to the previous project - [Post-Secondary-App](https://github.com/JacobPamintuan/Post-Secondary-App)
