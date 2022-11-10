@@ -8,7 +8,7 @@ Legato Learning is an application designed to introduce musicians to the world o
 Learn through the lessons provided and test your knowledge by completing the quizzes.
 Track your Strengths and Weaknesses and review lessons and quizzes until you are confident.
 
-I mainly focused on the UI and UX aspect rather than the complexity of the program (In my opinion, a huge step up from [project 1](https://github.com/JacobPamintuan/Legato-Learning) and especiallly [project 2](https://github.com/JacobPamintuan/Post-Secondary-App/tree/main/src/postApp)). 
+I mainly focused on the UI and UX aspect rather than the complexity of the program (In my opinion, a huge step up from [project 1](https://github.com/JacobPamintuan/AmazingLabyrinth) and especiallly [project 2](https://github.com/JacobPamintuan/Post-Secondary-App/tree/main/src/postApp)). 
 
 Using Figma for prototyping the GUI, I learned how having a clear prototype can speed up the coding process. As Java is not primarily built for front-end development, it was a challenge to make it look as nice as it is using Java Swing. 
 I took inspiration from several learning websites like Duolingo and Quizlet when it came to how the user interacts with the program, and the different visual cues to help the user navigate through the UI seamlessly. Furthermore, I used MuseScore 3 to create multiple-choice selections for the quizzes.
